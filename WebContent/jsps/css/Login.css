@@ -1,0 +1,72 @@
+body {
+	color: rgb(2,2,2);
+	background-color:#efefef;
+	font-family: 'Fira Sans', Verdana, sans-serif, Arial, Helvetica;
+	line-height: 1.6;
+	max-width: 40rem;
+	padding:2rem;
+	margin:auto;
+}
+
+p {
+	color: red;
+	text-align: center;
+}
+
+ /* Bordered form */
+form {
+  border: 1px solid black;
+  background-color: white;
+}
+
+/* Full-width inputs */
+input[type=text], input[type=password] {
+  width: 100%;
+  
+  padding: 1em 1.5em;
+  margin: 0.5em 0;
+  
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+button {
+  background-color: #4CAF50;
+  color: white;
+  
+  padding: 1em 1.5em;
+  margin: 0.8em 0;
+  
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* Add a hover effect for buttons */
+button:hover {
+  opacity: 0.8;
+}
+
+/* Center the avatar image inside this container */
+.image {
+  text-align: center;
+  margin: 0 0 1em 0;
+}
+
+/* Avatar image */
+img {
+  width: 100%;
+}
+
+/* Add padding to containers */
+.container {
+  padding: 1em;
+}
+
+/* The "Forgot password" text */
+.register {
+  float: right;
+  padding-top: 1em;
+}
