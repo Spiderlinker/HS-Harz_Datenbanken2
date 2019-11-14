@@ -25,9 +25,9 @@
 				
 				<br>
 				
-				<button type="submit">Ausw‰hlen</button>
+				<button type="submit">Registrierung abschlieﬂen</button>
 			</div>
-			<input type="text" name="selectGenre" hidden="hidden"/>
+			<input type="text" name="registerPage" value="2" hidden="hidden"/>
 		</form>
 		<span class="logout"><a href="Logout">Abmelden</a></span>
 	</body>
