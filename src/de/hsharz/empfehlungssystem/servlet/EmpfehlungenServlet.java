@@ -39,11 +39,11 @@ public class EmpfehlungenServlet extends HttpServlet {
 			throws ServletException, IOException {
 		System.out.println("doGet Empfehlungen");
 		
-		if(SessionUtils.redirectToLoginPageIfNotLoggedIn(this, request, response)) {
+		if(SessionUtils.redirectToLoginPageIfNotLoggedIn(request, response)) {
 			// Nutzer war nicht eingeloggt und wurde auf die Login-Page weitergeleitet
 			return;
 		}
-		
+		 
 		RequestDispatcher requestDispatcher = this.getServletContext().getRequestDispatcher("/jsps/Empfehlungen.jsp");
 		requestDispatcher.forward(request, response);
 	}
