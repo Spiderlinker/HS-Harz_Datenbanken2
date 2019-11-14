@@ -1,6 +1,5 @@
 package de.hsharz.empfehlungssystem.database;
 
-import java.nio.channels.ConnectionPendingException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
