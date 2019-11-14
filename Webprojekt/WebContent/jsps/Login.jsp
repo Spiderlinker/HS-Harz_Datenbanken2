@@ -10,7 +10,7 @@
 	<body>
 		<form action="/Empfehlungssystem/Login" method="POST">
 			<div class="image">
-				<img src="${pageContext.request.contextPath}/jsps/img/events.jpg" alt="Events">
+				<img src="${pageContext.request.contextPath}/jsps/img/events.png" alt="Events">
 			</div>
 	
 			<p>${errorString}<p>
