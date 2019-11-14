@@ -21,7 +21,6 @@
 				<input type="text" placeholder="Vorname" name="firstname" style="width:40%;" required>
 				<input type="text" placeholder="Nachname" name="lastname" style="width:40%;" required>
 				
-				
 				<input type="text" placeholder="Anschrift" name="street" style="width:74%;" required>
 				<input type="text" placeholder="Hausnr." name="houseNumber" style="width:25%;" required>
 				

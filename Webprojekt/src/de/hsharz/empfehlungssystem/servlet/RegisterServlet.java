@@ -1,7 +1,6 @@
 package de.hsharz.empfehlungssystem.servlet;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import de.hsharz.empfehlungssystem.database.DatabaseAdapter;
+import de.hsharz.empfehlungssystem.beans.User;
 
 /**
  * Servlet implementation class RegisterServlet
@@ -66,6 +65,9 @@ public class RegisterServlet extends HttpServlet {
 		String registerPage = request.getParameter("registerPage");
 
 		if ("1".equals(registerPage)) {
+
+			createAndStoreUser(request);
+
 			RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/jsps/Register2.jsp");
 			dispatcher.forward(request, response);
 			return;
@@ -74,12 +76,6 @@ public class RegisterServlet extends HttpServlet {
 		} else {
 
 		}
-
-		System.out.println("Register do post...");
-		System.out.println(request.getParameter("firstname"));
-		System.out.println(request.getAttribute("firstname"));
-		System.out.println(request.getParameter("lastname"));
-		System.out.println(request.getAttribute("lastname"));
 
 		String isSelectGenrePage = request.getParameter("selectGenrePage");
 		if (isSelectGenrePage == null) {
@@ -90,6 +86,20 @@ public class RegisterServlet extends HttpServlet {
 		System.out.println(request.getParameter("firstname"));
 		System.out.println(request.getParameter("lastname"));
 		// Registrierung abschlieﬂen
+	}
+
+	private void createAndStoreUser(HttpServletRequest request) {
+		User user = new User();
+		user.setGender(request.getParameter("gender"));
+		user.setFirstname(request.getParameter("firstname"));
+		user.setLastname(request.getParameter("lastname"));
+		user.setStreet(request.getParameter("street"));
+		user.setHouseNr(request.getParameter("houseNumber"));
+		user.setZip(Integer.parseInt(request.getParameter("zip")));
+		user.setCity(request.getParameter("city"));
+		user.setEmail(request.getParameter("email"));
+		user.setPassword(request.getParameter("password"));
+		request.setAttribute("user", user);
 	}
 
 }
