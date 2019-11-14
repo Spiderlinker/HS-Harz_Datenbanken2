@@ -32,6 +32,11 @@ public class RegisterServlet extends HttpServlet {
 	public String getGenres() {
 
 		List<String> genreNames = new ArrayList<>();
+		genreNames.add("Techno");
+		genreNames.add("Metal");
+		genreNames.add("Pop");
+		genreNames.add("Rock");
+		genreNames.add("Schulungen");
 //		try {
 //			genreNames = DatabaseAdapter.getAllGenreNames();
 //		} catch (SQLException e) {
@@ -63,29 +68,29 @@ public class RegisterServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		String registerPage = request.getParameter("registerPage");
-
+		System.out.println("RegisterPage: " + registerPage);
 		if ("1".equals(registerPage)) {
 
 			createAndStoreUser(request);
+			if (!arePasswordsEqual(request)) {
+				request.setAttribute("errorString", "Passwörter stimmen nicht überein");
+				RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/jsps/Register.jsp");
+				dispatcher.forward(request, response);
+				return;
+			}
 
+			// Benutzer zur zweiten Seite der Registrierung weiterleiten
 			RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/jsps/Register2.jsp");
 			dispatcher.forward(request, response);
 			return;
 		} else if ("2".equals(registerPage)) {
+			System.out.println("Registrierung abschließen");
+			User user = Session.remove(Session.ATTRIBUTE_REGISTERING_USER);
+			System.out.println(user);
 
 		} else {
-
+			System.out.println("Keine Page erkannt");
 		}
-
-		String isSelectGenrePage = request.getParameter("selectGenrePage");
-		if (isSelectGenrePage == null) {
-			System.out.println("Forwarding to page 2");
-
-		}
-
-		System.out.println(request.getParameter("firstname"));
-		System.out.println(request.getParameter("lastname"));
-		// Registrierung abschließen
 	}
 
 	private void createAndStoreUser(HttpServletRequest request) {
@@ -99,7 +104,16 @@ public class RegisterServlet extends HttpServlet {
 		user.setCity(request.getParameter("city"));
 		user.setEmail(request.getParameter("email"));
 		user.setPassword(request.getParameter("password"));
+		user.setBirthday(request.getParameter("birthday"));
 		request.setAttribute("user", user);
+		Session.store(Session.ATTRIBUTE_REGISTERING_USER, user);
+	}
+
+	private boolean arePasswordsEqual(HttpServletRequest request) {
+		String password1 = request.getParameter("password");
+		String password2 = request.getParameter("passwordRepeat");
+
+		return password1 != null && password1.equals(password2);
 	}
 
 }
