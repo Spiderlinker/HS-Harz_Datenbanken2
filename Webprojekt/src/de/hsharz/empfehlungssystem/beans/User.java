@@ -17,6 +17,8 @@ public class User {
 	private String email;
 	private String password;
 	
+	private String birthday;
+	
 	
 	public User() {
 
@@ -109,5 +111,14 @@ public class User {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
+
+	public String getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
+	}
+
 
 }
