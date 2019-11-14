@@ -5,3 +5,7 @@ Tutorials zu JavaServlets, JSP und JDBC:
   - JavaServlets: https://o7planning.org/en/10169/java-servlet-tutorial
   - JSP: https://o7planning.org/en/10263/java-jsp-tutorial
   - JDBC: https://o7planning.org/en/10167/java-jdbc-tutorial
+
+
+Partitioning:
+- https://docs.oracle.com/en/database/oracle/oracle-database/12.2/vldbg/partition-concepts.html#GUID-256BA7EE-BF49-42DE-9B38-CD2480A73129
