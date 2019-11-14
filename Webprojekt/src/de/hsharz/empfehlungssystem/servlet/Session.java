@@ -73,6 +73,6 @@ public class Session {
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T> T remove(String key) {
-		return (T) attributes.get(key);
+		return (T) attributes.remove(key);
 	}
 }
