@@ -17,6 +17,7 @@ public class LogoutServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("Logging out user...");
 		Session.removeLoggedInUser();
 		response.sendRedirect(request.getContextPath() + "/Login");
 	}
@@ -24,6 +25,7 @@ public class LogoutServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		System.out.println("Logging out user...");
 		Session.removeLoggedInUser();
 		response.sendRedirect(request.getContextPath() + "/Login");
 	}

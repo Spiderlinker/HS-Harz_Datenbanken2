@@ -29,16 +29,17 @@ public class LoginServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		System.out.println("Check if user already logged in...");
 
 		User loggedInUser = Session.getLoggedInUser();
-		if(loggedInUser == null)
-		{
+		System.out.println("User: " + loggedInUser);
+		if (loggedInUser == null) {
 			// Keine GET-Operationen ausführen, nur über POST anmelden
 			RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/jsps/Login.jsp");
 			dispatcher.forward(request, response);
 			return;
 		}
-		
+
 		request.setAttribute("user", loggedInUser);
 		response.sendRedirect(request.getContextPath() + "/Empfehlungen");
 	}
@@ -81,10 +82,9 @@ public class LoginServlet extends HttpServlet {
 			request.setAttribute("errorString", errorString);
 			request.setAttribute("user", user);
 
-			RequestDispatcher dispatcher = this.getServletContext()
-					.getRequestDispatcher("/jsps/Login.jsp");
+			RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/jsps/Login.jsp");
 			dispatcher.forward(request, response);
-			
+
 		} else {
 
 			Session.storeLoggedInUser(user);
