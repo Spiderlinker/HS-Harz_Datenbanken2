@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-    
-    <jsp:useBean id="torsten" class="de.hsharz.empfehlungssystem.servlet.EmpfehlungenServlet" scope="session"/>
-    
+
+<jsp:useBean id="torsten" class="de.hsharz.empfehlungssystem.servlet.EmpfehlungenServlet" scope="session" />
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -12,9 +12,14 @@
 	</head>
 	<body>
 		<div class="container">
-						
+	
 			<jsp:getProperty name="torsten" property="empfehlungen" />
-			
+	
+			<div class="container">
+				<p class="hello">Hallo <b>${user.username}</b></p>
+			</div>
+	
+			<span class="logout"><a href="Logout">Abmelden</a></span>
 		</div>
 	</body>
 </html>
