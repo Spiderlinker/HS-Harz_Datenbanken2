@@ -1,0 +1,169 @@
+drop sequence useridseq
+
+create sequence useridseq start with 10000 increment by 1;
+
+drop sequence addressidseq
+
+create sequence addressidseq start with 10000 increment by 1;
+
+drop sequence eventtypeidseq
+
+create sequence eventtypeidseq start with 100 increment by 1;
+
+drop sequence organizeridseq
+
+create sequence organizeridseq start with 1000 increment by 1;
+
+drop sequence paymethodidseq
+
+create sequence paymethodidseq start with 1 increment by 1;
+
+drop sequence tickettypeidseq
+
+create sequence tickettypeidseq start with 10 increment by 1;
+
+drop sequence buyidseq
+
+create sequence buyidseq start with 10000 increment by 1;
+
+
+/* Löschreihenfolge (grob)*/
+DROP TABLE Purchases;
+DROP TABLE Ratings;
+DROP TABLE "EVENTS";
+DROP TABLE TicketSeller;
+DROP TABLE PayMethods;
+DROP TABLE TicketTypes;
+DROP TABLE Organizer;
+DROP TABLE EventTypes;
+DROP TABLE Customer;
+DROP TABLE Addresses;
+
+
+DROP TABLE Addresses;
+
+CREATE TABLE Addresses (
+AddressID NUMBER NOT NULL,
+Street VARCHAR2(100) NOT NULL,
+HouseNumber VARCHAR2(4) NOT NULL,
+PostCode NUMBER(5) NOT NULL,
+Town VARCHAR2(80) NOT NULL,
+Country VARCHAR2(60) DEFAULT 'Germany',
+PRIMARY KEY (AddressID)
+);
+
+/*DROP TABLE GenderDimension;
+
+CREATE TABLE GenderDimension (
+GenderID NUMBER(1),
+GenderShort CHAR(1),
+GenderMiddle VARCHAR2(3),
+GenderLong VARCHAR2(7),
+GeschlechtShort CHAR(1),
+GeschlechtMittelÄ VARCHAR2(5),
+GeschlechtMittelAe VARCHAR2(6),
+GeschlechtLangÄ VARCHAR2(8),
+GeschlechtLangAe VARCHAR2(9),
+PRIMARY KEY (GenderID))*/
+
+DROP TABLE Customer;
+
+create table Customer (
+UserID NUMBER NOT NULL,
+FirstName VARCHAR2(30) NOT NULL,
+LastName VARCHAR(20) NOT NULL,
+AddressID NUMBER REFERENCES Address,
+EMailAddress VARCHAR(100) CHECK(EMailAddress LIKE '%@%.%'),
+LoginName VARCHAR(15) NOT NULL,
+"PASSWORD" VARCHAR(30) NOT NULL,
+/*Gender CHAR(1) REFERENCES GenderDimension,*/
+Birthday NUMBER REFERENCES Timetable,
+PRIMARY KEY (UserID),
+UNIQUE (EMailAddress),
+UNIQUE (LoginName));
+
+DROP TABLE EventTypes;
+
+CREATE TABLE EventTypes (
+EventTypeID NUMBER NOT NULL,
+TypeName VARCHAR2(20) NOT NULL,
+Genre VARCHAR2(500),
+PRIMARY KEY (EventTypeID));
+
+DROP TABLE Organizer;
+
+CREATE TABLE Organizer (
+OrganizerID NUMBER NOT NULL,
+OrganizerName VARCHAR2(80) NOT NULL,
+LocationAddressID NUMBER REFERENCES Address,
+PRIMARY KEY (OrganizerID));
+
+DROP TABLE TicketTypes;
+
+CREATE TABLE TicketTypes (
+TicketTypeID NUMBER NOT NULL,
+"NAME" VARCHAR2(100) NOT NULL,
+Description VARCHAR2(500),
+PriceAdvantage VARCHAR2(25),
+OtherAdvantages VARCHAR2(100),
+PRIMARY KEY (TicketTypeID));
+
+DROP TABLE PayMethods;
+
+CREATE TABLE PayMethods (
+PayMethodID NUMBER NOT NULL,
+PayMethodName VARCHAR2(50) NOT NULL,
+Fees NUMBER(4,2),
+SpecialConditions VARCHAR2(100),
+PRIMARY KEY (PayMethodID));
+
+DROP TABLE TicketSeller;
+
+CREATE TABLE TicketSeller (
+SellerID NUMBER NOT NULL,
+SellerName VARCHAR2(100),
+Website VARCHAR2(50) CHECK (Website LIKE '%.%'),
+PossiblePayMethodsID NUMBER REFERENCES PayMethod,
+PRIMARY KEY (SellerID));
+
+DROP TABLE "EVENTS";
+
+CREATE TABLE "EVENTS" (
+EventID NUMBER,
+EventTypeID NUMBER REFERENCES EventType,
+EventLocationID NUMBER REFERENCES Address,
+OrganizerID NUMBER REFERENCES Organizer,
+Title VARCHAR2(100),
+"DESCRIPTION" VARCHAR2(500),
+"DATE" NUMBER REFERENCES TIMETABLE,         
+DurationInMinutes NUMBER(4),
+Prize NUMBER(5),
+TicketsAll NUMBER(6),
+SoldTickets NUMBER(6),
+"AVAILABILITY" VARCHAR2(6),
+PRIMARY KEY (EventID));
+
+DROP TABLE Purchases;
+
+CREATE TABLE Purchases (
+BuyID NUMBER NOT NULL,
+UserID NUMBER REFERENCES Customer,
+EventID NUMBER REFERENCES "EVENTS",
+TicketType NUMBER REFERENCES TicketType,
+PlannedPrize Number(5),
+PayedPrize Number(5),
+"DATE" DATE DEFAULT SYSDATE,
+TicketSellerID NUMBER REFERENCES TicketSeller,
+PayMethodID NUMBER REFERENCES PayMethod,
+PRIMARY KEY (BuyID));
+
+DROP TABLE Ratings;
+
+CREATE TABLE Ratings (
+UserId NUMBER NOT NULL,
+EventID NUMBER NOT NULL,
+Rating NUMBER,
+"TIMESTAMP" DATE DEFAULT SYSDATE,
+PRIMARY KEY (UserID, EventID),
+FOREIGN KEY (UserID) REFERENCES Customer,
+FOREIGN KEY (EventID) REFERENCES "EVENTS");
