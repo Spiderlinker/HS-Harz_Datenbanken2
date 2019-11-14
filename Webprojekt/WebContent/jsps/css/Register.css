@@ -8,6 +8,11 @@ body {
 	margin:auto;
 }
 
+p {
+	color: red;
+	text-align: center;
+}
+
  /* Bordered form */
 form {
   border: 1px solid black;
