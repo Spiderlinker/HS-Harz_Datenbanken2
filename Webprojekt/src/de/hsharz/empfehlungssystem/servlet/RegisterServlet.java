@@ -20,6 +20,9 @@ import de.hsharz.empfehlungssystem.beans.User;
 public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	private static final String FIRST_REGISTER_PAGE = "1";
+	private static final String SECOND_REGISTER_PAGE = "2";
+
 	private static final String CHECKBOX_WITH_LABEL = "<input type=\"checkbox\" hidden=\"hidden\" id=\"%s\" name=\"%s\" /><label for=\"%s\">%s</label>";
 
 	/**
@@ -68,32 +71,69 @@ public class RegisterServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		String registerPage = request.getParameter("registerPage");
-		System.out.println("RegisterPage: " + registerPage);
-		if ("1".equals(registerPage)) {
+		System.out.println("User is at Register-Page #" + registerPage);
 
-			createAndStoreUser(request);
+		// Prüfen welche Register-Page der Nutzer aktuell aufgerufen hat.
+		// - Falls der Nutzer sich auf der 1. Seite befand, müssen seine Eingaben
+		// geprüft werden und wird dann auf Seite 2 weitergeleitet.
+		// - Falls der Nutzer sich auf der 2. Seite befand, muss seine Genre-Auswahl
+		// geprüft werden und wird dann in der Datenbank registriert.
+		if (FIRST_REGISTER_PAGE.equals(registerPage)) {
+
+			// Daten aus der Webseite auslesen und Nutzer erstellen
+			User user = createUser(request);
+			Session.store(Session.ATTRIBUTE_REGISTERING_USER, user);
+			request.setAttribute("user", user);
+
+			StringBuilder errorStrings = new StringBuilder();
+			boolean inputsValid = true;
+
+			/*
+			 * Validitätsprüfung der eingegebenen Daten
+			 */
 			if (!arePasswordsEqual(request)) {
-				request.setAttribute("errorString", "Passwörter stimmen nicht überein");
-				RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/jsps/Register.jsp");
-				dispatcher.forward(request, response);
-				return;
+				inputsValid = false;
+				errorStrings.append("Die Passwörter stimmen nicht überein<br>");
 			}
 
-			// Benutzer zur zweiten Seite der Registrierung weiterleiten
-			RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/jsps/Register2.jsp");
+			if (!isStreetValid(user.getStreet())) {
+				inputsValid = false;
+				errorStrings.append("Die Straße entspricht nicht dem erwarteten Format<br>");
+			}
+
+			if (!isHouseNumberValid(user.getHouseNr())) {
+				inputsValid = false;
+				errorStrings.append("Die Hausnummer entspricht nicht dem erwarteten Format<br>");
+			}
+
+			/*
+			 * Falls der Nutzer ungültige Angaben gemacht hat, wird dieser nicht auf die 2.
+			 * Seite der Registrierung weitergeleitet, sondern wird erneut auf die 1. Seite
+			 * geschickt. Alle bisher getätigten Eingaben bleiben erhalten, da der User als
+			 * Objekt in den Request gespeichert wurde (unter dem Key 'user')
+			 */
+			String forwardToUrl = "/jsp/Register2.jsp";
+			if (!inputsValid) {
+				// Die fehlerhaften Felder sollen auf der Webseite ausgegeben werden
+				request.setAttribute("errorString", errorStrings.toString());
+				forwardToUrl = "/jsps/Register.jsp";
+			}
+
+			// Benutzer weiteleiten
+			RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher(forwardToUrl);
 			dispatcher.forward(request, response);
 			return;
-		} else if ("2".equals(registerPage)) {
+		} else if (SECOND_REGISTER_PAGE.equals(registerPage)) {
 			System.out.println("Registrierung abschließen");
 			User user = Session.remove(Session.ATTRIBUTE_REGISTERING_USER);
 			System.out.println(user);
 
 		} else {
-			System.out.println("Keine Page erkannt");
+			System.err.println("Keine Implementierung für dieses Register-Seite.");
 		}
 	}
 
-	private void createAndStoreUser(HttpServletRequest request) {
+	private User createUser(HttpServletRequest request) {
 		User user = new User();
 		user.setGender(request.getParameter("gender"));
 		user.setFirstname(request.getParameter("firstname"));
@@ -105,8 +145,7 @@ public class RegisterServlet extends HttpServlet {
 		user.setEmail(request.getParameter("email"));
 		user.setPassword(request.getParameter("password"));
 		user.setBirthday(request.getParameter("birthday"));
-		request.setAttribute("user", user);
-		Session.store(Session.ATTRIBUTE_REGISTERING_USER, user);
+		return user;
 	}
 
 	private boolean arePasswordsEqual(HttpServletRequest request) {
@@ -114,6 +153,22 @@ public class RegisterServlet extends HttpServlet {
 		String password2 = request.getParameter("passwordRepeat");
 
 		return password1 != null && password1.equals(password2);
+	}
+
+	private boolean isStreetValid(String street) {
+		return false;
+	}
+
+	private boolean isHouseNumberValid(String houseNumber) {
+		return false;
+	}
+
+	private boolean isZipValid(String zip) {
+		return false;
+	}
+
+	private boolean isCityValid(String city) {
+		return false;
 	}
 
 }
