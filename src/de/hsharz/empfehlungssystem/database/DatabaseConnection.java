@@ -15,18 +15,31 @@ public class DatabaseConnection {
 	private static final String USER = "BROCKEN_001";
 	private static final String PASSWORD = "BROCKEN_003";
 	private static final String DATABASE_DRIVER = "oracle.jdbc.driver.OracleDriver";
-	
+
+	// Pool mit Datenbankverbindungen
 	private static BasicDataSource connectionPool;
 
 	private DatabaseConnection() {
 		// Single instance
 	}
 
-	private static void establishConnection() {
-		if (!isConnectionClosed()) {
-			throw new ConnectionPendingException();
+	/**
+	 * Liefert eine neue Connection zu der Datenbank.
+	 * 
+	 * @return eine neue Connection zu der Datenbank
+	 * @throws SQLException Falls
+	 */
+	public static Connection getConnection() throws SQLException {
+		if (isConnectionClosed()) {
+			establishConnection();
 		}
+		return connectionPool.getConnection();
+	}
 
+	/**
+	 * 
+	 */
+	private static void establishConnection() {
 		BasicDataSource basicDataSource = new BasicDataSource();
 		basicDataSource.setDriverClassName(DATABASE_DRIVER);
 		basicDataSource.setUrl(DATABASE_URL);
@@ -35,22 +48,26 @@ public class DatabaseConnection {
 		connectionPool = basicDataSource;
 	}
 
+	/**
+	 * Gibt an, ob die Verbindung zur Datenbank getrennt wurde bzw. nicht aufgebaut
+	 * ist
+	 * 
+	 * @return true, falls keine Verbindung besteht; andernfalls false
+	 */
 	public static boolean isConnectionClosed() {
 		return connectionPool == null || connectionPool.isClosed();
 	}
 
+	/**
+	 * Schlieﬂt alle Connections (den ConnectionPool) zu der Datenbank
+	 * 
+	 * @throws SQLException Fehler beim Schlieﬂen der Connections
+	 */
 	public static void closeConnection() throws SQLException {
 		if (connectionPool != null) {
 			connectionPool.close();
 			connectionPool = null;
 		}
-	}
-
-	public static Connection getConnection() throws SQLException {
-		if (isConnectionClosed()) {
-			establishConnection();
-		}
-		return connectionPool.getConnection();
 	}
 
 }
