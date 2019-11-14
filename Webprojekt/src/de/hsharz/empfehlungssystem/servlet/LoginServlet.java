@@ -30,9 +30,17 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// Keine GET-Operationen ausführen, nur über POST anmelden
-		RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/jsps/Login.jsp");
-		dispatcher.forward(request, response);
+		User loggedInUser = Session.getLoggedInUser();
+		if(loggedInUser == null)
+		{
+			// Keine GET-Operationen ausführen, nur über POST anmelden
+			RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/jsps/Login.jsp");
+			dispatcher.forward(request, response);
+			return;
+		}
+		
+		request.setAttribute("user", loggedInUser);
+		response.sendRedirect(request.getContextPath() + "/Empfehlungen");
 	}
 
 	@Override
