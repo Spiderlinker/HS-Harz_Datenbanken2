@@ -44,9 +44,9 @@
 				
 				<br>
 				<br>
-				<button type="button">Nächster Schritt</button>
-				<button type="submit">Registrieren</button>
+				<button type="submit">Nächster Schritt</button>
 			</div>
+			<input type="text" name="registerPage" value="1" hidden="hidden"/>
 	
 			<span class="login">Hast du bereits einen Account? <a href="Login">Zurück zum Login</a></span>
 		</form>
