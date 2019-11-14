@@ -10,12 +10,9 @@
 		<title>Login Page</title>
 		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/jsps/css/ChoosePreferences.css" title="style1" />
 	</head>
-	<body>
-		<div class="container">
-			<p class="hello" >Hallo <b>${user.username}</b></p>
-		</div>
-	
+	<body>	
 		<form action="/Empfehlungssystem/Register" method="POST">	
+			<input type="hidden" name="registerPage" value="2"/>
 			<div class="container">
 			
 				<h3>Was magst du?</h3>
@@ -27,8 +24,6 @@
 				
 				<button type="submit">Registrierung abschlieﬂen</button>
 			</div>
-			<input type="text" name="registerPage" value="2" hidden="hidden"/>
 		</form>
-		<span class="logout"><a href="Logout">Abmelden</a></span>
 	</body>
 </html>
