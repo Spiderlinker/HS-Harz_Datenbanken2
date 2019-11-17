@@ -8,18 +8,14 @@
 	<head>
 		<meta charset="ISO-8859-1">
 		<title>Deine Empfehlungen</title>
-		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/jsps/css/Login.css" title="style1" />
+		<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/jsps/css/Empfehlungen.css" title="style1" />
 	</head>
 	<body>
+	
+		<jsp:include page="_header.jsp"></jsp:include>
+		
 		<div class="container">
-	
 			<jsp:getProperty name="torsten" property="empfehlungen" />
-	
-			<div class="container">
-				<p class="hello">Hallo <b>${user.username}</b></p>
-			</div>
-	
-			<span class="logout"><a href="Logout">Abmelden</a></span>
 		</div>
 	</body>
 </html>
