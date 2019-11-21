@@ -18,3 +18,7 @@ Tipps & Tricks:
   - select to_char(sysdate, 'MM') from dual; -- Monat
   - select to_char(sysdate, 'YYYY') from dual; -- Jahr
   - select to_char(sysdate, 'DAY') from dual; -- Wochentag
+
+
+Analysen:
+- https://canvasjs.com/
