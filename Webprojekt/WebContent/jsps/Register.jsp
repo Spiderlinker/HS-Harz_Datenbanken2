@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
+<jsp:useBean id="country" class="de.hsharz.empfehlungssystem.servlet.RegisterServlet" scope="session" />
+    
 <!DOCTYPE html>
 <html>
 	<head>
@@ -17,19 +20,22 @@
 			
 				<label><b>Persönliche Daten</b></label>
 				<br>
-				<select name="gender" style="width:18%;">
+				<select name="gender" style="width:20%;">
 					<option selected> Männlich </option>
 					<option ${user.gender == 'Weiblich' ? 'selected' : ''}> Weiblich </option>
 					<option ${user.gender == 'Divers' ? 'selected' : ''}> Divers </option>
 				</select>
-				<input type="text" placeholder="Vorname" name="firstname" value="${user.firstname}" style="width:40%;" required>
-				<input type="text" placeholder="Nachname" name="lastname" value="${user.lastname}" style="width:40%;" required>
+				<input type="text" placeholder="Vorname" name="firstname" value="${user.firstname}" style="width:39%;" required>
+				<input type="text" placeholder="Nachname" name="lastname" value="${user.lastname}" style="width:39%;" required>
 				
 				<input type="text" placeholder="Anschrift" name="street" value="${user.street}" style="width:74%;" required>
 				<input type="text" placeholder="Hausnr." name="houseNumber" value="${user.houseNr}" style="width:25%;" required>
 				
-				<input type="text" placeholder="PLZ" name="zip" value="${user.zip}" style="width:30%;" required>
-				<input type="text" placeholder="Ort" name="city" value="${user.city}" style="width:69%;" required>
+				<input type="text" placeholder="PLZ" name="zip" value="${user.zip}" style="width:28%;" required>
+				<input type="text" placeholder="Ort" name="city" value="${user.city}" style="width:55%;" required>
+				<select name="country" style="width:15%;">
+					<jsp:getProperty property="countries" name="country"/>
+				</select>
 				
 				<br>
 				<br>
