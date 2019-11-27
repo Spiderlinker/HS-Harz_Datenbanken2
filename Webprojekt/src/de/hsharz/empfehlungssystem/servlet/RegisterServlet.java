@@ -1,6 +1,7 @@
 package de.hsharz.empfehlungssystem.servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import de.hsharz.empfehlungssystem.beans.User;
+import de.hsharz.empfehlungssystem.database.DatabaseAdapter;
 
 /**
  * Servlet implementation class RegisterServlet
@@ -23,6 +25,8 @@ public class RegisterServlet extends HttpServlet {
 
 	private static final String FIRST_REGISTER_PAGE = "1";
 	private static final String SECOND_REGISTER_PAGE = "2";
+
+	private static final String DEFAULT_COUNTRY = "DE";
 
 	private static final String CHECKBOX_WITH_LABEL = "<input type=\"checkbox\" hidden=\"hidden\" id=\"%s\" name=\"%s\" /><label for=\"%s\">%s</label>";
 
@@ -52,6 +56,37 @@ public class RegisterServlet extends HttpServlet {
 			builder.append(String.format(CHECKBOX_WITH_LABEL, genre, genre, genre, genre));
 		}
 		return builder.toString();
+	}
+
+	public String getCountries() {
+		String option = "<option %s>%s</option>";
+		String selectedCountryCode = DEFAULT_COUNTRY;
+
+		// Falls der Benutzer bei der Registrierung war und noch Eingaben korrigieren
+		// muss,
+		// So soll der zuvor ausgewählte CountryCode wieder ausgewählt sein.
+		User registeringUser = Session.get(Session.ATTRIBUTE_REGISTERING_USER);
+		if (registeringUser != null) {
+			selectedCountryCode = registeringUser.getCountryShort();
+		}
+
+		// CountryCodes aus der Datenbank holen
+		List<String> countries = new ArrayList<>();
+		try {
+			countries = DatabaseAdapter.getCountryCodes();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		// Alle CountryCodes in das <select> einfügen und in die HTML-Seite einspeisen
+		StringBuilder countriesBuilder = new StringBuilder();
+		for (String country : countries) {
+			// select default country
+			String isSelected = selectedCountryCode.equals(country) ? "selected" : "";
+			countriesBuilder.append(String.format(option, isSelected, country));
+		}
+
+		return countriesBuilder.toString();
 	}
 
 	/**
@@ -108,12 +143,14 @@ public class RegisterServlet extends HttpServlet {
 			 * geschickt. Alle bisher getätigten Eingaben bleiben erhalten, da der User als
 			 * Objekt in den Request gespeichert wurde (unter dem Key 'user')
 			 */
-			String forwardToUrl = "/jsp/Register2.jsp";
+			String forwardToUrl = "/jsps/Register2.jsp";
 			if (!inputsValid) {
 				// Die fehlerhaften Felder sollen auf der Webseite ausgegeben werden
 				request.setAttribute("errorString", errorStrings.toString());
 				forwardToUrl = "/jsps/Register.jsp";
 			}
+
+			System.out.println("Redirect user from Register1 to " + forwardToUrl);
 
 			// Benutzer weiteleiten
 			RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher(forwardToUrl);
@@ -122,8 +159,24 @@ public class RegisterServlet extends HttpServlet {
 		} else if (SECOND_REGISTER_PAGE.equals(registerPage)) {
 			System.out.println("Registrierung abschließen");
 			User user = Session.remove(Session.ATTRIBUTE_REGISTERING_USER);
+
 			System.out.println(user);
 
+			StringBuilder errorStrings = new StringBuilder();
+			boolean inputsValid = true;
+
+			// TODO Check Input
+
+			if (!inputsValid) {
+				// Die fehlerhaften Felder sollen auf der Webseite ausgegeben werden
+				request.setAttribute("errorString", errorStrings.toString());
+				RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/jsps/Register2.jsp");
+				dispatcher.forward(request, response);
+				return;
+			}
+
+			response.sendRedirect(request.getContextPath() + "/UserHome");
+			return;
 		} else {
 			System.err.println("Keine Implementierung für dieses Register-Seite.");
 		}
@@ -138,6 +191,7 @@ public class RegisterServlet extends HttpServlet {
 		user.setHouseNr(request.getParameter("houseNumber"));
 		user.setZip(request.getParameter("zip"));
 		user.setCity(request.getParameter("city"));
+		user.setCountryShort(request.getParameter("country"));
 		user.setEmail(request.getParameter("email"));
 		user.setPassword(request.getParameter("password"));
 		user.setBirthday(request.getParameter("birthday"));
