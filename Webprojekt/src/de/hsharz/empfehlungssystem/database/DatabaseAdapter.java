@@ -54,6 +54,44 @@ public class DatabaseAdapter {
 		});
 	}
 
+	public static boolean registerUser(User user) throws SQLException {
+		return runWithConnection(conn -> {
+
+			PreparedStatement statement = conn.prepareStatement("INSERT INTO CUSTOMER  values(CUSTOMERIDSEQ.NEXTVAL," //
+					+ "?," // 1 Firstname
+					+ "?," // 2 Lastname
+					+ "?," // 3 Street
+					+ "?," // 4 House Number
+					+ "?," // 5 ZIP
+					+ "?," // 6 City
+					+ "?," // 7 Country
+					+ "(SELECT code from countries where de = ?)," // 8 Country_Code Short
+					+ "?," // 9 Email
+					+ "?," // 10 Email_Provider
+					+ "?," // 11 Password
+					+ "?," // 12 Gender
+					+ "?," // 13 Gender_Short
+					+ "?," // 14 Birthday_Date
+					+ "?," // 15 Birthday_Julian
+					+ ")");
+
+			statement.setString(1, user.getFirstname());
+			statement.setString(2, user.getLastname());
+			statement.setString(3, user.getStreet());
+			statement.setString(4, user.getHouseNr());
+			statement.setString(5, user.getZip());
+			statement.setString(6, user.getCity());
+			statement.setString(7, user.getCountry());
+			statement.setString(8, user.getCountry());
+			statement.setString(9, user.getEmail());
+			statement.setString(10, user.getEmail().substring(user.getEmail().indexOf('@') + 1));
+
+			int result = statement.executeUpdate();
+
+			return false;
+		});
+	}
+
 	/**
 	 * Führt die gegebene Funktion aus und übergibt dieser eine Verbindung zur
 	 * Datenbank
