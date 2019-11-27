@@ -9,10 +9,16 @@ public class DatabaseConnection {
 
 //	private static final String HOSTNAME = "oracle.hs-harz.de";
 //	private static final String PORT = "1521";
-	private static final String DATABASE = "HARZDB01";
+//	private static final String DATABASE = "HARZDB01";
+//	private static final String DATABASE_URL = "jdbc:oracle:thin:@oracle.hs-harz.de:1521:" + DATABASE;
+//	private static final String USER = "BROCKEN_001";
+//	private static final String PASSWORD = "BROCKEN_003";
+//	private static final String DATABASE_DRIVER = "oracle.jdbc.driver.OracleDriver";
+
+	private static final String DATABASE = "HARZLABOR";
 	private static final String DATABASE_URL = "jdbc:oracle:thin:@oracle.hs-harz.de:1521:" + DATABASE;
-	private static final String USER = "BROCKEN_001";
-	private static final String PASSWORD = "BROCKEN_003";
+	private static final String USER = "LABOR_HARZ_007";
+	private static final String PASSWORD = "Lutimy94";
 	private static final String DATABASE_DRIVER = "oracle.jdbc.driver.OracleDriver";
 
 	// Pool mit Datenbankverbindungen
