@@ -92,6 +92,21 @@ public class DatabaseAdapter {
 		});
 	}
 
+	public static List<String> getCountryCodes() throws SQLException {
+		return runWithConnection(conn -> {
+			List<String> countryCodes = new ArrayList<>();
+
+			PreparedStatement statement = conn.prepareStatement(
+					"SELECT code FROM COUNTRIES");
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				countryCodes.add(result.getString(1));
+			}
+			
+			return countryCodes;
+		});
+	}
+
 	/**
 	 * Führt die gegebene Funktion aus und übergibt dieser eine Verbindung zur
 	 * Datenbank
