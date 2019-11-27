@@ -3,6 +3,7 @@ package de.hsharz.empfehlungssystem.servlet;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -91,19 +92,14 @@ public class RegisterServlet extends HttpServlet {
 			/*
 			 * Validitätsprüfung der eingegebenen Daten
 			 */
-			if (!arePasswordsEqual(request)) {
+			if (user.getPassword().length() < 4 || !arePasswordsEqual(request)) {
 				inputsValid = false;
 				errorStrings.append("Die Passwörter stimmen nicht überein<br>");
 			}
 
-			if (!isStreetValid(user.getStreet())) {
+			if (!isEmailValid(user.getEmail())) {
 				inputsValid = false;
-				errorStrings.append("Die Straße entspricht nicht dem erwarteten Format<br>");
-			}
-
-			if (!isHouseNumberValid(user.getHouseNr())) {
-				inputsValid = false;
-				errorStrings.append("Die Hausnummer entspricht nicht dem erwarteten Format<br>");
+				errorStrings.append("Die E-Mail-Adresse entspricht nicht dem erwarteten Format<br>");
 			}
 
 			/*
@@ -140,7 +136,7 @@ public class RegisterServlet extends HttpServlet {
 		user.setLastname(request.getParameter("lastname"));
 		user.setStreet(request.getParameter("street"));
 		user.setHouseNr(request.getParameter("houseNumber"));
-		user.setZip(Integer.parseInt(request.getParameter("zip")));
+		user.setZip(request.getParameter("zip"));
 		user.setCity(request.getParameter("city"));
 		user.setEmail(request.getParameter("email"));
 		user.setPassword(request.getParameter("password"));
@@ -155,20 +151,8 @@ public class RegisterServlet extends HttpServlet {
 		return password1 != null && password1.equals(password2);
 	}
 
-	private boolean isStreetValid(String street) {
-		return false;
-	}
-
-	private boolean isHouseNumberValid(String houseNumber) {
-		return false;
-	}
-
-	private boolean isZipValid(String zip) {
-		return false;
-	}
-
-	private boolean isCityValid(String city) {
-		return false;
+	private boolean isEmailValid(String email) {
+		return Pattern.matches("[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,10}", email);
 	}
 
 }
