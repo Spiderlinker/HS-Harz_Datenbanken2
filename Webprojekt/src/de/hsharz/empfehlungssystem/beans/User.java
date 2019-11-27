@@ -11,8 +11,10 @@ public class User {
 
 	private String street;
 	private String houseNr;
-	private int zip;
+	private String zip;
 	private String city;
+	private String country;
+	private String countryShort;
 
 	private String email;
 	private String password;
@@ -64,11 +66,11 @@ public class User {
 		this.city = city;
 	}
 
-	public int getZip() {
+	public String getZip() {
 		return zip;
 	}
 
-	public void setZip(int zip) {
+	public void setZip(String zip) {
 		this.zip = zip;
 	}
 
@@ -118,6 +120,22 @@ public class User {
 
 	public void setBirthday(String birthday) {
 		this.birthday = birthday;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getCountryShort() {
+		return countryShort;
+	}
+
+	public void setCountryShort(String countryShort) {
+		this.countryShort = countryShort;
 	}
 
 
