@@ -28,15 +28,19 @@
 				<input type="text" placeholder="Anschrift" name="street" value="${user.street}" style="width:74%;" required>
 				<input type="text" placeholder="Hausnr." name="houseNumber" value="${user.houseNr}" style="width:25%;" required>
 				
-				<input type="number" placeholder="PLZ" name="zip" value="${user.zip}" style="width:30%;" min="0" max="99999" required>
+				<input type="text" placeholder="PLZ" name="zip" value="${user.zip}" style="width:30%;" required>
 				<input type="text" placeholder="Ort" name="city" value="${user.city}" style="width:69%;" required>
 				
 				<br>
 				<br>
 				
 				<label for="email"><b>Welche Anmeldedaten möchtest du verwenden?</b></label> 
-				<input type="text" placeholder="Wie lautet deine E-Mail-Adresse" name="email" value="${user.email}" class="fullText" required>
-				<input type="password" placeholder="Welches Passwort möchtest du wählen?" name="password" value="${user.password}" class="fullText" required>
+				<input type="text" placeholder="Wie lautet deine E-Mail-Adresse" name="email" value="${user.email}" 
+					   pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,10}" class="fullText" required>
+					   
+				<!-- \s matched Whitespace, \S matched alles was nicht Whitespace ist -->
+				<input type="password" placeholder="Welches Passwort möchtest du wählen? (mind. 4 Zeichen)" name="password" value="${user.password}" 
+					   pattern="[\s\S]{4,}" class="fullText" required>
 				<input type="password" placeholder="Bitte wiederhole dein eingegebenes Passwort" name="passwordRepeat" class="fullText" required>
 	
 				<br>
