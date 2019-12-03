@@ -167,3 +167,132 @@ INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Show", "Comedy" , "?" , "Friedric
 INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Show", "Comedy" , "?" , "Friedrich Ebert Str.", "152", 34119, "Kassel" , "Deutschland", "DE", "", "Chris Tall - Schönheit braucht Platz!", "Stand-up-Star Chris Tall geht mit seinem neuen Bühnenprogramm „Schönheit braucht Platz!“ auf große Tournee!", 15.05.2020 20:00, 180, 27.00); 
 INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Show", "Comedy" , "?" , "Friedrich Ebert Str.", "152", 34119, "Kassel" , "Deutschland", "DE", "", "Chris Tall - Schönheit braucht Platz!", "Stand-up-Star Chris Tall geht mit seinem neuen Bühnenprogramm „Schönheit braucht Platz!“ auf große Tournee!", 16.05.2020 20:00, 180, 26.50); 
 INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Show", "Comedy" , "?" , "Friedrich Ebert Str.", "152", 34119, "Kassel" , "Deutschland", "DE", "", "Chris Tall - Schönheit braucht Platz!", "Stand-up-Star Chris Tall geht mit seinem neuen Bühnenprogramm „Schönheit braucht Platz!“ auf große Tournee!", 17.05.2020 20:00, 180, 25.00); 
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Show", "Comedy" , "?" , "Friedrich Ebert Str.", "152", 34119, "Kassel" , "Deutschland", "DE", "", "Chris Tall - Schönheit braucht Platz!", "Stand-up-Star Chris Tall geht mit seinem neuen Bühnenprogramm „Schönheit braucht Platz!“ auf große Tournee!", 18.05.2020 20:00, 180, 25.00); 
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Show", "Comedy" , "?" , "Friedrich Ebert Str.", "152", 34119, "Kassel" , "Deutschland", "DE", "", "Chris Tall - Schönheit braucht Platz!", "Stand-up-Star Chris Tall geht mit seinem neuen Bühnenprogramm „Schönheit braucht Platz!“ auf große Tournee!", 19.05.2020 20:00, 180, 25.00); 
+
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Show", "Comedy" , "?" , "Heinrich-Heine-Str.", "1", 38440, "Wolfsburg" , "Deutschland", "DE", "", "Chris Tall - Schönheit braucht Platz!", "Stand-up-Star Chris Tall geht mit seinem neuen Bühnenprogramm „Schönheit braucht Platz!“ auf große Tournee!", 13.06.2020 20:00, 180, 25.00); 
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Show", "Comedy" , "?" , "Heinrich-Heine-Str.", "1", 38440, "Wolfsburg" , "Deutschland", "DE", "", "Chris Tall - Schönheit braucht Platz!", "Stand-up-Star Chris Tall geht mit seinem neuen Bühnenprogramm „Schönheit braucht Platz!“ auf große Tournee!", 14.06.2020 20:00, 180, 25.00); 
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Show", "Comedy" , "?" , "Heinrich-Heine-Str.", "1", 38440, "Wolfsburg" , "Deutschland", "DE", "", "Chris Tall - Schönheit braucht Platz!", "Stand-up-Star Chris Tall geht mit seinem neuen Bühnenprogramm „Schönheit braucht Platz!“ auf große Tournee!", 15.06.2020 20:00, 180, 27.00); 
+
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Show", "Comedy" , "?" , "Europaplatz", "1", 38100, "Braunschweig" , "Deutschland", "DE", "", "Chris Tall - Schönheit braucht Platz!", "Stand-up-Star Chris Tall geht mit seinem neuen Bühnenprogramm „Schönheit braucht Platz!“ auf große Tournee!", 11.09.2020 20:00, 180, 25.00); 
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Show", "Comedy" , "?" , "Europaplatz", "1", 38100, "Braunschweig" , "Deutschland", "DE", "", "Chris Tall - Schönheit braucht Platz!", "Stand-up-Star Chris Tall geht mit seinem neuen Bühnenprogramm „Schönheit braucht Platz!“ auf große Tournee!", 12.09.2020 20:00, 180, 25.00); 
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Show", "Comedy" , "?" , "Europaplatz", "1", 38100, "Braunschweig" , "Deutschland", "DE", "", "Chris Tall - Schönheit braucht Platz!", "Stand-up-Star Chris Tall geht mit seinem neuen Bühnenprogramm „Schönheit braucht Platz!“ auf große Tournee!", 13.09.2020 20:00, 180, 27.00); 
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Show", "Comedy" , "?" , "Europaplatz", "1", 38100, "Braunschweig" , "Deutschland", "DE", "", "Chris Tall - Schönheit braucht Platz!", "Stand-up-Star Chris Tall geht mit seinem neuen Bühnenprogramm „Schönheit braucht Platz!“ auf große Tournee!", 14.09.2020 20:00, 180, 26.50); 
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Show", "Comedy" , "?" , "Europaplatz", "1", 38100, "Braunschweig" , "Deutschland", "DE", "", "Chris Tall - Schönheit braucht Platz!", "Stand-up-Star Chris Tall geht mit seinem neuen Bühnenprogramm „Schönheit braucht Platz!“ auf große Tournee!", 15.09.2020 20:00, 180, 25.00); 
+
+
+-- Gregory Porter & Band
+
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Konzert", "Jazz" , "Jazz" , "Rosenheimerstr.", "5", 81667, "München" , "Deutschland", "DE", "", "Gregory Porter & Band", "Die schönste Stimme des Jazz: Gregory Porter geht 2020 mit neuem Album auf große Tournee!", 01.03.2020 19:00, 180, 65.75);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Konzert", "Jazz" , "Jazz" , "Rosenheimerstr.", "5", 81667, "München" , "Deutschland", "DE", "", "Gregory Porter & Band", "Die schönste Stimme des Jazz: Gregory Porter geht 2020 mit neuem Album auf große Tournee!", 02.03.2020 19:00, 180, 65.75);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Konzert", "Jazz" , "Jazz" , "Rosenheimerstr.", "5", 81667, "München" , "Deutschland", "DE", "", "Gregory Porter & Band", "Die schönste Stimme des Jazz: Gregory Porter geht 2020 mit neuem Album auf große Tournee!", 03.03.2020 19:00, 180, 65.80);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Konzert", "Jazz" , "Jazz" , "Rosenheimerstr.", "5", 81667, "München" , "Deutschland", "DE", "", "Gregory Porter & Band", "Die schönste Stimme des Jazz: Gregory Porter geht 2020 mit neuem Album auf große Tournee!", 04.03.2020 19:00, 180, 66.00);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Konzert", "Jazz" , "Jazz" , "Rosenheimerstr.", "5", 81667, "München" , "Deutschland", "DE", "", "Gregory Porter & Band", "Die schönste Stimme des Jazz: Gregory Porter geht 2020 mit neuem Album auf große Tournee!", 05.03.2020 19:00, 180, 65.75);
+
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Konzert", "Jazz" , "Jazz" , "Leonhardplatz", "1", 38102, "Braunschweig" , "Deutschland", "DE", "", "Gregory Porter & Band", "Die schönste Stimme des Jazz: Gregory Porter geht 2020 mit neuem Album auf große Tournee!", 11.03.2020 19:00, 180, 78.75);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Konzert", "Jazz" , "Jazz" , "Leonhardplatz", "1", 38102, "Braunschweig" , "Deutschland", "DE", "", "Gregory Porter & Band", "Die schönste Stimme des Jazz: Gregory Porter geht 2020 mit neuem Album auf große Tournee!", 12.03.2020 19:00, 180, 78.75);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Konzert", "Jazz" , "Jazz" , "Leonhardplatz", "1", 38102, "Braunschweig" , "Deutschland", "DE", "", "Gregory Porter & Band", "Die schönste Stimme des Jazz: Gregory Porter geht 2020 mit neuem Album auf große Tournee!", 13.03.2020 19:00, 180, 78.80);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Konzert", "Jazz" , "Jazz" , "Leonhardplatz", "1", 38102, "Braunschweig" , "Deutschland", "DE", "", "Gregory Porter & Band", "Die schönste Stimme des Jazz: Gregory Porter geht 2020 mit neuem Album auf große Tournee!", 14.03.2020 19:00, 180, 78.00);
+
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Konzert", "Jazz" , "Jazz" , "Opernplatz", "1", 60313, "Frankfurt" , "Deutschland", "DE", "", "Gregory Porter & Band", "Die schönste Stimme des Jazz: Gregory Porter geht 2020 mit neuem Album auf große Tournee!", 11.04.2020 19:30, 180, 65.75);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Konzert", "Jazz" , "Jazz" , "Opernplatz", "1", 60313, "Frankfurt" , "Deutschland", "DE", "", "Gregory Porter & Band", "Die schönste Stimme des Jazz: Gregory Porter geht 2020 mit neuem Album auf große Tournee!", 12.04.2020 19:30, 180, 65.75);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Konzert", "Jazz" , "Jazz" , "Opernplatz", "1", 60313, "Frankfurt" , "Deutschland", "DE", "", "Gregory Porter & Band", "Die schönste Stimme des Jazz: Gregory Porter geht 2020 mit neuem Album auf große Tournee!", 13.04.2020 19:30, 180, 65.80);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Konzert", "Jazz" , "Jazz" , "Opernplatz", "1", 60313, "Frankfurt" , "Deutschland", "DE", "", "Gregory Porter & Band", "Die schönste Stimme des Jazz: Gregory Porter geht 2020 mit neuem Album auf große Tournee!", 14.04.2020 19:30, 180, 66.00);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Konzert", "Jazz" , "Jazz" , "Opernplatz", "1", 60313, "Frankfurt" , "Deutschland", "DE", "", "Gregory Porter & Band", "Die schönste Stimme des Jazz: Gregory Porter geht 2020 mit neuem Album auf große Tournee!", 15.04.2020 19:30, 180, 65.75);
+
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Konzert", "Jazz" , "Jazz" , "Ehrenhof", "1", 40479, "Düsseldorf" , "Deutschland", "DE", "", "Gregory Porter & Band", "Die schönste Stimme des Jazz: Gregory Porter geht 2020 mit neuem Album auf große Tournee!", 01.07.2020 19:00, 180, 68.75);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Konzert", "Jazz" , "Jazz" , "Ehrenhof", "1", 40479, "Düsseldorf" , "Deutschland", "DE", "", "Gregory Porter & Band", "Die schönste Stimme des Jazz: Gregory Porter geht 2020 mit neuem Album auf große Tournee!", 02.07.2020 19:00, 180, 68.75);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Konzert", "Jazz" , "Jazz" , "Ehrenhof", "1", 40479, "Düsseldorf" , "Deutschland", "DE", "", "Gregory Porter & Band", "Die schönste Stimme des Jazz: Gregory Porter geht 2020 mit neuem Album auf große Tournee!", 03.07.2020 19:00, 180, 68.80);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Konzert", "Jazz" , "Jazz" , "Ehrenhof", "1", 40479, "Düsseldorf" , "Deutschland", "DE", "", "Gregory Porter & Band", "Die schönste Stimme des Jazz: Gregory Porter geht 2020 mit neuem Album auf große Tournee!", 04.07.2020 19:00, 180, 68.00);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Konzert", "Jazz" , "Jazz" , "Ehrenhof", "1", 40479, "Düsseldorf" , "Deutschland", "DE", "", "Gregory Porter & Band", "Die schönste Stimme des Jazz: Gregory Porter geht 2020 mit neuem Album auf große Tournee!", 05.07.2020 19:00, 180, 68.75);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Konzert", "Jazz" , "Jazz" , "Ehrenhof", "1", 40479, "Düsseldorf" , "Deutschland", "DE", "", "Gregory Porter & Band", "Die schönste Stimme des Jazz: Gregory Porter geht 2020 mit neuem Album auf große Tournee!", 07.07.2020 19:00, 180, 68.75);
+
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Konzert", "Jazz" , "Jazz" , "Theodor-Heuss-Platz", "1", 30175, "Hannover" , "Deutschland", "DE", "", "Gregory Porter & Band", "Die schönste Stimme des Jazz: Gregory Porter geht 2020 mit neuem Album auf große Tournee!", 21.07.2020 19:00, 180, 68.75);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Konzert", "Jazz" , "Jazz" , "Theodor-Heuss-Platz", "1", 30175, "Hannover" , "Deutschland", "DE", "", "Gregory Porter & Band", "Die schönste Stimme des Jazz: Gregory Porter geht 2020 mit neuem Album auf große Tournee!", 22.07.2020 19:00, 180, 68.75);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Konzert", "Jazz" , "Jazz" , "Theodor-Heuss-Platz", "1", 30175, "Hannover" , "Deutschland", "DE", "", "Gregory Porter & Band", "Die schönste Stimme des Jazz: Gregory Porter geht 2020 mit neuem Album auf große Tournee!", 23.07.2020 19:00, 180, 68.80);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Konzert", "Jazz" , "Jazz" , "Theodor-Heuss-Platz", "1", 30175, "Hannover" , "Deutschland", "DE", "", "Gregory Porter & Band", "Die schönste Stimme des Jazz: Gregory Porter geht 2020 mit neuem Album auf große Tournee!", 24.07.2020 19:00, 180, 68.00);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Konzert", "Jazz" , "Jazz" , "Theodor-Heuss-Platz", "1", 30175, "Hannover" , "Deutschland", "DE", "", "Gregory Porter & Band", "Die schönste Stimme des Jazz: Gregory Porter geht 2020 mit neuem Album auf große Tournee!", 25.07.2020 19:00, 180, 68.75);
+
+
+-- Fat Freddy's Drop
+
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Konzert", "Blues" , "Blues" , "Falkplatz", "1", 10437, "Berlin" , "Deutschland", "DE", "", "Fat Freddy's Drop", "", 01.04.2020 19:00, 200, 49.75);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Konzert", "Blues" , "Blues" , "Falkplatz", "1", 10437, "Berlin" , "Deutschland", "DE", "", "Fat Freddy's Drop", "", 02.04.2020 19:00, 200, 49.75);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Konzert", "Blues" , "Blues" , "Falkplatz", "1", 10437, "Berlin" , "Deutschland", "DE", "", "Fat Freddy's Drop", "", 03.04.2020 19:00, 200, 49.80);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Konzert", "Blues" , "Blues" , "Falkplatz", "1", 10437, "Berlin" , "Deutschland", "DE", "", "Fat Freddy's Drop", "", 04.04.2020 19:00, 200, 49.00);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Konzert", "Blues" , "Blues" , "Falkplatz", "1", 10437, "Berlin" , "Deutschland", "DE", "", "Fat Freddy's Drop", "", 05.04.2020 19:00, 200, 49.75);
+
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Konzert", "Blues" , "Blues" , "Schanzenstr.", "40", 51063, "Köln" , "Deutschland", "DE", "", "Fat Freddy's Drop", "", 12.05.2020 19:00, 200, 49.75);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Konzert", "Blues" , "Blues" , "Schanzenstr.", "40", 51063, "Köln" , "Deutschland", "DE", "", "Fat Freddy's Drop", "", 13.05.2020 19:00, 200, 49.80);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Konzert", "Blues" , "Blues" , "Schanzenstr.", "40", 51063, "Köln" , "Deutschland", "DE", "", "Fat Freddy's Drop", "", 14.05.2020 19:00, 200, 49.00);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Konzert", "Blues" , "Blues" , "Schanzenstr.", "40", 51063, "Köln" , "Deutschland", "DE", "", "Fat Freddy's Drop", "", 15.05.2020 19:00, 200, 49.75);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Konzert", "Blues" , "Blues" , "Schanzenstr.", "40", 51063, "Köln" , "Deutschland", "DE", "", "Fat Freddy's Drop", "", 16.05.2020 19:00, 200, 49.75);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Konzert", "Blues" , "Blues" , "Schanzenstr.", "40", 51063, "Köln" , "Deutschland", "DE", "", "Fat Freddy's Drop", "", 17.05.2020 19:00, 200, 49.75);
+
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Konzert", "Blues" , "Blues" , "Sonnenallee", "22", 34233, "Kassel" , "Deutschland", "DE", "", "Fat Freddy's Drop", "", 18.05.2020 19:00, 200, 52.00);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Konzert", "Blues" , "Blues" , "Sonnenallee", "22", 34233, "Kassel" , "Deutschland", "DE", "", "Fat Freddy's Drop", "", 19.05.2020 19:00, 200, 52.50);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Konzert", "Blues" , "Blues" , "Sonnenallee", "22", 34233, "Kassel" , "Deutschland", "DE", "", "Fat Freddy's Drop", "", 20.05.2020 19:00, 200, 52.50);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Konzert", "Blues" , "Blues" , "Sonnenallee", "22", 34233, "Kassel" , "Deutschland", "DE", "", "Fat Freddy's Drop", "", 21.05.2020 19:00, 200, 52.50);
+
+
+
+-- Der Räuber Hotzenplotz
+
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Kultur", "Theater" , "Theater" , "Opernplatz", "1", 30159, "Hannover" , "Deutschland", "DE", "", "Der Räuber Hotzenplotz - Meininger Staatstheater", "Das Weihnachtsmärchen 2019 im Großen Haus.", 06.12.2019 12:00, 140, 9.50);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Kultur", "Theater" , "Theater" , "Opernplatz", "1", 30159, "Hannover" , "Deutschland", "DE", "", "Der Räuber Hotzenplotz - Meininger Staatstheater", "Das Weihnachtsmärchen 2019 im Großen Haus.", 06.12.2019 16:00, 140, 9.50);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Kultur", "Theater" , "Theater" , "Opernplatz", "1", 30159, "Hannover" , "Deutschland", "DE", "", "Der Räuber Hotzenplotz - Meininger Staatstheater", "Das Weihnachtsmärchen 2019 im Großen Haus.", 06.12.2019 20:00, 140, 9.50);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Kultur", "Theater" , "Theater" , "Opernplatz", "1", 30159, "Hannover" , "Deutschland", "DE", "", "Der Räuber Hotzenplotz - Meininger Staatstheater", "Das Weihnachtsmärchen 2019 im Großen Haus.", 09.12.2019 12:00, 140, 9.70);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Kultur", "Theater" , "Theater" , "Opernplatz", "1", 30159, "Hannover" , "Deutschland", "DE", "", "Der Räuber Hotzenplotz - Meininger Staatstheater", "Das Weihnachtsmärchen 2019 im Großen Haus.", 09.12.2019 16:00, 140, 9.70);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Kultur", "Theater" , "Theater" , "Opernplatz", "1", 30159, "Hannover" , "Deutschland", "DE", "", "Der Räuber Hotzenplotz - Meininger Staatstheater", "Das Weihnachtsmärchen 2019 im Großen Haus.", 09.12.2019 20:00, 140, 9.70);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Kultur", "Theater" , "Theater" , "Opernplatz", "1", 30159, "Hannover" , "Deutschland", "DE", "", "Der Räuber Hotzenplotz - Meininger Staatstheater", "Das Weihnachtsmärchen 2019 im Großen Haus.", 10.12.2019 13:00, 140, 10.00);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Kultur", "Theater" , "Theater" , "Opernplatz", "1", 30159, "Hannover" , "Deutschland", "DE", "", "Der Räuber Hotzenplotz - Meininger Staatstheater", "Das Weihnachtsmärchen 2019 im Großen Haus.", 10.12.2019 17:00, 140, 10.00);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Kultur", "Theater" , "Theater" , "Opernplatz", "1", 30159, "Hannover" , "Deutschland", "DE", "", "Der Räuber Hotzenplotz - Meininger Staatstheater", "Das Weihnachtsmärchen 2019 im Großen Haus.", 10.12.2019 21:00, 140, 10.00);
+
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Kultur", "Theater" , "Theater" , "Offenbachplatz", "1", 50667, "Köln" , "Deutschland", "DE", "", "Der Räuber Hotzenplotz - Meininger Staatstheater", "Das Weihnachtsmärchen 2019 im Großen Haus.", 16.12.2019 12:00, 140, 10.00);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Kultur", "Theater" , "Theater" , "Offenbachplatz", "1", 50667, "Köln" , "Deutschland", "DE", "", "Der Räuber Hotzenplotz - Meininger Staatstheater", "Das Weihnachtsmärchen 2019 im Großen Haus.", 16.12.2019 16:00, 140, 10.00);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Kultur", "Theater" , "Theater" , "Offenbachplatz", "1", 50667, "Köln" , "Deutschland", "DE", "", "Der Räuber Hotzenplotz - Meininger Staatstheater", "Das Weihnachtsmärchen 2019 im Großen Haus.", 16.12.2019 20:00, 140, 10.00);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Kultur", "Theater" , "Theater" , "Offenbachplatz", "1", 50667, "Köln" , "Deutschland", "DE", "", "Der Räuber Hotzenplotz - Meininger Staatstheater", "Das Weihnachtsmärchen 2019 im Großen Haus.", 17.12.2019 12:00, 140, 10.00);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Kultur", "Theater" , "Theater" , "Offenbachplatz", "1", 50667, "Köln" , "Deutschland", "DE", "", "Der Räuber Hotzenplotz - Meininger Staatstheater", "Das Weihnachtsmärchen 2019 im Großen Haus.", 17.12.2019 16:00, 140, 10.00);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Kultur", "Theater" , "Theater" , "Offenbachplatz", "1", 50667, "Köln" , "Deutschland", "DE", "", "Der Räuber Hotzenplotz - Meininger Staatstheater", "Das Weihnachtsmärchen 2019 im Großen Haus.", 17.12.2019 20:00, 140, 10.00);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Kultur", "Theater" , "Theater" , "Offenbachplatz", "1", 50667, "Köln" , "Deutschland", "DE", "", "Der Räuber Hotzenplotz - Meininger Staatstheater", "Das Weihnachtsmärchen 2019 im Großen Haus.", 19.12.2019 12:00, 140, 9.70);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Kultur", "Theater" , "Theater" , "Offenbachplatz", "1", 50667, "Köln" , "Deutschland", "DE", "", "Der Räuber Hotzenplotz - Meininger Staatstheater", "Das Weihnachtsmärchen 2019 im Großen Haus.", 19.12.2019 16:00, 140, 9.70);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Kultur", "Theater" , "Theater" , "Offenbachplatz", "1", 50667, "Köln" , "Deutschland", "DE", "", "Der Räuber Hotzenplotz - Meininger Staatstheater", "Das Weihnachtsmärchen 2019 im Großen Haus.", 19.12.2019 20:00, 140, 9.70);
+
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Kultur", "Theater" , "Theater" , "Oberer Schloßgarten", "6", 70173, "Stuttgart" , "Deutschland", "DE", "", "Der Räuber Hotzenplotz - Meininger Staatstheater", "Das Weihnachtsmärchen 2019 im Großen Haus.", 20.12.2019 12:00, 140, 11.20);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Kultur", "Theater" , "Theater" , "Oberer Schloßgarten", "6", 70173, "Stuttgart" , "Deutschland", "DE", "", "Der Räuber Hotzenplotz - Meininger Staatstheater", "Das Weihnachtsmärchen 2019 im Großen Haus.", 20.12.2019 16:00, 140, 11.20);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Kultur", "Theater" , "Theater" , "Oberer Schloßgarten", "6", 70173, "Stuttgart" , "Deutschland", "DE", "", "Der Räuber Hotzenplotz - Meininger Staatstheater", "Das Weihnachtsmärchen 2019 im Großen Haus.", 20.12.2019 20:00, 140, 11.20);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Kultur", "Theater" , "Theater" , "Oberer Schloßgarten", "6", 70173, "Stuttgart" , "Deutschland", "DE", "", "Der Räuber Hotzenplotz - Meininger Staatstheater", "Das Weihnachtsmärchen 2019 im Großen Haus.", 21.12.2019 12:00, 140, 11.00);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Kultur", "Theater" , "Theater" , "Oberer Schloßgarten", "6", 70173, "Stuttgart" , "Deutschland", "DE", "", "Der Räuber Hotzenplotz - Meininger Staatstheater", "Das Weihnachtsmärchen 2019 im Großen Haus.", 21.12.2019 16:00, 140, 11.00);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Kultur", "Theater" , "Theater" , "Oberer Schloßgarten", "6", 70173, "Stuttgart" , "Deutschland", "DE", "", "Der Räuber Hotzenplotz - Meininger Staatstheater", "Das Weihnachtsmärchen 2019 im Großen Haus.", 21.12.2019 20:00, 140, 11.00);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Kultur", "Theater" , "Theater" , "Oberer Schloßgarten", "6", 70173, "Stuttgart" , "Deutschland", "DE", "", "Der Räuber Hotzenplotz - Meininger Staatstheater", "Das Weihnachtsmärchen 2019 im Großen Haus.", 22.12.2019 12:00, 140, 9.70);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Kultur", "Theater" , "Theater" , "Oberer Schloßgarten", "6", 70173, "Stuttgart" , "Deutschland", "DE", "", "Der Räuber Hotzenplotz - Meininger Staatstheater", "Das Weihnachtsmärchen 2019 im Großen Haus.", 22.12.2019 16:00, 140, 9.70);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Kultur", "Theater" , "Theater" , "Oberer Schloßgarten", "6", 70173, "Stuttgart" , "Deutschland", "DE", "", "Der Räuber Hotzenplotz - Meininger Staatstheater", "Das Weihnachtsmärchen 2019 im Großen Haus.", 22.12.2019 20:00, 140, 9.70);
+
+
+
+-- Der Zauberer von Oz
+
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Kultur", "Theater" , "Theater" , "Parkaue", "29", 10367, "Berlin" , "Deutschland", "DE", "", "Der Zauberer von Oz", "", 06.12.2019 16:00, 140, 14.30);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Kultur", "Theater" , "Theater" , "Parkaue", "29", 10367, "Berlin" , "Deutschland", "DE", "", "Der Zauberer von Oz", "", 06.12.2019 20:00, 140, 14.30);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Kultur", "Theater" , "Theater" , "Parkaue", "29", 10367, "Berlin" , "Deutschland", "DE", "", "Der Zauberer von Oz", "", 07.12.2019 16:00, 140, 14.30);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Kultur", "Theater" , "Theater" , "Parkaue", "29", 10367, "Berlin" , "Deutschland", "DE", "", "Der Zauberer von Oz", "", 07.12.2019 20:00, 140, 15.00);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Kultur", "Theater" , "Theater" , "Parkaue", "29", 10367, "Berlin" , "Deutschland", "DE", "", "Der Zauberer von Oz", "", 08.12.2019 16:00, 140, 15.00);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Kultur", "Theater" , "Theater" , "Parkaue", "29", 10367, "Berlin" , "Deutschland", "DE", "", "Der Zauberer von Oz", "", 08.12.2019 20:00, 140, 15.00);
+
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Kultur", "Theater" , "Theater" , "Opernplatz", "1", 30159, "Hannover" , "Deutschland", "DE", "", "Der Zauberer von Oz", "", 12.12.2019 16:00, 140, 14.30);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Kultur", "Theater" , "Theater" , "Opernplatz", "1", 30159, "Hannover" , "Deutschland", "DE", "", "Der Zauberer von Oz", "", 12.12.2019 20:00, 140, 14.30);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Kultur", "Theater" , "Theater" , "Opernplatz", "1", 30159, "Hannover" , "Deutschland", "DE", "", "Der Zauberer von Oz", "", 13.12.2019 16:00, 140, 14.30);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Kultur", "Theater" , "Theater" , "Opernplatz", "1", 30159, "Hannover" , "Deutschland", "DE", "", "Der Zauberer von Oz", "", 13.12.2019 20:00, 140, 15.00);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Kultur", "Theater" , "Theater" , "Opernplatz", "1", 30159, "Hannover" , "Deutschland", "DE", "", "Der Zauberer von Oz", "", 14.12.2019 16:00, 140, 15.00);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Kultur", "Theater" , "Theater" , "Opernplatz", "1", 30159, "Hannover" , "Deutschland", "DE", "", "Der Zauberer von Oz", "", 14.12.2019 20:00, 140, 15.00);
+
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Kultur", "Theater" , "Theater" , "Kirchenallee", "39", 20099, "Hamburg" , "Deutschland", "DE", "", "Der Zauberer von Oz", "", 16.12.2019 16:00, 140, 13.30);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Kultur", "Theater" , "Theater" , "Kirchenallee", "39", 20099, "Hamburg" , "Deutschland", "DE", "", "Der Zauberer von Oz", "", 16.12.2019 20:00, 140, 13.30);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Kultur", "Theater" , "Theater" , "Kirchenallee", "39", 20099, "Hamburg" , "Deutschland", "DE", "", "Der Zauberer von Oz", "", 17.12.2019 16:00, 140, 13.30);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Kultur", "Theater" , "Theater" , "Kirchenallee", "39", 20099, "Hamburg" , "Deutschland", "DE", "", "Der Zauberer von Oz", "", 17.12.2019 20:00, 140, 13.80);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Kultur", "Theater" , "Theater" , "Kirchenallee", "39", 20099, "Hamburg" , "Deutschland", "DE", "", "Der Zauberer von Oz", "", 18.12.2019 16:00, 140, 13.80);
+INSERT INTO EVENTS VALUES (EVENTSSEQ.NEXTVAL, "Kultur", "Theater" , "Theater" , "Kirchenallee", "39", 20099, "Hamburg" , "Deutschland", "DE", "", "Der Zauberer von Oz", "", 18.12.2019 20:00, 140, 13.80);
+
+
+
+
