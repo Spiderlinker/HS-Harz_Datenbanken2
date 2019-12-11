@@ -291,3 +291,76 @@ INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Theater', 'Märchen' , 'Märche
 INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Theater', 'Märchen' , 'Märchen' , 'Kirchenallee', '39', '20099', 'Hamburg' , 'Deutschland', 'DE', 'Dorothy UG', 'Der Zauberer von Oz', '-', to_date('17.12.2019 20:00', 'DD.MM.YYYY HH24:MI'), to_char(to_date('17.12.2019', 'DD.MM.YYYY'), 'J'), 140, 13.80, 1380);
 INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Theater', 'Märchen' , 'Märchen' , 'Kirchenallee', '39', '20099', 'Hamburg' , 'Deutschland', 'DE', 'Dorothy UG', 'Der Zauberer von Oz', '-', to_date('18.12.2019 16:00', 'DD.MM.YYYY HH24:MI'), to_char(to_date('18.12.2019', 'DD.MM.YYYY'), 'J'), 140, 13.80, 1380);
 INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Theater', 'Märchen' , 'Märchen' , 'Kirchenallee', '39', '20099', 'Hamburg' , 'Deutschland', 'DE', 'Dorothy UG', 'Der Zauberer von Oz', '-', to_date('18.12.2019 20:00', 'DD.MM.YYYY HH24:MI'), to_char(to_date('18.12.2019', 'DD.MM.YYYY'), 'J'), 140, 13.80, 1380);
+
+-- Sportveranstaltungen Fußball
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Sportveranstalung', 'Fußball' , 'Bundesliga' , 'Werner-Heisenberg-Allee' , '25',  '80939', 'München' 
+, 'Deutschland', 'DE', 'DFB', 'FC Bayern - Borussia Mönchengladbach'
+, 'Das letzte Liga-Heimspiel des FC Bayern vor der Sommerpause'
+, to_date('27.04.2020 18:00', 'DD.MM.YYYY HH24:MI'), to_char(to_date('27.04.2020', 'DD.MM.YYYY'), 'J'), 120, 35.00, 3500);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Sportveranstalung', 'Fußball' , 'Bundesliga' , 'Werner-Heisenberg-Allee' , '25',  '80939', 'München' 
+, 'Deutschland', 'DE', 'DFB', 'FC Bayern - FC Schalke 04'
+, 'Rot-Weiss gegen Königsblau in der imposanten Allianz-Arena'
+, to_date('27.01.2020 19:00', 'DD.MM.YYYY HH24:MI'), to_char(to_date('27.01.2020', 'DD.MM.YYYY'), 'J'), 120, 35.00, 3500);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Sportveranstalung', 'Fußball' , 'DFB-Pokal' , 'Strobelallee' , '50',  '44139', 'Dortmund' 
+, 'Deutschland', 'DE', 'DFB', 'Borussia Dortmund - Werder Bremen'
+, 'Das packende Ruhrpottderby im DFB-Pokal'
+, to_date('04.02.2020 20:45', 'DD.MM.YYYY HH24:MI'), to_char(to_date('04.02.2020', 'DD.MM.YYYY'), 'J'), 120, 16.70, 1670);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Sportveranstalung', 'Fußball' , 'DFB-Pokal' , 'Strobelallee' , '50',  '44139', 'Dortmund' 
+, 'Deutschland', 'DE', 'DFB', 'Borussia Dortmund - FC Schalke 04'
+, 'Das packende Ruhrpottderby geht in die nächste Runde'
+, to_date('14.03.2020 18:00', 'DD.MM.YYYY HH24:MI'), to_char(to_date('14.03.2020', 'DD.MM.YYYY'), 'J'), 120, 16.70, 1670);
+
+
+-- Sportveranstaltung Handball
+
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Sportveranstalung', 'Handball' , 'Handball-Bundesliga' , 'Berliner Chaussee' , '32',  '39114', 'Magdeburg' 
+, 'Deutschland', 'DE', 'HBL', 'SC Magdeburg - HC Erlangen'
+, 'Heimspiel für den SC Magdeburg in der GETEC-Arena'
+, to_date('03.03.2020 18:00', 'DD.MM.YYYY HH24:MI'), to_char(to_date('03.03.2020', 'DD.MM.YYYY'), 'J'), 70, 14.60, 1460);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Sportveranstalung', 'Handball' , 'Handball-Bundesliga' , 'Berliner Chaussee' , '32',  '39114', 'Magdeburg' 
+, 'Deutschland', 'DE', 'HBL', 'SC Magdeburg - Bittenfeld'
+, 'Heimspiel für den SC Magdeburg in der GETEC-Arena'
+, to_date('05.03.2020 19:00', 'DD.MM.YYYY HH24:MI'), to_char(to_date('05.03.2020', 'DD.MM.YYYY'), 'J'), 70, 14.60, 1460);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Sportveranstalung', 'Handball' , 'Handball-Bundesliga' , 'Berliner Chaussee' , '32',  '39114', 'Magdeburg' 
+, 'Deutschland', 'DE', 'HBL', 'SC Magdeburg - TBV Lemgo Lippe'
+, 'Heimspiel für den SC Magdeburg in der GETEC-Arena'
+, to_date('19.03.2020 18:00', 'DD.MM.YYYY HH24:MI'), to_char(to_date('19.03.2020', 'DD.MM.YYYY'), 'J'), 70, 14.60, 1460);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Sportveranstalung', 'Handball' , 'Handball-Bundesliga' , 'Berliner Chaussee' , '32',  '39114', 'Magdeburg' 
+, 'Deutschland', 'DE', 'HBL', 'SC Magdeburg - Die Eulen Ludwigshafen'
+, 'Heimspiel für den SC Magdeburg in der GETEC-Arena'
+, to_date('23.04.2020 19:00', 'DD.MM.YYYY HH24:MI'), to_char(to_date('23.04.2020', 'DD.MM.YYYY'), 'J'), 70, 14.60, 1460);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Sportveranstalung', 'Handball' , 'Handball-Bundesliga' , 'Berliner Chaussee' , '32',  '39114', 'Magdeburg' 
+, 'Deutschland', 'DE', 'HBL', 'SC Magdeburg - Bergischer HC'
+, 'Heimspiel für den SC Magdeburg in der GETEC-Arena'
+, to_date('07.05.2020 19:00', 'DD.MM.YYYY HH24:MI'), to_char(to_date('07.05.2020', 'DD.MM.YYYY'), 'J'), 70, 14.60, 1460);
+
+--Europapl. 1, 24103 Kiel
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Sportveranstalung', 'Handball' , 'Handball-Bundesliga' , 'Europaplatz' , '1',  '24103', 'Kiel' 
+, 'Deutschland', 'DE', 'HBL', 'THW Kiel - Rhein-Neckar Löwen'
+, 'Heimspiel für den THW Kiel in der Sparkassen-Arena'
+, to_date('05.03.2020 19:00', 'DD.MM.YYYY HH24:MI'), to_char(to_date('05.03.2020', 'DD.MM.YYYY'), 'J'), 70, 15.00, 1500);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Sportveranstalung', 'Handball' , 'Handball-Bundesliga' , 'Europaplatz' , '1',  '24103', 'Kiel' 
+, 'Deutschland', 'DE', 'HBL', 'THW Kiel - SC Magdeburg'
+, 'Heimspiel für den THW Kiel in der Sparkassen-Arena'
+, to_date('26.03.2020 18:00', 'DD.MM.YYYY HH24:MI'), to_char(to_date('26.03.2020', 'DD.MM.YYYY'), 'J'), 70, 15.00, 1500);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Sportveranstalung', 'Handball' , 'Handball-Bundesliga' , 'Europaplatz' , '1',  '24103', 'Kiel' 
+, 'Deutschland', 'DE', 'HBL', 'THW Kiel - Bergischer HC'
+, 'Heimspiel für den THW Kiel in der Sparkassen-Arena'
+, to_date('23.04.2020 19:00', 'DD.MM.YYYY HH24:MI'), to_char(to_date('23.04.2020', 'DD.MM.YYYY'), 'J'), 70, 15.00, 1500);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Sportveranstalung', 'Handball' , 'Handball-Bundesliga' , 'Europaplatz' , '1',  '24103', 'Kiel' 
+, 'Deutschland', 'DE', 'HBL', 'THW Kiel - Füchse Berlin'
+, 'Heimspiel für den THW Kiel in der Sparkassen-Arena'
+, to_date('07.05.2020 19:00', 'DD.MM.YYYY HH24:MI'), to_char(to_date('07.05.2020', 'DD.MM.YYYY'), 'J'), 70, 15.00, 1500);
