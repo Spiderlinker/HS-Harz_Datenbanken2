@@ -417,8 +417,6 @@ INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Sportveranstaltung', 'Handball'
 , 'Heimspiel für den SC Magdeburg in der GETEC-Arena'
 , to_date('07.05.2020 19:00', 'DD.MM.YYYY HH24:MI'), to_char(to_date('07.05.2020', 'DD.MM.YYYY'), 'J'), 70, 14.60, 1460);
 
---Europapl. 1, 24103 Kiel
-
 INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Sportveranstaltung', 'Handball' , 'Handball-Bundesliga' , 'Europaplatz' , '1',  '24103', 'Kiel' 
 , 'Deutschland', 'DE', 'HBL', 'THW Kiel - Rhein-Neckar Löwen'
 , 'Heimspiel für den THW Kiel in der Sparkassen-Arena'
@@ -438,3 +436,151 @@ INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Sportveranstaltung', 'Handball'
 , 'Deutschland', 'DE', 'HBL', 'THW Kiel - Füchse Berlin'
 , 'Heimspiel für den THW Kiel in der Sparkassen-Arena'
 , to_date('07.05.2020 19:00', 'DD.MM.YYYY HH24:MI'), to_char(to_date('07.05.2020', 'DD.MM.YYYY'), 'J'), 70, 15.00, 1500);
+
+
+-- Sportveranstaltung Eishockeyweltmeisterschaft gruppe a
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Sportveranstaltung', 'Eishockey' , 'Weltmeisterschaft' , 'Wallisellenstrasse' , '45',  '8050', 'Zürich' 
+, 'Schweiz', 'CH', 'IIHF', 'Spiel der Gruppe A'
+, 'Kanada - Deutschland'
+, to_date('08.05.2020 16:20', 'DD.MM.YYYY HH24:MI'), to_char(to_date('08.05.2020', 'DD.MM.YYYY'), 'J'), 120, 304.00, 30400);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Sportveranstaltung', 'Eishockey' , 'Weltmeisterschaft' , 'Wallisellenstrasse' , '45',  '8050', 'Zürich' 
+, 'Schweiz', 'CH', 'IIHF', 'Spiel der Gruppe A'
+, 'Schweden - Tschechien'
+, to_date('08.05.2020 20:20', 'DD.MM.YYYY HH24:MI'), to_char(to_date('08.05.2020', 'DD.MM.YYYY'), 'J'), 120, 304.00, 30400);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Sportveranstaltung', 'Eishockey' , 'Weltmeisterschaft' , 'Wallisellenstrasse' , '45',  '8050', 'Zürich' 
+, 'Schweiz', 'CH', 'IIHF', 'Spiel der Gruppe A'
+, 'Deutschland - Großbrittainien'
+, to_date('09.05.2020 12:20', 'DD.MM.YYYY HH24:MI'), to_char(to_date('09.05.2020', 'DD.MM.YYYY'), 'J'), 120, 304.00, 30400);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Sportveranstaltung', 'Eishockey' , 'Weltmeisterschaft' , 'Wallisellenstrasse' , '45',  '8050', 'Zürich' 
+, 'Schweiz', 'CH', 'IIHF', 'Spiel der Gruppe A'
+, 'Slowakei - Dänemark'
+, to_date('09.05.2020 16:20', 'DD.MM.YYYY HH24:MI'), to_char(to_date('09.05.2020', 'DD.MM.YYYY'), 'J'), 120, 304.00, 30400);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Sportveranstaltung', 'Eishockey' , 'Weltmeisterschaft' , 'Wallisellenstrasse' , '45',  '8050', 'Zürich' 
+, 'Schweiz', 'CH', 'IIHF', 'Spiel der Gruppe A'
+, 'Weißrussland - Tschechien'
+, to_date('09.05.2020 20:20', 'DD.MM.YYYY HH24:MI'), to_char(to_date('09.05.2020', 'DD.MM.YYYY'), 'J'), 120, 304.00, 30400);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Sportveranstaltung', 'Eishockey' , 'Weltmeisterschaft' , 'Wallisellenstrasse' , '45',  '8050', 'Zürich' 
+, 'Schweiz', 'CH', 'IIHF', 'Spiel der Gruppe A'
+, 'Großbrittainien - Slowakei'
+, to_date('10.05.2020 12:20', 'DD.MM.YYYY HH24:MI'), to_char(to_date('10.05.2020', 'DD.MM.YYYY'), 'J'), 120, 304.00, 30400);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Sportveranstaltung', 'Eishockey' , 'Weltmeisterschaft' , 'Wallisellenstrasse' , '45',  '8050', 'Zürich' 
+, 'Schweiz', 'CH', 'IIHF', 'Spiel der Gruppe A'
+, 'Kanada - Dänemark'
+, to_date('10.05.2020 16:20', 'DD.MM.YYYY HH24:MI'), to_char(to_date('10.05.2020', 'DD.MM.YYYY'), 'J'), 120, 304.00, 30400);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Sportveranstaltung', 'Eishockey' , 'Weltmeisterschaft' , 'Wallisellenstrasse' , '45',  '8050', 'Zürich' 
+, 'Schweiz', 'CH', 'IIHF', 'Spiel der Gruppe A'
+, 'Schweden - Weißrussland'
+, to_date('10.05.2020 20:20', 'DD.MM.YYYY HH24:MI'), to_char(to_date('10.05.2020', 'DD.MM.YYYY'), 'J'), 120, 304.00, 30400);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Sportveranstaltung', 'Eishockey' , 'Weltmeisterschaft' , 'Wallisellenstrasse' , '45',  '8050', 'Zürich' 
+, 'Schweiz', 'CH', 'IIHF', 'Spiel der Gruppe A'
+, 'Tschechien - Kanada'
+, to_date('11.05.2020 16:20', 'DD.MM.YYYY HH24:MI'), to_char(to_date('11.05.2020', 'DD.MM.YYYY'), 'J'), 120, 304.00, 30400);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Sportveranstaltung', 'Eishockey' , 'Weltmeisterschaft' , 'Wallisellenstrasse' , '45',  '8050', 'Zürich' 
+, 'Schweiz', 'CH', 'IIHF', 'Spiel der Gruppe A'
+, 'Deutschland - Schweden'
+, to_date('11.05.2020 20:20', 'DD.MM.YYYY HH24:MI'), to_char(to_date('11.05.2020', 'DD.MM.YYYY'), 'J'), 120, 304.00, 30400);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Sportveranstaltung', 'Eishockey' , 'Weltmeisterschaft' , 'Wallisellenstrasse' , '45',  '8050', 'Zürich' 
+, 'Schweiz', 'CH', 'IIHF', 'Spiel der Gruppe A'
+, 'Tschechien - Kanada'
+, to_date('11.05.2020 16:20', 'DD.MM.YYYY HH24:MI'), to_char(to_date('11.05.2020', 'DD.MM.YYYY'), 'J'), 120, 304.00, 30400);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Sportveranstaltung', 'Eishockey' , 'Weltmeisterschaft' , 'Wallisellenstrasse' , '45',  '8050', 'Zürich' 
+, 'Schweiz', 'CH', 'IIHF', 'Spiel der Gruppe A'
+, 'Großbrittanien - Dänemark'
+, to_date('12.05.2020 16:20', 'DD.MM.YYYY HH24:MI'), to_char(to_date('12.05.2020', 'DD.MM.YYYY'), 'J'), 120, 304.00, 30400);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Sportveranstaltung', 'Eishockey' , 'Weltmeisterschaft' , 'Wallisellenstrasse' , '45',  '8050', 'Zürich' 
+, 'Schweiz', 'CH', 'IIHF', 'Spiel der Gruppe A'
+, 'Weißrussland - Slowakei'
+, to_date('12.05.2020 20:20', 'DD.MM.YYYY HH24:MI'), to_char(to_date('12.05.2020', 'DD.MM.YYYY'), 'J'), 120, 304.00, 30400);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Sportveranstaltung', 'Eishockey' , 'Weltmeisterschaft' , 'Wallisellenstrasse' , '45',  '8050', 'Zürich' 
+, 'Schweiz', 'CH', 'IIHF', 'Spiel der Gruppe A'
+, 'Tschechien - Großbrittanien'
+, to_date('13.05.2020 16:20', 'DD.MM.YYYY HH24:MI'), to_char(to_date('13.05.2020', 'DD.MM.YYYY'), 'J'), 120, 304.00, 30400);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Sportveranstaltung', 'Eishockey' , 'Weltmeisterschaft' , 'Wallisellenstrasse' , '45',  '8050', 'Zürich' 
+, 'Schweiz', 'CH', 'IIHF', 'Spiel der Gruppe A'
+, 'Kanada - Weißrussland'
+, to_date('13.05.2020 20:20', 'DD.MM.YYYY HH24:MI'), to_char(to_date('13.05.2020', 'DD.MM.YYYY'), 'J'), 120, 304.00, 30400);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Sportveranstaltung', 'Eishockey' , 'Weltmeisterschaft' , 'Wallisellenstrasse' , '45',  '8050', 'Zürich' 
+, 'Schweiz', 'CH', 'IIHF', 'Spiel der Gruppe A'
+, 'Dänemark - Deutschland'
+, to_date('14.05.2020 16:20', 'DD.MM.YYYY HH24:MI'), to_char(to_date('14.05.2020', 'DD.MM.YYYY'), 'J'), 120, 304.00, 30400);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Sportveranstaltung', 'Eishockey' , 'Weltmeisterschaft' , 'Wallisellenstrasse' , '45',  '8050', 'Zürich' 
+, 'Schweiz', 'CH', 'IIHF', 'Spiel der Gruppe A'
+, 'Schweden - Slowakei'
+, to_date('14.05.2020 20:20', 'DD.MM.YYYY HH24:MI'), to_char(to_date('14.05.2020', 'DD.MM.YYYY'), 'J'), 120, 304.00, 30400);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Sportveranstaltung', 'Eishockey' , 'Weltmeisterschaft' , 'Wallisellenstrasse' , '45',  '8050', 'Zürich' 
+, 'Schweiz', 'CH', 'IIHF', 'Spiel der Gruppe A'
+, 'Deutschland - Weißrussland'
+, to_date('15.05.2020 16:20', 'DD.MM.YYYY HH24:MI'), to_char(to_date('15.05.2020', 'DD.MM.YYYY'), 'J'), 120, 304.00, 30400);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Sportveranstaltung', 'Eishockey' , 'Weltmeisterschaft' , 'Wallisellenstrasse' , '45',  '8050', 'Zürich' 
+, 'Schweiz', 'CH', 'IIHF', 'Spiel der Gruppe A'
+, 'Großbrittanien - Kanada'
+, to_date('15.05.2020 20:20', 'DD.MM.YYYY HH24:MI'), to_char(to_date('15.05.2020', 'DD.MM.YYYY'), 'J'), 120, 304.00, 30400);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Sportveranstaltung', 'Eishockey' , 'Weltmeisterschaft' , 'Wallisellenstrasse' , '45',  '8050', 'Zürich' 
+, 'Schweiz', 'CH', 'IIHF', 'Spiel der Gruppe A'
+, 'Dänemark - Weißrussland'
+, to_date('16.05.2020 16:20', 'DD.MM.YYYY HH24:MI'), to_char(to_date('16.05.2020', 'DD.MM.YYYY'), 'J'), 120, 304.00, 30400);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Sportveranstaltung', 'Eishockey' , 'Weltmeisterschaft' , 'Wallisellenstrasse' , '45',  '8050', 'Zürich' 
+, 'Schweiz', 'CH', 'IIHF', 'Spiel der Gruppe A'
+, 'Kanada - Schweden'
+, to_date('16.05.2020 20:20', 'DD.MM.YYYY HH24:MI'), to_char(to_date('16.05.2020', 'DD.MM.YYYY'), 'J'), 120, 304.00, 30400);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Sportveranstaltung', 'Eishockey' , 'Weltmeisterschaft' , 'Wallisellenstrasse' , '45',  '8050', 'Zürich' 
+, 'Schweiz', 'CH', 'IIHF', 'Spiel der Gruppe A'
+, 'Slowakei - Tschechien'
+, to_date('16.05.2020 12:20', 'DD.MM.YYYY HH24:MI'), to_char(to_date('16.05.2020', 'DD.MM.YYYY'), 'J'), 120, 304.00, 30400);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Sportveranstaltung', 'Eishockey' , 'Weltmeisterschaft' , 'Wallisellenstrasse' , '45',  '8050', 'Zürich' 
+, 'Schweiz', 'CH', 'IIHF', 'Spiel der Gruppe A'
+, 'Schweden - Großbritanien'
+, to_date('17.05.2020 16:20', 'DD.MM.YYYY HH24:MI'), to_char(to_date('17.05.2020', 'DD.MM.YYYY'), 'J'), 120, 304.00, 30400);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Sportveranstaltung', 'Eishockey' , 'Weltmeisterschaft' , 'Wallisellenstrasse' , '45',  '8050', 'Zürich' 
+, 'Schweiz', 'CH', 'IIHF', 'Spiel der Gruppe A'
+, 'Deutschland - Slowakei'
+, to_date('17.05.2020 20:20', 'DD.MM.YYYY HH24:MI'), to_char(to_date('17.05.2020', 'DD.MM.YYYY'), 'J'), 120, 304.00, 30400);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Sportveranstaltung', 'Eishockey' , 'Weltmeisterschaft' , 'Wallisellenstrasse' , '45',  '8050', 'Zürich' 
+, 'Schweiz', 'CH', 'IIHF', 'Spiel der Gruppe A'
+, 'Weißrussland - Großbritanien'
+, to_date('18.05.2020 16:20', 'DD.MM.YYYY HH24:MI'), to_char(to_date('18.05.2020', 'DD.MM.YYYY'), 'J'), 120, 304.00, 30400);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Sportveranstaltung', 'Eishockey' , 'Weltmeisterschaft' , 'Wallisellenstrasse' , '45',  '8050', 'Zürich' 
+, 'Schweiz', 'CH', 'IIHF', 'Spiel der Gruppe A'
+, 'Tschechien - Dänemark'
+, to_date('18.05.2020 20:20', 'DD.MM.YYYY HH24:MI'), to_char(to_date('18.05.2020', 'DD.MM.YYYY'), 'J'), 120, 304.00, 30400);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Sportveranstaltung', 'Eishockey' , 'Weltmeisterschaft' , 'Wallisellenstrasse' , '45',  '8050', 'Zürich' 
+, 'Schweiz', 'CH', 'IIHF', 'Spiel der Gruppe A'
+, 'Slowakei - Kanada'
+, to_date('19.05.2020 12:20', 'DD.MM.YYYY HH24:MI'), to_char(to_date('19.05.2020', 'DD.MM.YYYY'), 'J'), 120, 304.00, 30400);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Sportveranstaltung', 'Eishockey' , 'Weltmeisterschaft' , 'Wallisellenstrasse' , '45',  '8050', 'Zürich' 
+, 'Schweiz', 'CH', 'IIHF', 'Spiel der Gruppe A'
+, 'Tschechien - Deutschland'
+, to_date('19.05.2020 16:20', 'DD.MM.YYYY HH24:MI'), to_char(to_date('19.05.2020', 'DD.MM.YYYY'), 'J'), 120, 304.00, 30400);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Sportveranstaltung', 'Eishockey' , 'Weltmeisterschaft' , 'Wallisellenstrasse' , '45',  '8050', 'Zürich' 
+, 'Schweiz', 'CH', 'IIHF', 'Spiel der Gruppe A'
+, 'Dänemark - Schweden'
+, to_date('19.05.2020 20:20', 'DD.MM.YYYY HH24:MI'), to_char(to_date('19.05.2020', 'DD.MM.YYYY'), 'J'), 120, 304.00, 30400);
