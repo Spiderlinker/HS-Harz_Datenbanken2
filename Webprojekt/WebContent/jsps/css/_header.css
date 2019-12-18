@@ -1,0 +1,10 @@
+.header-container {
+  padding: 1em 0 1em 0;
+  margin: 0 0 1em 0;;
+}
+
+.header-span {
+	font-size: 18pt;
+	float: right;
+	text-align: center;
+}

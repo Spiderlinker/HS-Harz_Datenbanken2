@@ -1,0 +1,64 @@
+body {
+	color: rgb(2,2,2);
+	background-color:#efefef;
+	font-family: 'Fira Sans', Verdana, sans-serif, Arial, Helvetica;
+	line-height: 1.6;
+	max-width: 40rem;
+	padding:2rem;
+	margin:auto;
+}
+
+ /* Bordered form */
+form {
+  border: 1px solid black;
+  background-color: white;
+}
+
+/* Set a style for all buttons */
+button {
+  background-color: #2b5d9e;
+  color: white;
+  
+  padding: 1em 1.5em;
+  
+  border: none;
+  cursor: pointer;
+}
+
+/* Add a hover effect for buttons */
+button:hover {
+  opacity: 0.8;
+}
+
+/* Add padding to containers */
+.container {
+  padding: 1em;
+  
+}
+
+.error-text {
+	color: red;
+	text-align: center;
+}
+
+input[type=text], input[type=password], 
+input[type=number], input[type=date] {
+  
+  padding: 1em 1.5em;
+  margin: 0.5em 0;
+  
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* Center the avatar image inside this container */
+.image {
+  text-align: center;
+  margin: 0 0 1em 0;
+}
+
+/* Avatar image */
+img {
+  width: 100%;
+}

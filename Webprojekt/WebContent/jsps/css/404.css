@@ -1,12 +1,4 @@
-body {
-	color: rgb(2,2,2);
-	background-color:#efefef;
-	font-family: 'Fira Sans', Verdana, sans-serif, Arial, Helvetica;
-	line-height: 1.6;
-	max-width: 40rem;
-	padding:2rem;
-	margin:auto;
-}
+@import url("basic.css");
 
 h1 {
 	color: blue;
@@ -18,42 +10,7 @@ p {
 	text-align: center;
 }
 
- /* Bordered form */
-form {
-  border: 1px solid black;
-  background-color: white;
-}
-
-
-/* Set a style for all buttons */
 button {
-  background-color: #2b5d9e;
-  color: white;
-  
-  padding: 1em 1.5em;
-  margin: 0.8em 0;
-  
-  border: none;
-  cursor: pointer;
-  width: 100%;
+	width: 100%;
 }
 
-/* Add a hover effect for buttons */
-button:hover {
-  opacity: 0.8;
-}
-
-/* Center the avatar image inside this container */
-.image {
-  text-align: center;
-}
-
-/* Avatar image */
-img {
-  width: 100%;
-}
-
-/* Add padding to containers */
-.container {
-  padding: 1em;
-}

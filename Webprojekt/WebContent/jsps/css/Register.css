@@ -1,35 +1,4 @@
-body {
-	color: rgb(2,2,2);
-	background-color:#efefef;
-	font-family: 'Fira Sans', Verdana, sans-serif, Arial, Helvetica;
-	line-height: 1.6;
-	max-width: 40rem;
-	padding:2rem;
-	margin:auto;
-}
-
-p {
-	color: red;
-	text-align: center;
-}
-
- /* Bordered form */
-form {
-  border: 1px solid black;
-  background-color: white;
-}
-
-/* Full-width inputs */
-input[type=text], input[type=password], 
-input[type=number], input[type=date] {
-  
-  padding: 1em 1.5em;
-  margin: 0.5em 0;
-  
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-}
+@import url("basic.css");
 
 select {
   padding: 1em 1.5em;
@@ -41,41 +10,19 @@ select {
 }
 
 .halfText {
-	
 	width: 49%;
-	
 }
 
 .fullText {
 	width: 100%;
 }
 
-/* Set a style for all buttons */
-button {
-  background-color: #2b5d9e;
-  color: white;
-  
-  padding: 1em 1.5em;
-  margin: 0.8em 0;
-  
-  border: none;
-  cursor: pointer;
-  width: 100%;
-}
-
-/* Add a hover effect for buttons */
-button:hover {
-  opacity: 0.8;
-}
-
-
-/* Add padding to containers */
-.container {
-  padding: 1em;
-}
-
 /* The "Forgot password" text */
 .login {
   float: right;
   padding-top: 1em;
+}
+
+button {
+	width: 100%;
 }
