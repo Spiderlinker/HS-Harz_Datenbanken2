@@ -595,3 +595,92 @@ INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Sportveranstaltung', 'Eishockey
 , 'Schweiz', 'CH', 'IIHF', 'Spiel der Gruppe A'
 , 'Dänemark - Schweden'
 , to_date('19.05.2020 20:20', 'DD.MM.YYYY HH24:MI'), to_char(to_date('19.05.2020', 'DD.MM.YYYY'), 'J'), 120, 304.00, 30400);
+
+
+--- Bildung ist wichtig
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Festival', 'Bildung' , 'Vorträge und Workshops' , 'Willy-Brandt-Platz' , '3',  '50679', 'Köln' 
+, 'Deutschland', 'DE', 'Gedankentanken', '#growtogether'
+, 'Workshops und Vorträge zu Themen wie Persönlichkeitsbildung, Selbstverwirklichung und Unternehmensführung mit Top-Speakern'
+, to_date('27.05.2020 08:00', 'DD.MM.YYYY HH24:MI'), to_char(to_date('27.05.2020', 'DD.MM.YYYY'), 'J'), 720, 399.00, 39900);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Festival', 'Bildung' , 'Vorträge und Workshops' , 'Willy-Brandt-Platz' , '3',  '50679', 'Köln' 
+, 'Deutschland', 'DE', 'Gedankentanken', '#growtogether'
+, 'Workshops und Vorträge zu Themen wie Persönlichkeitsbildung, Selbstverwirklichung und Unternehmensführung mit Top-Speakern'
+, to_date('28.05.2020 08:00', 'DD.MM.YYYY HH24:MI'), to_char(to_date('28.05.2020', 'DD.MM.YYYY'), 'J'), 720, 399.00, 39900);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Festival', 'Bildung' , 'Vorträge und Workshops' , 'Willy-Brandt-Platz' , '3',  '50679', 'Köln' 
+, 'Deutschland', 'DE', 'Gedankentanken', '#growtogether'
+, 'Workshops und Vorträge zu Themen wie Persönlichkeitsbildung, Selbstverwirklichung und Unternehmensführung mit Top-Speakern'
+, to_date('29.05.2020 08:00', 'DD.MM.YYYY HH24:MI'), to_char(to_date('29.05.2020', 'DD.MM.YYYY'), 'J'), 720, 399.00, 39900);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Festival', 'Bildung' , 'Vorträge und Workshops' , 'Willy-Brandt-Platz' , '3',  '50679', 'Köln' 
+, 'Deutschland', 'DE', 'Gedankentanken', '#growtogether'
+, 'Workshops und Vorträge zu Themen wie Persönlichkeitsbildung, Selbstverwirklichung und Unternehmensführung mit Top-Speakern'
+, to_date('27.05.2020 08:00', 'DD.MM.YYYY HH24:MI'), to_char(to_date('27.05.2020', 'DD.MM.YYYY'), 'J'), 720, 899.00, 89900);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Festival', 'Bildung' , 'Vorträge und Workshops' , 'Willy-Brandt-Platz' , '3',  '50679', 'Köln' 
+, 'Deutschland', 'DE', 'Gedankentanken', '#growtogether'
+, 'Workshops und Vorträge zu Themen wie Persönlichkeitsbildung, Selbstverwirklichung und Unternehmensführung mit Top-Speakern'
+, to_date('28.05.2020 08:00', 'DD.MM.YYYY HH24:MI'), to_char(to_date('28.05.2020', 'DD.MM.YYYY'), 'J'), 720, 899.00, 89900);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Festival', 'Bildung' , 'Vorträge und Workshops' , 'Willy-Brandt-Platz' , '3',  '50679', 'Köln' 
+, 'Deutschland', 'DE', 'Gedankentanken', '#growtogether'
+, 'Workshops und Vorträge zu Themen wie Persönlichkeitsbildung, Selbstverwirklichung und Unternehmensführung mit Top-Speakern'
+, to_date('29.05.2020 08:00', 'DD.MM.YYYY HH24:MI'), to_char(to_date('29.05.2020', 'DD.MM.YYYY'), 'J'), 720, 899.00, 89900);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Festival', 'Bildung' , 'Vorträge und Workshops' , 'Willy-Brandt-Platz' , '3',  '50679', 'Köln' 
+, 'Deutschland', 'DE', 'Gedankentanken', '#growtogether'
+, 'Workshops und Vorträge zu Themen wie Persönlichkeitsbildung, Selbstverwirklichung und Unternehmensführung mit Top-Speakern'
+, to_date('27.05.2020 08:00', 'DD.MM.YYYY HH24:MI'), to_char(to_date('27.05.2020', 'DD.MM.YYYY'), 'J'), 720, 1999.00, 199900);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Festival', 'Bildung' , 'Vorträge und Workshops' , 'Willy-Brandt-Platz' , '3',  '50679', 'Köln' 
+, 'Deutschland', 'DE', 'Gedankentanken', '#growtogether'
+, 'Workshops und Vorträge zu Themen wie Persönlichkeitsbildung, Selbstverwirklichung und Unternehmensführung mit Top-Speakern'
+, to_date('28.05.2020 08:00', 'DD.MM.YYYY HH24:MI'), to_char(to_date('28.05.2020', 'DD.MM.YYYY'), 'J'), 720, 1999.00, 199900);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Festival', 'Bildung' , 'Vorträge und Workshops' , 'Willy-Brandt-Platz' , '3',  '50679', 'Köln' 
+, 'Deutschland', 'DE', 'Gedankentanken', '#growtogether'
+, 'Workshops und Vorträge zu Themen wie Persönlichkeitsbildung, Selbstverwirklichung und Unternehmensführung mit Top-Speakern'
+, to_date('29.05.2020 08:00', 'DD.MM.YYYY HH24:MI'), to_char(to_date('29.05.2020', 'DD.MM.YYYY'), 'J'), 720, 1999.00, 199900);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Messe', 'Bildung' , 'Bildungsmesse' , 'Fürstenbergerstraße' , '166',  '60322', 'Frankfurt' 
+, 'Deutschland', 'DE', 'weltweiser', 'Jugendbildungsmesse'
+, 'Messe für Bildung im Ausland'
+, to_date('14.03.2020 10:00', 'DD.MM.YYYY HH24:MI'), to_char(to_date('14.03.2020', 'DD.MM.YYYY'), 'J'), 360, 0.00, 0);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Messe', 'Bildung' , 'Bildungsmesse' , 'Erich-Maria-Remarque-Ring' , '18',  '49074', 'Osnabrück' 
+, 'Deutschland', 'DE', 'Barlag', 'Beruf und Bildung'
+, 'Messe für Aus- und Weiterbildung'
+, to_date('28.02.2020 10:00', 'DD.MM.YYYY HH24:MI'), to_char(to_date('28.02.2020', 'DD.MM.YYYY'), 'J'), 360, 0.00, 0);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Messe', 'Bildung' , 'Bildungsmesse' , 'Erich-Maria-Remarque-Ring' , '18',  '49074', 'Osnabrück' 
+, 'Deutschland', 'DE', 'Barlag', 'Beruf und Bildung'
+, 'Messe für Aus- und Weiterbildung'
+, to_date('29.02.2020 10:00', 'DD.MM.YYYY HH24:MI'), to_char(to_date('29.02.2020', 'DD.MM.YYYY'), 'J'), 360, 0.00, 0);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Messe', 'Bildung' , 'Bildungsmesse' , 'Nina-Rubinstein-Weg ' , '1',  '60323', 'Frankfurt' 
+, 'Deutschland', 'DE', 'Internationaler Bund', 'IB-Kongress: Bildung neu denken'
+, 'Bildungslandschaft diskutieren und verändern'
+, to_date('01.04.2020 09:00', 'DD.MM.YYYY HH24:MI'), to_char(to_date('01.04.2020', 'DD.MM.YYYY'), 'J'), 300, 0.00, 0);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Messe', 'Bildung' , 'Bildungsmesse' , 'Nina-Rubinstein-Weg' , '1',  '60323', 'Frankfurt' 
+, 'Deutschland', 'DE', 'Internationaler Bund', 'IB-Kongress: Bildung neu denken'
+, 'Bildungslandschaft diskutieren und verändern'
+, to_date('02.04.2020 09:00', 'DD.MM.YYYY HH24:MI'), to_char(to_date('02.04.2020', 'DD.MM.YYYY'), 'J'), 300, 0.00, 0);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Seminar', 'Bildung' , 'Literatur' , 'Würzburger Straße' , '6',  '97236', 'Randersacker' 
+, 'Deutschland', 'DE', 'bildungsbetrieb.de', 'Textertraining'
+, 'Textertraining für Weiterbildungsanbieter*innen'
+, to_date('02.04.2020 09:45', 'DD.MM.YYYY HH24:MI'), to_char(to_date('02.04.2020', 'DD.MM.YYYY'), 'J'), 495, 365.00, 36500);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Seminar', 'Bildung' , 'Literatur' , 'Brandeburger Straße' , '9',  '39104', 'Magdeburg' 
+, 'Deutschland', 'DE', '.lkj) Sachsen-Anhalt e. V. ', 'Kreatives Schreiben'
+, 'Kreativität im Schreiben der Jugendlichen fördern'
+, to_date('14.01.2020 09:45', 'DD.MM.YYYY HH24:MI'), to_char(to_date('14.01.2020', 'DD.MM.YYYY'), 'J'), 0, 0.00, 0);
+
+INSERT INTO EVENTS VALUES (EVENTSIDSEQ.NEXTVAL, 'Seminar', 'Bildung' , 'Literatur' , 'Brandeburger Straße' , '9',  '39104', 'Magdeburg' 
+, 'Deutschland', 'DE', '.lkj) Sachsen-Anhalt e. V. ', 'Kreatives Schreiben'
+, 'Kreativität im Schreiben der Jugendlichen fördern'
+, to_date('15.01.2020 09:45', 'DD.MM.YYYY HH24:MI'), to_char(to_date('15.01.2020', 'DD.MM.YYYY'), 'J'), 0, 0.00, 0);
+
