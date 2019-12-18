@@ -20,12 +20,10 @@
 				<input type="text" value="${user.username}" placeholder="Wie lautet dein Benutzername?" name="username" required>
 				
 				<br>
-				<br>
 				
 				<label for="password"><b>Passwort:</b></label> 
 				<input type="password" placeholder="Und das dazugehörige Passwort?" name="password" required>
 	
-				<br>
 				<br>
 				<br>
 	
