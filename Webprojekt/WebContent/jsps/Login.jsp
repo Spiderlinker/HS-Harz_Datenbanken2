@@ -13,14 +13,21 @@
 				<img src="${pageContext.request.contextPath}/jsps/img/events.png" alt="Events">
 			</div>
 	
-			<p>${errorString}<p>
+			<p class="error-text">${errorString}<p>
 	
 			<div class="container">
 				<label for="username"><b>Benutzername:</b></label> 
 				<input type="text" value="${user.username}" placeholder="Wie lautet dein Benutzername?" name="username" required>
 				
+				<br>
+				<br>
+				
 				<label for="password"><b>Passwort:</b></label> 
 				<input type="password" placeholder="Und das dazugehörige Passwort?" name="password" required>
+	
+				<br>
+				<br>
+				<br>
 	
 				<button type="submit">Login</button>
 			</div>
