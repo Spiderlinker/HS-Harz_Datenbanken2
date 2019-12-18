@@ -2,7 +2,9 @@ package de.hsharz.empfehlungssystem.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -40,16 +42,11 @@ public class RegisterServlet extends HttpServlet {
 	public String getGenres() {
 
 		List<String> genreNames = new ArrayList<>();
-		genreNames.add("Techno");
-		genreNames.add("Metal");
-		genreNames.add("Pop");
-		genreNames.add("Rock");
-		genreNames.add("Schulungen");
-//		try {
-//			genreNames = DatabaseAdapter.getAllGenreNames();
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
+		try {
+			genreNames = DatabaseAdapter.getAllGenreNames();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
 		StringBuilder builder = new StringBuilder();
 		for (String genre : genreNames) {
@@ -161,18 +158,14 @@ public class RegisterServlet extends HttpServlet {
 			User user = Session.remove(Session.ATTRIBUTE_REGISTERING_USER);
 
 			System.out.println(user);
+			insertPreferencesIntoUser(user,  request.getParameterNames());
 
-			StringBuilder errorStrings = new StringBuilder();
-			boolean inputsValid = true;
-
-			// TODO Check Input
-
-			if (!inputsValid) {
-				// Die fehlerhaften Felder sollen auf der Webseite ausgegeben werden
-				request.setAttribute("errorString", errorStrings.toString());
-				RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/jsps/Register2.jsp");
-				dispatcher.forward(request, response);
-				return;
+			try {
+				System.out.println("Registering User to database");
+				boolean registerUser = DatabaseAdapter.registerUser(user);
+				System.out.println("User registered: " + registerUser);
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
 
 			response.sendRedirect(request.getContextPath() + "/UserHome");
@@ -194,7 +187,10 @@ public class RegisterServlet extends HttpServlet {
 		user.setCountryShort(request.getParameter("country"));
 		user.setEmail(request.getParameter("email"));
 		user.setPassword(request.getParameter("password"));
-		user.setBirthday(request.getParameter("birthday"));
+
+		LocalDate birthdate = LocalDate.parse(request.getParameter("birthday"));
+		String dateAsString = birthdate.getDayOfMonth() + "." + birthdate.getMonthValue() + "." + birthdate.getYear();
+		user.setBirthday(dateAsString);
 		return user;
 	}
 
@@ -207,6 +203,23 @@ public class RegisterServlet extends HttpServlet {
 
 	private boolean isEmailValid(String email) {
 		return Pattern.matches("[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,10}", email);
+	}
+
+	private void insertPreferencesIntoUser(User user, Enumeration<String> preferences) {
+		while (preferences.hasMoreElements()) {
+			String attribute = preferences.nextElement();
+			if (!attribute.equals("registerPage")) {
+				if (user.getPreference1() == null) {
+					user.setPreference1(attribute);
+				} else if (user.getPreference2() == null) {
+					user.setPreference2(attribute);
+				} else if (user.getPreference3() == null) {
+					user.setPreference3(attribute);
+				} else {
+					break;
+				}
+			}
+		}
 	}
 
 }
