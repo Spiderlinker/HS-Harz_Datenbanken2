@@ -2,6 +2,8 @@ package de.hsharz.empfehlungssystem.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -30,12 +32,27 @@ public class PurchasesServlet extends HttpServlet {
 			List<Event> events = DatabaseAdapter.getAllPurchases(Session.getLoggedInUser());
 
 			for (Event event : events) {
+				// Titel einfuegen
 				builder.append("<b>" + event.getTitle() + "</b>");
-				builder.append("<span style=\"float: right;\">" + "<button type=\"submit\">Kaufen</button><p>" + event.getPrice() + "&euro; </p></span><br>");
+
+				// Kaufen-Button (und Preis) einfuegen
+				builder.append("<span style=\"float: right;\">" + "<button type=\"submit\">Kaufen</button>"
+				// Preis einfuegen
+						+ "<p style=\"text-align: center;\">" + String.format("%.2f", event.getPrice())
+						+ "&euro; </p></span>");
+
+				// Zeit und Ort einfügen
+				builder.append("<p style=\"font-size: 10pt;\">Datum: <b>");
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd. MMMM yyyy");
+				LocalDate date = LocalDate.parse(event.getDate().toString());
+				builder.append(formatter.format(date));
+				// Ort einfuegen
+				builder.append("</b> &nbsp; Ort: <b>" + event.getCity());
+				builder.append("</b></p>");
+
+				// Beschreibung einfuegen
 				builder.append(event.getDescription());
-				builder.append("<br>");
-				builder.append(event.getDate());
-				builder.append("<br><br>");
+				builder.append("<br><br><hr><br>");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
