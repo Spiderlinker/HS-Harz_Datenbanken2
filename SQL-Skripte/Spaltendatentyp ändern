@@ -1,0 +1,3 @@
+alter table purchases modify TIMESPAN_BETWEEN_PURCHASE_AND_EVENT_DAYS number(10, 0);
+alter table purchases modify TIMESPAN_BETWEEN_PURCHASE_AND_EVENT_HOURS number(10, 0);
+alter table purchases modify TIMESPAN_BETWEEN_PURCHASE_AND_EVENT_MINUTES number(10, 0);
