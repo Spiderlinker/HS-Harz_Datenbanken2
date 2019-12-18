@@ -2,8 +2,8 @@
     pageEncoding="ISO-8859-1"%>
 
 <div class="header-container">
-	<form action="Logout" style="display: inline;">
-		<button type="submit">Logout</button>
+	<form action="Logout" style="display: inline; border: none;">
+		<button type="submit" style="width: 20%;">Logout</button>
 	</form>
-	<span>Hallo, <b>${user.username}</b></span>
+	<span class="header-span">Hallo, <b>${user.firstname}</b></span>
 </div>
