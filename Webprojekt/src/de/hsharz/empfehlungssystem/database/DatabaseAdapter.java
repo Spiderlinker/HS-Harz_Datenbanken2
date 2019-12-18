@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hsharz.empfehlungssystem.beans.Event;
 import de.hsharz.empfehlungssystem.beans.User;
 import de.hsharz.empfehlungssystem.database.function.SqlFunction;
 
@@ -20,7 +21,7 @@ public class DatabaseAdapter {
 		return runWithConnection(conn -> {
 
 			PreparedStatement prepareStatement = conn
-					.prepareStatement("SELECT USERID FROM CC_Vorlage_User WHERE USERNAME = ? AND PASSWORD = ?");
+					.prepareStatement("SELECT * FROM customer WHERE emailaddress = ? AND PASSWORD = ?");
 			prepareStatement.setString(1, username);
 			prepareStatement.setString(2, password);
 			ResultSet result = prepareStatement.executeQuery();
@@ -29,8 +30,21 @@ public class DatabaseAdapter {
 			user.setUsername(username);
 
 			if (result.next()) {
-				int userID = result.getInt("USERID");
-				user.setId(userID);
+				user.setId(result.getInt("UserID"));
+				user.setFirstname(result.getString("Firstname"));
+				user.setLastname(result.getString("Lastname"));
+				user.setStreet(result.getString("Street"));
+				user.setHouseNr(result.getString("Housenumber"));
+				user.setZip(result.getString("ZIP"));
+				user.setCity(result.getString("City"));
+				user.setCountry(result.getString("Country"));
+				user.setCountryShort(result.getString("Country_Short"));
+				user.setEmail(result.getString("Emailaddress"));
+				user.setGender(result.getString("Gender"));
+				user.setBirthday(result.getString("Birthday_Date"));
+				user.setPreference1(result.getString("Preference1"));
+				user.setPreference2(result.getString("Preference2"));
+				user.setPreference3(result.getString("Preference3"));
 			} else {
 				user = null;
 			}
@@ -43,8 +57,7 @@ public class DatabaseAdapter {
 		return runWithConnection(conn -> {
 			List<String> genreNames = new ArrayList<>();
 
-			PreparedStatement statement = conn.prepareStatement(
-					"SELECT distinct p.produktname FROM BEWERTUNGUSER b, CC_Produkte p where b.prodid = p.typid");
+			PreparedStatement statement = conn.prepareStatement("SELECT distinct typename FROM events");
 			ResultSet result = statement.executeQuery();
 			while (result.next()) {
 				genreNames.add(result.getString(1));
@@ -57,22 +70,25 @@ public class DatabaseAdapter {
 	public static boolean registerUser(User user) throws SQLException {
 		return runWithConnection(conn -> {
 
-			PreparedStatement statement = conn.prepareStatement("INSERT INTO CUSTOMER  values(CUSTOMERIDSEQ.NEXTVAL," //
+			PreparedStatement statement = conn.prepareStatement("INSERT INTO CUSTOMER VALUES (CUSTOMERIDSEQ.NEXTVAL," //
 					+ "?," // 1 Firstname
 					+ "?," // 2 Lastname
 					+ "?," // 3 Street
 					+ "?," // 4 House Number
 					+ "?," // 5 ZIP
 					+ "?," // 6 City
-					+ "?," // 7 Country
-					+ "(SELECT code from countries where de = ?)," // 8 Country_Code Short
+					+ "(SELECT DE from countries where code = ?)," // 7 Country
+					+ "?," // 8 Country_Short
 					+ "?," // 9 Email
 					+ "?," // 10 Email_Provider
 					+ "?," // 11 Password
 					+ "?," // 12 Gender
 					+ "?," // 13 Gender_Short
 					+ "?," // 14 Birthday_Date
-					+ "?," // 15 Birthday_Julian
+					+ "to_char(to_date(?, 'DD.MM.YYYY'), 'J')," // 15 Birthday_Julian
+					+ "?," // 16 Preference1
+					+ "?," // 17 Preference2
+					+ "?" // 18 Preference3
 					+ ")");
 
 			statement.setString(1, user.getFirstname());
@@ -81,14 +97,22 @@ public class DatabaseAdapter {
 			statement.setString(4, user.getHouseNr());
 			statement.setString(5, user.getZip());
 			statement.setString(6, user.getCity());
-			statement.setString(7, user.getCountry());
-			statement.setString(8, user.getCountry());
+			statement.setString(7, user.getCountryShort());
+			statement.setString(8, user.getCountryShort());
 			statement.setString(9, user.getEmail());
 			statement.setString(10, user.getEmail().substring(user.getEmail().indexOf('@') + 1));
+			statement.setString(11, user.getPassword());
+			statement.setString(12, user.getGender().toLowerCase());
+			statement.setString(13, String.valueOf(user.getGender().charAt(0)).toLowerCase());
+			statement.setString(14, user.getBirthday());
+			statement.setString(15, user.getBirthday());
+			statement.setString(16, user.getPreference1());
+			statement.setString(17, user.getPreference2());
+			statement.setString(18, user.getPreference3());
 
 			int result = statement.executeUpdate();
 
-			return false;
+			return result == 1;
 		});
 	}
 
@@ -96,14 +120,54 @@ public class DatabaseAdapter {
 		return runWithConnection(conn -> {
 			List<String> countryCodes = new ArrayList<>();
 
-			PreparedStatement statement = conn.prepareStatement(
-					"SELECT code FROM COUNTRIES");
+			PreparedStatement statement = conn.prepareStatement("SELECT code FROM COUNTRIES");
 			ResultSet result = statement.executeQuery();
 			while (result.next()) {
 				countryCodes.add(result.getString(1));
 			}
-			
+
 			return countryCodes;
+		});
+	}
+
+	public static String getStatistik() throws SQLException {
+		return runWithConnection(conn -> {
+
+			PreparedStatement statement = conn.prepareStatement("SELECT * FROM ANALYTICS_ANFRAGE");
+			ResultSet result = statement.executeQuery();
+
+			result.next();
+
+			PreparedStatement stmtStatistik = conn.prepareStatement(result.getString(1));
+			ResultSet restulStatistik = stmtStatistik.executeQuery();
+
+			restulStatistik.next();
+			return restulStatistik.getString(1);
+		});
+	}
+
+	public static List<Event> getAllPurchases(User loggedInUser) throws SQLException {
+		return runWithConnection(conn -> {
+			List<Event> events = new ArrayList<>();
+
+			PreparedStatement statement = conn.prepareStatement("SELECT * FROM events");
+//			statement.setInt(1, loggedInUser.getId());
+
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				Event event = new Event();
+				event.setId(result.getInt("EVENTID"));
+				event.setTitle(result.getString("TITLE"));
+				event.setDescription(result.getString("DESCRIPTION"));
+				event.setGenre(result.getString("GENRE"));
+				event.setSubGenre(result.getString("SUB_GENRE"));
+				event.setCity(result.getString("CITY"));
+				event.setPrice(result.getInt("PRICE"));
+				event.setDate(result.getDate("DATE"));
+				events.add(event);
+			}
+
+			return events;
 		});
 	}
 
@@ -167,4 +231,5 @@ public class DatabaseAdapter {
 	public static List<String> getAllEmpfehlungen(User loggedInUser) {
 		return new ArrayList<>();
 	}
+
 }
