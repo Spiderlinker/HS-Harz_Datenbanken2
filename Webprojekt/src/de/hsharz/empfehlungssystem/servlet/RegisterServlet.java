@@ -73,6 +73,7 @@ public class RegisterServlet extends HttpServlet {
 			countries = DatabaseAdapter.getCountryCodes();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return "Fehler: " + e.getMessage();
 		}
 
 		// Alle CountryCodes in das <select> einfügen und in die HTML-Seite einspeisen
@@ -158,7 +159,7 @@ public class RegisterServlet extends HttpServlet {
 			User user = Session.remove(Session.ATTRIBUTE_REGISTERING_USER);
 
 			System.out.println(user);
-			insertPreferencesIntoUser(user,  request.getParameterNames());
+			insertPreferencesIntoUser(user, request.getParameterNames());
 
 			try {
 				System.out.println("Registering User to database");
