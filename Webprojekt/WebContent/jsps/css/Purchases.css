@@ -1,2 +1,11 @@
 @import url("_header.css");
 @import url("basic.css");
+
+body {
+	max-width: 50%;
+}
+
+hr {
+	size: 1px;
+	color: #efefef;
+}
