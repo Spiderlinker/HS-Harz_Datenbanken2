@@ -16,6 +16,7 @@
 			<div class="container">
 			
 				<h3>Was magst du?</h3>
+				<p>Bitte wähle bis zu 3 Elemente aus</p>
 				<br>
 				
 				<jsp:getProperty name="genreBean" property="genres" />
