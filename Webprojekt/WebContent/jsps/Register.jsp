@@ -14,7 +14,7 @@
 		<form action="/Empfehlungssystem/Register" method="POST">	
 			<input type="hidden" name="registerPage" value="1" />
 			
-			<p>${errorString}<p>
+			<p class="error-text">${errorString}<p>
 			
 			<div class="container">
 			
