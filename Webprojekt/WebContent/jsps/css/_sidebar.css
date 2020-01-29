@@ -1,0 +1,22 @@
+.sidebar {
+  width: 130px;
+  position: fixed;
+  top: 6em;
+  left: 2em;
+}
+
+.sidebar p {
+  text-decoration: none;
+  font-size: 16px;
+  color: black;
+}
+
+.sidebar a {
+  text-decoration: none;
+  font-size: 14px;
+  color: #2196F3;
+}
+
+.sidebar a:hover {
+  color: #064579;
+}
