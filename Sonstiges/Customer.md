@@ -1,8 +1,8 @@
-| Username | Passwort |      Bearbeitet |                                    
-| ------------- |:-------------:| :--: |
-|techno@gmx.de |	Techno                                       | * [ ] |
-|volker.gerber@t-online.de |	volkergerbert                    | - [ ] |
-|dmeier@t-online.de |	Meier                                    |- [X] |
+| Username | Passwort |                                    
+| ------------- |:-------------:| 
+|techno@gmx.de |	Techno                                       |
+|volker.gerber@t-online.de |	volkergerbert                    |
+|dmeier@t-online.de |	Meier                                    |
 |judith.schreiber@gmail.de |	judithschreiber                  |
 |amanda.segel@t-mobile.de |	amandasegel                      |
 |dieter.wulf@t-online.de |	dieterwulf                       |
