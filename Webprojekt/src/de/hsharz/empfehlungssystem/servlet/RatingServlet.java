@@ -6,7 +6,10 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -90,23 +93,27 @@ public class RatingServlet extends HttpServlet {
 			throws ServletException, IOException {
 		System.out.println("doPost Käufe");
 
-		// Alle EventIDs holen
+		// Alle EventIDs holen und in eine Map speichern für späteren Verarbeitung
 		Enumeration<String> parameterNames = request.getParameterNames();
+		Map<String, Integer> ratings = new HashMap<>();
+		while(parameterNames.hasMoreElements()) {
+			// EventID mit Rating in Map speichern
+			String eventID = parameterNames.nextElement();
+			ratings.put(eventID, Integer.parseInt(request.getParameter(eventID)));
+		}
+		
 		new Thread(() -> { // Ratings in neuem Thread in Datenbank schreiben
 			System.out.println("Trage Bewertungen in Datenbank ein...");
-			while (parameterNames.hasMoreElements()) {
-				// EventID mit Rating holen
-				String eventID = parameterNames.nextElement();
-				Integer rating = Integer.parseInt(request.getParameter(eventID));
+			for(Entry<String, Integer> e : ratings.entrySet()) {
 
 				// Rating nur in die Datenbank schreiben, falls Rating > 0
-				if (rating != null && rating > 0) {
-					System.out.println("Event: " + eventID + " - Rating: " + rating);
+				if (e.getValue() != null && e.getValue() > 0) {
+					System.out.println("Event: " + e.getKey() + " - Rating: " + e.getValue());
 					try {
 						// Rating mit EventID in Datenbank schreiben
-						DatabaseAdapter.insertRating(Session.getLoggedInUser(), eventID, rating);
-					} catch (SQLException e) {
-						e.printStackTrace();
+						DatabaseAdapter.insertRating(Session.getLoggedInUser(), e.getKey(),  e.getValue());
+					} catch (SQLException ex) {
+						ex.printStackTrace();
 					}
 				}
 			}
