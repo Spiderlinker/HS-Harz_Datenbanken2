@@ -1,6 +1,7 @@
 package de.hsharz.empfehlungssystem.database;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.hsharz.empfehlungssystem.beans.Event;
+import de.hsharz.empfehlungssystem.beans.TicketType;
 import de.hsharz.empfehlungssystem.beans.User;
 import de.hsharz.empfehlungssystem.database.function.SqlFunction;
 
@@ -116,6 +118,79 @@ public class DatabaseAdapter {
 		});
 	}
 
+	public static boolean putPurchase(Event event, int amountOfTickets, String paymethod, String ticketTypeName,
+			User user) throws SQLException {
+		return runWithConnection(conn -> {
+
+			PreparedStatement statement = conn.prepareStatement("INSERT INTO PURCHASES VALUES (" //
+					+ "?," // 1 EventID
+					+ "?," // 2 UserID
+					+ "?," // 3 Timestamp
+					+ "?," // 4 AmountOfTickets
+					+ "?," // 5 PayedPricePerTicket
+					+ "?," // 6 PayerdPricePerTicket_Cent
+					+ "?," // 7 PayedPriceTotal
+					+ "?," // 8 PayedPriceTotal_Cent
+					+ "?," // 9 Paymethod
+					+ "?," // 10 TicketType
+					+ "?," // 11 Price_Advantage_Total
+					+ "?" // 12 Price_Advantage_Total_Cent
+					+ ")");
+
+			statement.setInt(1, event.getId());
+			statement.setInt(2, user.getId());
+			statement.setDate(3, new Date(System.currentTimeMillis()));
+			statement.setInt(4, amountOfTickets);
+
+			ResultSet r = conn.createStatement()
+					.executeQuery("SELECT PERCENTAGE FROM TICKETTYPES WHERE NAME = '" + ticketTypeName + "'");
+			double percentage = 0;
+			if (r.next()) {
+				percentage = r.getInt(1);
+			}
+
+			double invPercentage = (1 - percentage / 100);
+			double payedPricePT = event.getPrice() * invPercentage;
+			statement.setDouble(5, payedPricePT);
+			statement.setDouble(6, payedPricePT * 100);
+			statement.setDouble(7, payedPricePT * amountOfTickets);
+			statement.setDouble(8, payedPricePT * 100 * amountOfTickets);
+			statement.setString(9, paymethod);
+			statement.setString(10, ticketTypeName);
+			statement.setDouble(11, (event.getPrice() - payedPricePT) * amountOfTickets);
+			statement.setDouble(12, (event.getPrice() - payedPricePT) * amountOfTickets * 100);
+
+			int result = statement.executeUpdate();
+
+			return result == 1;
+		});
+	}
+	
+
+
+	public static boolean insertRating(User user, String event, Integer rating) throws SQLException {
+		return runWithConnection(conn -> {
+
+			PreparedStatement statement = conn.prepareStatement("INSERT INTO RATINGS VALUES (" //
+					+ "?," // 1 UserID
+					+ "?," // 2 EventID
+					+ "?," // 3 Rating
+					+ "?," // 4 Timestamp
+					+ "(SELECT DURATION_IN_MINUTES FROM EVENTS WHERE EVENTID = ?)" // 5 Event_Duration 
+					+ ")");
+
+			statement.setInt(1, user.getId());
+			statement.setString(2, event);
+			statement.setInt(3, rating);
+			statement.setDate(4, new Date(System.currentTimeMillis()));
+			statement.setString(5, event);
+
+			int result = statement.executeUpdate();
+
+			return result == 1;
+		});
+	}
+
 	public static List<String> getCountryCodes() throws SQLException {
 		return runWithConnection(conn -> {
 			List<String> countryCodes = new ArrayList<>();
@@ -146,28 +221,99 @@ public class DatabaseAdapter {
 		});
 	}
 
-	public static List<Event> getAllPurchases(User loggedInUser) throws SQLException {
+	public static List<Event> getAllEvents() throws SQLException {
 		return runWithConnection(conn -> {
 			List<Event> events = new ArrayList<>();
 
 			PreparedStatement statement = conn.prepareStatement("SELECT * FROM events");
-//			statement.setInt(1, loggedInUser.getId());
 
 			ResultSet result = statement.executeQuery();
 			while (result.next()) {
-				Event event = new Event();
-				event.setId(result.getInt("EVENTID"));
-				event.setTitle(result.getString("TITLE"));
-				event.setDescription(result.getString("DESCRIPTION"));
-				event.setGenre(result.getString("GENRE"));
-				event.setSubGenre(result.getString("SUB_GENRE"));
-				event.setCity(result.getString("CITY"));
-				event.setPrice(result.getInt("PRICE"));
-				event.setDate(result.getDate("DATE"));
-				events.add(event);
+				events.add(createEventFromResult(result));
 			}
 
 			return events;
+		});
+	}
+
+	public static Object getEvent(String eventID) throws SQLException {
+		return runWithConnection(conn -> {
+
+			PreparedStatement statement = conn.prepareStatement("SELECT * FROM events WHERE eventID = ?");
+			statement.setString(1, eventID);
+
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				return createEventFromResult(result);
+			}
+
+			return null;
+		});
+	}
+
+	public static List<Event> getPurchasesOfUser(User user) throws SQLException {
+		return runWithConnection(conn -> {
+			List<Event> events = new ArrayList<>();
+
+			PreparedStatement statement = conn.prepareStatement(
+					"SELECT * FROM events WHERE eventID IN (select eventID from purchases where userID = ?) "
+							+ "AND eventID not in (select eventID from ratings where userID = ? AND rating > 0)");
+			statement.setInt(1, user.getId());
+			statement.setInt(2, user.getId());
+
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				events.add(createEventFromResult(result));
+			}
+
+			return events;
+		});
+	}
+
+	private static Event createEventFromResult(ResultSet result) throws SQLException {
+		Event event = new Event();
+		event.setId(result.getInt("EVENTID"));
+		event.setTitle(result.getString("TITLE"));
+		event.setDescription(result.getString("DESCRIPTION"));
+		event.setGenre(result.getString("GENRE"));
+		event.setSubGenre(result.getString("SUB_GENRE"));
+		event.setCity(result.getString("CITY"));
+		event.setPrice(result.getDouble("PRICE"));
+		event.setDate(result.getDate("DATE"));
+		event.setTime(result.getTime("DATE"));
+		return event;
+	}
+
+	public static List<String> getPaymethods() throws SQLException {
+		return runWithConnection(conn -> {
+
+			List<String> paymethods = new ArrayList<>();
+			PreparedStatement statement = conn.prepareStatement("SELECT * FROM paymethod");
+
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				paymethods.add(result.getString(1));
+			}
+
+			return paymethods;
+		});
+	}
+
+	public static List<TicketType> getTicketTypes() throws SQLException {
+		return runWithConnection(conn -> {
+
+			List<TicketType> ticketTypes = new ArrayList<>();
+			PreparedStatement statement = conn.prepareStatement("SELECT * FROM tickettypes");
+
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				TicketType type = new TicketType();
+				type.setName(result.getString(1));
+				type.setPercentage(result.getInt(2));
+				ticketTypes.add(type);
+			}
+
+			return ticketTypes;
 		});
 	}
 

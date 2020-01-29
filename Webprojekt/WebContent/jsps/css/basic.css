@@ -10,7 +10,6 @@ body {
 
  /* Bordered form */
 form {
-  border: 1px solid black;
   background-color: white;
 }
 
@@ -33,7 +32,6 @@ button:hover {
 /* Add padding to containers */
 .container {
   padding: 1em;
-  
 }
 
 .error-text {

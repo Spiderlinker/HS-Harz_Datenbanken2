@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
-<jsp:useBean id="torsten" class="de.hsharz.empfehlungssystem.servlet.EmpfehlungenServlet" scope="session" />
+<jsp:useBean id="torsten" class="de.hsharz.empfehlungssystem.servlet.RecommenderServlet" scope="session" />
 
 <!DOCTYPE html>
 <html>

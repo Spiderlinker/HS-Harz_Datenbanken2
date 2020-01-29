@@ -1,6 +1,7 @@
 package de.hsharz.empfehlungssystem.beans;
 
 import java.sql.Date;
+import java.sql.Time;
 
 public class Event {
 
@@ -11,6 +12,7 @@ public class Event {
 	private String subGenre;
 	private String city;
 	private Date date;
+	private Time time;
 	private double price;
 
 	public int getId() {
@@ -75,6 +77,14 @@ public class Event {
 
 	public void setPrice(double price) {
 		this.price = price;
+	}
+
+	public Time getTime() {
+		return time;
+	}
+
+	public void setTime(Time time) {
+		this.time = time;
 	}
 
 }

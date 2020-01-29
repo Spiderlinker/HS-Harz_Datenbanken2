@@ -9,6 +9,7 @@ public class Session {
 
 	public static final String ATTRIBUTE_LOGGED_IN_USER = "loggedInUser";
 	public static final String ATTRIBUTE_REGISTERING_USER = "registeringUser";
+	public static final String ATTRIBUTE_EVENT_TO_PURCHASE= "eventToPurchase";
 
 	private static Map<String, Object> attributes = new HashMap<>();
 

@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -18,29 +19,31 @@ import de.hsharz.empfehlungssystem.beans.Event;
 import de.hsharz.empfehlungssystem.database.DatabaseAdapter;
 import de.hsharz.empfehlungssystem.utils.SessionUtils;
 
-@WebServlet(description = "Deine vorgeschlagenen Events", urlPatterns = { "/Empfehlungen" })
-public class RecommenderServlet extends HttpServlet {
+@WebServlet(description = "Deine gekauften Events", urlPatterns = { "/Bewertungen" })
+public class RatingServlet extends HttpServlet {
 
 	/** */
 	private static final long serialVersionUID = 1L;
 
-	public String getEmpfehlungen() {
-		System.out.println("Hole Empfehlungen");
+	public String getPurchases() {
+		System.out.println("Hole Käufe");
 
 		StringBuilder builder = new StringBuilder();
 		try {
 
-			List<Event> events = DatabaseAdapter.getAllEvents();
+			List<Event> purchasedEvents = DatabaseAdapter.getPurchasesOfUser(Session.getLoggedInUser());
 
-			for (Event event : events) {
+			for (Event event : purchasedEvents) {
 				// Titel einfuegen
-				builder.append("<form method=\"GET\" action=\"/Empfehlungssystem/Purchase\"><b>" + event.getTitle() + "</b>");
+				builder.append("<b>" + event.getTitle() + "</b>");
 
 				// Kaufen-Button (und Preis) einfuegen
-				builder.append("<span style=\"float: right;\">" + "<button type=\"submit\">Kaufen</button>"
-				// Preis einfuegen
-						+ "<p style=\"text-align: center;\">" + String.format("%.2f", event.getPrice())
-						+ "&euro; </p></span>");
+				builder.append("<span style=\"float: right;\">");
+				builder.append(" <select name=\"" + event.getId() + "\">");
+				for (int i = 0; i <= 5; i++) {
+					builder.append("<option value=\"" + i + "\">" + i + "</option>");
+				}
+				builder.append("</select></span>");
 
 				// Zeit und Ort einfügen
 				builder.append("<p style=\"font-size: 10pt;\">Datum: <b>");
@@ -58,8 +61,8 @@ public class RecommenderServlet extends HttpServlet {
 
 				// Beschreibung einfuegen
 				builder.append(event.getDescription());
-				builder.append("<input type=\"hidden\" name=\"eventID\" value=\"" + event.getId() + "\"/>");
-				builder.append("</form><br><hr><br>");
+				builder.append("<br><hr><br>");
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -71,19 +74,44 @@ public class RecommenderServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("doGet Empfehlungen");
+		System.out.println("doGet Käufe");
 
 		if (SessionUtils.redirectToLoginPageIfNotLoggedIn(request, response)) {
 			// Nutzer war nicht eingeloggt und wurde auf die Login-Page weitergeleitet
 			return;
 		}
 
-		RequestDispatcher requestDispatcher = this.getServletContext().getRequestDispatcher("/jsps/Recommender.jsp");
+		RequestDispatcher requestDispatcher = this.getServletContext().getRequestDispatcher("/jsps/Rating.jsp");
 		requestDispatcher.forward(request, response);
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect(request.getContextPath() + "/Purchase");
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		System.out.println("doPost Käufe");
+
+		// Alle EventIDs holen
+		Enumeration<String> parameterNames = request.getParameterNames();
+		new Thread(() -> { // Ratings in neuem Thread in Datenbank schreiben
+			System.out.println("Trage Bewertungen in Datenbank ein...");
+			while (parameterNames.hasMoreElements()) {
+				// EventID mit Rating holen
+				String eventID = parameterNames.nextElement();
+				Integer rating = Integer.parseInt(request.getParameter(eventID));
+
+				// Rating nur in die Datenbank schreiben, falls Rating > 0
+				if (rating != null && rating > 0) {
+					System.out.println("Event: " + eventID + " - Rating: " + rating);
+					try {
+						// Rating mit EventID in Datenbank schreiben
+						DatabaseAdapter.insertRating(Session.getLoggedInUser(), eventID, rating);
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}).start();
+
+		response.sendRedirect(request.getContextPath() + "/Bewertungen");
 	}
 }
