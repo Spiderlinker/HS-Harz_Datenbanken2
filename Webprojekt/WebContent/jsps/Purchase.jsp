@@ -25,7 +25,7 @@
 			<div class="container">
 				<jsp:getProperty name="purchaseID" property="purchase" />
 			</div>
-			<a href="Empfehlungen">Zurück zu meinen Empfehlungen</a>
 		</form>
+		<a href="Empfehlungen">Zurück zu meinen Empfehlungen</a>
 	</body>
 </html>
