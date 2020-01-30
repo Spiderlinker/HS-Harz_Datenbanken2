@@ -65,10 +65,15 @@ public class RatingServlet extends HttpServlet {
 				// Beschreibung einfuegen
 				builder.append(event.getDescription());
 				builder.append("<br><hr><br>");
-
 			}
+
+			if (purchasedEvents.isEmpty()) {
+				builder.append("Keine weiteren Käufe zum Bewerten");
+			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
+			builder.append("Error: " + e.getMessage());
 		}
 
 		return builder.toString();
@@ -96,22 +101,22 @@ public class RatingServlet extends HttpServlet {
 		// Alle EventIDs holen und in eine Map speichern für späteren Verarbeitung
 		Enumeration<String> parameterNames = request.getParameterNames();
 		Map<String, Integer> ratings = new HashMap<>();
-		while(parameterNames.hasMoreElements()) {
+		while (parameterNames.hasMoreElements()) {
 			// EventID mit Rating in Map speichern
 			String eventID = parameterNames.nextElement();
 			ratings.put(eventID, Integer.parseInt(request.getParameter(eventID)));
 		}
-		
+
 		new Thread(() -> { // Ratings in neuem Thread in Datenbank schreiben
 			System.out.println("Trage Bewertungen in Datenbank ein...");
-			for(Entry<String, Integer> e : ratings.entrySet()) {
+			for (Entry<String, Integer> e : ratings.entrySet()) {
 
 				// Rating nur in die Datenbank schreiben, falls Rating > 0
 				if (e.getValue() != null && e.getValue() > 0) {
 					System.out.println("Event: " + e.getKey() + " - Rating: " + e.getValue());
 					try {
 						// Rating mit EventID in Datenbank schreiben
-						DatabaseAdapter.insertRating(Session.getLoggedInUser(), e.getKey(),  e.getValue());
+						DatabaseAdapter.insertRating(Session.getLoggedInUser(), e.getKey(), e.getValue());
 					} catch (SQLException ex) {
 						ex.printStackTrace();
 					}

@@ -25,9 +25,9 @@
 		<form method="POST" action="/Empfehlungssystem/Bewertungen">
 			<div class="container">
 				<jsp:getProperty name="ratingID" property="purchases" />
+				<span style="float: right;"><button type="submit">Bewertungen abschicken</button></span>
+				<br>
 			</div>
-			<span style="float: right;"><button type="submit">Bewertungen abschicken</button></span>
-			<br>
 		</form>
 	</body>
 </html>
