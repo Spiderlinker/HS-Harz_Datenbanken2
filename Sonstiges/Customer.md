@@ -200,8 +200,6 @@
 |227|JeSeil@gmx.com|JeSeil|
 |228|DaSher@gmx.com|DaSher|
 |229|WaGutj@gmx.com|WaGutj|
-|234|BeRoge@gmx.com|BeRoge|
-|235|KiScha@gmx.com|KiScha|
 |236|FiSche@gmx.com|FiSche|
 |237|NiHäus@gmx.com|NiHäus|
 |238|KiLuth@gmx.com|KiLuth|
