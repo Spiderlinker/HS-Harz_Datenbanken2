@@ -101,7 +101,6 @@
 |126|franzialbert@gmx.com|franzialbert|
 |127|holgeralberts@yahoo.com|holgeralberts|
 |128|klausalberts@gmail.com|klausalberts|
-|129|sam.ansel@t-mobile.com|samansel|
 |130|nilsansel@t-online.de|nilsansel|
 |131|arturbrandt@yahoo.com|arturbrandt|
 |132|achimbrandtner@gmx.com|achimbrandtner|
