@@ -335,16 +335,6 @@
 |362|LiKock@t-online.com|LiKock|
 |363|SaMaas@t-online.com|SaMaas|
 |364|MeEhle@t-online.com|MeEhle|
-|365|LeBusc@t-online.com|LeBusc|
-|366|FrBreh@t-online.com|FrBreh|
-|367|HeKlei@t-online.com|HeKlei|
-|368|OlHart@t-online.com|OlHart|
-|369|VoWalt@t-online.com|VoWalt|
-|370|GeEber@hotmail.com|GeEber|
-|371|ChGibb@hotmail.com|ChGibb|
-|372|SiThie@hotmail.com|SiThie|
-|373|ToBreu@hotmail.com|ToBreu|
-|374|UlDahm@hotmail.com|UlDahm|
 |375|KlDahm@hotmail.com|KlDahm|
 |376|ChHaid@hotmail.com|ChHaid|
 |377|BeEcke@hotmail.com|BeEcke|
