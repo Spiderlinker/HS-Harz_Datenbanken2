@@ -243,16 +243,6 @@
 |277|EmSher@gmx.com|EmSher|
 |278|AmRabe@gmx.com|AmRabe|
 |279|MaFeil@gmx.com|MaFeil|
-|280|JoGeis@gmx.com|JoGeis|
-|281|IaBond@gmx.com|IaBond|
-|282|ReTaub@gmx.com|ReTaub|
-|283|LeMörs@gmx.com|LeMörs|
-|284|GeChri@t-mobile.com|GeChri|
-|285|MiHugh@t-mobile.com|MiHugh|
-|286|JoSchö@t-mobile.com|JoSchö|
-|287|MaDean@t-mobile.com|MaDean|
-|288|KaRobi@t-mobile.com|KaRobi|
-|289|DaSchü@t-mobile.com|DaSchü|
 |290|SiKani@t-mobile.com|SiKani|
 |291|GeDaub@t-mobile.com|GeDaub|
 |292|MiNorr@t-mobile.com|MiNorr|
