@@ -478,5 +478,3 @@
 |532|MiKlei@gmail.com|MiKlei|
 |533|ChHimm@gmail.com|ChHimm|
 |534|NoGaid@gmail.com|NoGaid|
-|535|AmSeit@gmail.com|AmSeit|
-|536|FiSeif@gmail.com|FiSeif|
