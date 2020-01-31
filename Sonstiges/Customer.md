@@ -480,5 +480,3 @@
 |534|NoGaid@gmail.com|NoGaid|
 |535|AmSeit@gmail.com|AmSeit|
 |536|FiSeif@gmail.com|FiSeif|
-|537|GeLay1@gmail.com|GeLay|
-|538|JöSix1@yahoo.com|JöSix|
