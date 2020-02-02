@@ -461,5 +461,3 @@
 |515|ArEber@gmail.com|ArEber|
 |516|PhOste@gmail.com|PhOste|
 |517|NiTews@gmail.com|NiTews|
-|518|LoFran@gmail.com|LoFran|
-|519|JeSchm@gmail.com|JeSchm|
