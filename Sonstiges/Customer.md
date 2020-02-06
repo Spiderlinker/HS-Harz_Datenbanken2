@@ -31,8 +31,6 @@
 |32|monica.geller@yahoo.com|friends4|
 |33|chandler.bing@gmx.com|friends5|
 |34|ross.geller@yahoo.com|friends6|
-|35|sherlock@gmail.com|sherlock001|
-|36|watson@hotmail.com|watson001|
 |37|tickduck@hotmail.com|tickduck|
 |38|trickduck@hotmail.com|trickduck|
 |39|trackduck@t-mobile.com|trackduck|
