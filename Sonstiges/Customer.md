@@ -7,7 +7,6 @@
 |6|bb.bb@hs-harz.de|bbbb|
 |7|c.c@hs-harz.de|cc|
 |8|cc.cc@hs-harz.de|cccc|
-|9|d.d@hs-harz.de|dd|
 |10|dd.dd@hs-harz.de|dddd|
 |11|anton.antonio@gmx.com|anton12345|
 |12|angelo.antonio@gmail.com|angelo1234|
