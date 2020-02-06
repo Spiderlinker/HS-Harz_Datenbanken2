@@ -1,6 +1,5 @@
 |ID| Username | Passwort |                                    
 |--| ------------- |:-------------:| 
-|3|ab.ab@hs-harz.de|abab|
 |4|ac.ac@hs-harz.de|acac|
 |5|b.b@hs-harz.de|bb|
 |6|bb.bb@hs-harz.de|bbbb|
