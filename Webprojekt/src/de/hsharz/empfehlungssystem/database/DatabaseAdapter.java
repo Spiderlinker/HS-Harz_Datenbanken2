@@ -165,8 +165,6 @@ public class DatabaseAdapter {
 			return result == 1;
 		});
 	}
-	
-
 
 	public static boolean insertRating(User user, String event, Integer rating) throws SQLException {
 		return runWithConnection(conn -> {
@@ -176,7 +174,7 @@ public class DatabaseAdapter {
 					+ "?," // 2 EventID
 					+ "?," // 3 Rating
 					+ "?," // 4 Timestamp
-					+ "(SELECT DURATION_IN_MINUTES FROM EVENTS WHERE EVENTID = ?)" // 5 Event_Duration 
+					+ "(SELECT DURATION_IN_MINUTES FROM EVENTS WHERE EVENTID = ?)" // 5 Event_Duration
 					+ ")");
 
 			statement.setInt(1, user.getId());
@@ -278,9 +276,14 @@ public class DatabaseAdapter {
 		event.setGenre(result.getString("GENRE"));
 		event.setSubGenre(result.getString("SUB_GENRE"));
 		event.setCity(result.getString("CITY"));
+		event.setZIP(result.getString("ZIP"));
+		event.setStreet(result.getString("STREET"));
+		event.setHouseNumber(result.getString("HOUSENUMBER"));
 		event.setPrice(result.getDouble("PRICE"));
 		event.setDate(result.getDate("DATE"));
 		event.setTime(result.getTime("DATE"));
+		event.setOrganizer(result.getString("ORGANIZERNAME"));
+		event.setDuration(result.getLong("DURATION_IN_MINUTES"));
 		return event;
 	}
 

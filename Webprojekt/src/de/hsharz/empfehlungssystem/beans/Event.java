@@ -11,8 +11,13 @@ public class Event {
 	private String genre;
 	private String subGenre;
 	private String city;
+	private String street;
+	private String zip;
+	private String housenumber;
+	private String organizer;
 	private Date date;
 	private Time time;
+	private long duration;
 	private double price;
 
 	public int getId() {
@@ -85,6 +90,46 @@ public class Event {
 
 	public void setTime(Time time) {
 		this.time = time;
+	}
+
+	public long getDuration() {
+		return duration;
+	}
+
+	public void setDuration(long duration) {
+		this.duration = duration;
+	}
+
+	public String getOrganizer() {
+		return organizer;
+	}
+
+	public void setOrganizer(String organizer) {
+		this.organizer = organizer;
+	}
+
+	public String getHouseNumber() {
+		return housenumber;
+	}
+
+	public void setHouseNumber(String housenumber) {
+		this.housenumber = housenumber;
+	}
+
+	public String getZIP() {
+		return zip;
+	}
+
+	public void setZIP(String zip) {
+		this.zip = zip;
+	}
+
+	public String getStreet() {
+		return street;
+	}
+
+	public void setStreet(String street) {
+		this.street = street;
 	}
 
 }
