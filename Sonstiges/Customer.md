@@ -6,7 +6,6 @@
 |7|c.c@hs-harz.de|cc|
 |8|cc.cc@hs-harz.de|cccc|
 |10|dd.dd@hs-harz.de|dddd|
-|13|angelica.antonio@gmail.com|angelica12|
 |14|sandra.ahrends@gmx.com|sandra1234|
 |15|jolineahrends@gmx.com|jolineahr1|
 |16|nathalie.abel@gmx.com|natabel123|
