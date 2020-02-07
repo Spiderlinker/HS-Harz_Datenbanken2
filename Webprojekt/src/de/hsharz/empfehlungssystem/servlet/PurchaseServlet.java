@@ -50,8 +50,11 @@ public class PurchaseServlet extends HttpServlet {
 		builder.append(timeFormatter.format(time));
 
 		// Ort einfuegen
-		builder.append("</b> &nbsp; Ort: <b>" + event.getCity());
-		builder.append("</b></p>");
+		builder.append("</b><br> Adresse:" + event.getStreet() //
+				+ " " + event.getHouseNumber() //
+				+ ", " + event.getZIP()//
+				+ " " + event.getCity());
+		builder.append("</p>");
 
 		// Beschreibung einfuegen
 		builder.append(event.getDescription());
@@ -61,15 +64,17 @@ public class PurchaseServlet extends HttpServlet {
 		builder.append("<br><p style=\"text-align: center;\">Preis pro Ticket: <b>"
 				+ String.format("%.2f", event.getPrice()) + "&euro; </b> </p>");
 
-		builder.append("<table><tr><td>Anzahl der Tickets</td><td>");
+		// Veranstalter und Dauer des Events einfügen
+		builder.append("Veranstalter:" + event.getOrganizer() + " &nbsp Dauer:" + event.getDuration() + " min<hr>");
 
+		builder.append("<table><tr><td>Anzahl der Tickets</td><td>");
 		// Ticketanzahl
 		builder.append(" <select name=\"amountOfTickets\">");
 		for (int i = 1; i <= 5; i++) {
 			builder.append("<option value=\"" + i + "\">" + i + "</option>");
 		}
 		builder.append("</select></td></tr>");
-		builder.append("<br><tr><td>Zahlungsmethode</td><td>");
+		builder.append("<tr><td>Zahlungsmethode</td><td>");
 
 		// Zahlungsmethode auswählen
 		try {
@@ -83,7 +88,7 @@ public class PurchaseServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 
-		builder.append("<br><tr><td>Rabatt</td><td>");
+		builder.append("<tr><td>Rabatt</td><td>");
 
 		try {
 			List<TicketType> ticketTypes = DatabaseAdapter.getTicketTypes();
@@ -97,10 +102,11 @@ public class PurchaseServlet extends HttpServlet {
 		}
 		builder.append("<br>");
 		builder.append(
-				"Bitte beachten Sie, dass die Auswahl des Rabatts beim Einlass des Events kontrolliert wird <br>und Sie ggf. bei Falschangaben mit Nachzahlungen rechnen müssen.");
+				"Bitte beachten Sie, dass die Auswahl des Rabatts beim Einlass des "
+				+ "Events kontrolliert wird und Sie ggf. bei Falschangaben mit Nachzahlungen rechnen müssen.");
 
 		// Kaufen-Button (und Preis) einfuegen
-		builder.append("<span style=\"float: right;\">" + "<button type=\"submit\">Kaufen</button></span><br><br>");
+		builder.append("<span style=\"float: right;\">" + "<button type=\"submit\">Kaufen</button></span>");
 
 		return builder.toString();
 	}
