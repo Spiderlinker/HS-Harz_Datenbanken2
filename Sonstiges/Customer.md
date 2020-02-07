@@ -96,9 +96,7 @@
 |130|nilsansel@t-online.de|nilsansel|
 |131|arturbrandt@yahoo.com|arturbrandt|
 |132|achimbrandtner@gmx.com|achimbrandtner|
-|133|celinebauer@gmail.com|celinebauer|
 |134|paulbrauer@gmx.com|paulbrauer|
-|135|bastianchelli@gmail.com|bastianchelli|
 |136|geraldchris@gmx.com|geraldchris|
 |137|isoldeden@t-online.com|isoldeden|
 |138|hunkerdante@gmx.com|hunkerdante|
