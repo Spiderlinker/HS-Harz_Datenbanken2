@@ -59,7 +59,7 @@ public class DatabaseAdapter {
 		return runWithConnection(conn -> {
 			List<String> genreNames = new ArrayList<>();
 
-			PreparedStatement statement = conn.prepareStatement("SELECT distinct typename FROM events");
+			PreparedStatement statement = conn.prepareStatement("SELECT distinct genre FROM events");
 			ResultSet result = statement.executeQuery();
 			while (result.next()) {
 				genreNames.add(result.getString(1));
@@ -203,10 +203,12 @@ public class DatabaseAdapter {
 		});
 	}
 
-	public static String getStatistik() throws SQLException {
+	public static String getAnalysis(String name) throws SQLException {
 		return runWithConnection(conn -> {
 
-			PreparedStatement statement = conn.prepareStatement("SELECT * FROM ANALYTICS_ANFRAGE");
+			PreparedStatement statement = conn
+					.prepareStatement("SELECT sqlanfrage FROM ANALYTICS_ANFRAGE where name = ?");
+			statement.setString(1, name);
 			ResultSet result = statement.executeQuery();
 
 			result.next();
@@ -250,6 +252,23 @@ public class DatabaseAdapter {
 	}
 
 	public static List<Event> getPurchasesOfUser(User user) throws SQLException {
+		return runWithConnection(conn -> {
+			List<Event> events = new ArrayList<>();
+
+			PreparedStatement statement = conn.prepareStatement(
+					"SELECT * FROM events WHERE eventID IN (select eventID from purchases where userID = ?) ");
+			statement.setInt(1, user.getId());
+
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				events.add(createEventFromResult(result));
+			}
+
+			return events;
+		});
+	}
+
+	public static List<Event> getUnratedPurchasesOfUser(User user) throws SQLException {
 		return runWithConnection(conn -> {
 			List<Event> events = new ArrayList<>();
 
@@ -317,6 +336,21 @@ public class DatabaseAdapter {
 			}
 
 			return ticketTypes;
+		});
+	}
+
+	public static List<String> getAnalyticNames() throws SQLException {
+		return runWithConnection(conn -> {
+
+			List<String> names = new ArrayList<>();
+			PreparedStatement statement = conn.prepareStatement("SELECT Name FROM ANALYTICS_ANFRAGE");
+
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				names.add(result.getString(1));
+			}
+
+			return names;
 		});
 	}
 

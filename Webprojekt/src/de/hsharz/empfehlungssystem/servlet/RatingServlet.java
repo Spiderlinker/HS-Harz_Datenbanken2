@@ -34,7 +34,7 @@ public class RatingServlet extends HttpServlet {
 		StringBuilder builder = new StringBuilder();
 		try {
 
-			List<Event> purchasedEvents = DatabaseAdapter.getPurchasesOfUser(Session.getLoggedInUser());
+			List<Event> purchasedEvents = DatabaseAdapter.getUnratedPurchasesOfUser(Session.getLoggedInUser());
 
 			for (Event event : purchasedEvents) {
 				// Titel einfuegen
@@ -108,20 +108,20 @@ public class RatingServlet extends HttpServlet {
 		}
 
 //		new Thread(() -> { // Ratings in neuem Thread in Datenbank schreiben
-			System.out.println("Trage Bewertungen in Datenbank ein...");
-			for (Entry<String, Integer> e : ratings.entrySet()) {
+		System.out.println("Trage Bewertungen in Datenbank ein...");
+		for (Entry<String, Integer> e : ratings.entrySet()) {
 
-				// Rating nur in die Datenbank schreiben, falls Rating > 0
-				if (e.getValue() != null && e.getValue() > 0) {
-					System.out.println("Event: " + e.getKey() + " - Rating: " + e.getValue());
-					try {
-						// Rating mit EventID in Datenbank schreiben
-						DatabaseAdapter.insertRating(Session.getLoggedInUser(), e.getKey(), e.getValue());
-					} catch (SQLException ex) {
-						ex.printStackTrace();
-					}
+			// Rating nur in die Datenbank schreiben, falls Rating > 0
+			if (e.getValue() != null && e.getValue() > 0) {
+				System.out.println("Event: " + e.getKey() + " - Rating: " + e.getValue());
+				try {
+					// Rating mit EventID in Datenbank schreiben
+					DatabaseAdapter.insertRating(Session.getLoggedInUser(), e.getKey(), e.getValue());
+				} catch (SQLException ex) {
+					ex.printStackTrace();
 				}
 			}
+		}
 //		}).start();
 
 		response.sendRedirect(request.getContextPath() + "/Bewertungen");
