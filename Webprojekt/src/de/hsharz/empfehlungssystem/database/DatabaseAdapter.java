@@ -236,6 +236,43 @@ public class DatabaseAdapter {
 		});
 	}
 
+	public static List<Event> getAllEventTitleGrouped() throws SQLException {
+		return runWithConnection(conn -> {
+			List<Event> events = new ArrayList<>();
+
+			PreparedStatement statement = conn.prepareStatement(
+					"select title, description, typename from events group by title, description, typename order by typename asc");
+
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				Event event = new Event();
+				event.setTitle(result.getString("TITLE"));
+				event.setDescription(result.getString("DESCRIPTION"));
+				event.setGenre(result.getString("TYPENAME"));
+
+				events.add(event);
+			}
+
+			return events;
+		});
+	}
+
+	public static List<Event> getAllEventsOf(String eventTitle) throws SQLException {
+		return runWithConnection(conn -> {
+			List<Event> events = new ArrayList<>();
+
+			PreparedStatement statement = conn.prepareStatement("SELECT * FROM events where title = ?");
+			statement.setString(1, eventTitle);
+
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				events.add(createEventFromResult(result));
+			}
+
+			return events;
+		});
+	}
+
 	public static Object getEvent(String eventID) throws SQLException {
 		return runWithConnection(conn -> {
 
