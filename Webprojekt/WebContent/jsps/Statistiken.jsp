@@ -5,11 +5,13 @@
 
 <html>
 <head>
-
-<jsp:getProperty property="statistik" name="statistikServlet"/>
-
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/jsps/css/Statistiken.css" title="style1" />
+	<jsp:getProperty property="statistik" name="statistikServlet"/>
 </head>
 <body>
+	
+	<jsp:getProperty property="statistiken" name="statistikServlet"/>
+	
 	<div id="chartContainer" style="height: 700px; width: 100%;"></div>
 	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </body>
