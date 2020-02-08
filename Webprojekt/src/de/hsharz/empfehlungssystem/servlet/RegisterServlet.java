@@ -169,7 +169,7 @@ public class RegisterServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 
-			response.sendRedirect(request.getContextPath() + "/UserHome");
+			response.sendRedirect(request.getContextPath() + "/Empfehlungen");
 			return;
 		} else {
 			System.err.println("Keine Implementierung für dieses Register-Seite.");
