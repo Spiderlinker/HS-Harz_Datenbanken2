@@ -1,0 +1,15 @@
+Für die Begründung der Wahl, siehe Grafik S.345 Hybrid Recommender Systems: Survey and Experiments (Robin Burke)
+
+- Used Recommendation techniques:
+    - Collaborative : Identify users similar and extrapolate from their ratings of events
+    - Demographic-based : Identify users that are demographically similar and extrapolate from theis ratings of events
+    - Knowledge-based : Infer a match between events and the users need
+    
+- Hybridization method
+  /* nicht sicher, welche passt
+  * wird noch überarbeitet
+  */
+    - Weigthed: The score (votes) of several recommendation techniques are combined together to produce a single recommendation
+    - Switching: The system switches between recommendation techniques depending on the current situation
+    
+   
