@@ -6,11 +6,6 @@
 |7|c.c@hs-harz.de|cc|
 |8|cc.cc@hs-harz.de|cccc|
 |10|dd.dd@hs-harz.de|dddd|
-|12|angelo.antonio@gmail.com|angelo1234|
-|13|angelica.antonio@gmail.com|angelica12|
-|14|sandra.ahrends@gmx.com|sandra1234|
-|15|jolineahrends@gmx.com|jolineahr1|
-|16|nathalie.abel@gmx.com|natabel123|
 |17|andrea.adam@gmx.com|andrea1234|
 |18|jon.adam@gmx.com|jonadam123|
 |19|sven.adams@t-online.com|sven12345|
@@ -96,9 +91,7 @@
 |130|nilsansel@t-online.de|nilsansel|
 |131|arturbrandt@yahoo.com|arturbrandt|
 |132|achimbrandtner@gmx.com|achimbrandtner|
-|133|celinebauer@gmail.com|celinebauer|
 |134|paulbrauer@gmx.com|paulbrauer|
-|135|bastianchelli@gmail.com|bastianchelli|
 |136|geraldchris@gmx.com|geraldchris|
 |137|isoldeden@t-online.com|isoldeden|
 |138|hunkerdante@gmx.com|hunkerdante|
