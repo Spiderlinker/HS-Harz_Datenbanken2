@@ -7,3 +7,12 @@
 	</form>
 	<span class="header-span">Hallo, <b>${user.firstname}</b></span>
 </div>
+
+<div class="sidebar">
+	<p>Navigation</p>
+	<a href="Empfehlungen">Empfehlungen</a><br>
+	<a href="Bewertungen">Bewertungen</a><br>
+	<a href="History">Kaufhistorie</a><br>
+	<a href="Statistiken">Statistiken</a><br>
+	<a href="Logout">Logout</a>
+</div>
