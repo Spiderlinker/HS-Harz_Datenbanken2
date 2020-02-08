@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import de.hsharz.empfehlungssystem.Session;
+
 @WebServlet(displayName = "Logout", urlPatterns = { "/Logout", "/LogoutServlet" })
 public class LogoutServlet extends HttpServlet {
 

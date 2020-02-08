@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import de.hsharz.empfehlungssystem.Session;
 import de.hsharz.empfehlungssystem.beans.User;
 import de.hsharz.empfehlungssystem.database.DatabaseAdapter;
 

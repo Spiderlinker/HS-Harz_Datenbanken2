@@ -1,4 +1,4 @@
-package de.hsharz.empfehlungssystem.servlet;
+package de.hsharz.empfehlungssystem;
 
 import java.util.HashMap;
 import java.util.Map;
