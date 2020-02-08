@@ -14,14 +14,6 @@
 	
 		<jsp:include page="_header.jsp"></jsp:include>
 		
-		<div class="sidebar">
-			<p>Navigation</p>
-			<a href="/Empfehlungssystem/Empfehlungen">Empfehlungen</a>
-			<a href="/Empfehlungssystem/Bewertungen">Bewertungen</a>
-			<a href="/Empfehlungssystem/Statistiken">Statistiken</a>
-			<a href="/Empfehlungssystem/Logout">Logout</a>
-		</div>
-		
 		<div class="container">
 			<jsp:getProperty name="empfehlungenID" property="empfehlungen" />
 		</div>
