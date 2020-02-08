@@ -1,0 +1,24 @@
+select eventID, title from events where title in
+    (SELECT distinct e.title
+    from RATINGS r, EVENTS e,
+         (select c.userid userlist
+         from customer c, 
+                (SELECT GENDER_SHORT gender, EXTRACT(YEAR from BIRTHDAY_DATE) birthday
+                FROM CUSTOMER
+                WHERE userid = 541) info
+         where c.userid not like 541
+         AND c.GENDER_SHORT like info.gender
+         AND EXTRACT(YEAR from c.BIRTHDAY_DATE) < (info.birthday + 5)
+         AND EXTRACT(YEAR from c.BIRTHDAY_DATE) > (info.birthday - 5)
+         ) ageGender
+    where r.userid in ageGender.userlist
+    AND r.eventid = e.eventid
+    AND r.RATING > 3
+    AND e.genre in (select distinct genre
+from CUSTOMER, EVENTS 
+where userid = 541
+AND(
+  preference1 = genre
+  OR preference2 = genre
+  OR preference3 = genre
+)));
