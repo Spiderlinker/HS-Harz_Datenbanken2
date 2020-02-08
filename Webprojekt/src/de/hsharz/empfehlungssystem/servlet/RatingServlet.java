@@ -107,7 +107,7 @@ public class RatingServlet extends HttpServlet {
 			ratings.put(eventID, Integer.parseInt(request.getParameter(eventID)));
 		}
 
-		new Thread(() -> { // Ratings in neuem Thread in Datenbank schreiben
+//		new Thread(() -> { // Ratings in neuem Thread in Datenbank schreiben
 			System.out.println("Trage Bewertungen in Datenbank ein...");
 			for (Entry<String, Integer> e : ratings.entrySet()) {
 
@@ -122,7 +122,7 @@ public class RatingServlet extends HttpServlet {
 					}
 				}
 			}
-		}).start();
+//		}).start();
 
 		response.sendRedirect(request.getContextPath() + "/Bewertungen");
 	}
