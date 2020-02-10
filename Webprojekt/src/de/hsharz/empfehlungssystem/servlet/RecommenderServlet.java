@@ -39,9 +39,26 @@ public class RecommenderServlet extends HttpServlet {
 
 	private String showAllEvents() {
 		StringBuilder builder = new StringBuilder();
+		
 		try {
 
-			List<Event> events = DatabaseAdapter.getAllEventTitleGrouped();
+//			List<Event> events = DatabaseAdapter.getAllEventTitleGrouped();
+			int userID = Session.getLoggedInUser().getId();
+			List<Event> events = DatabaseAdapter.getRecommendationFilterStrong(userID, 4);
+
+			System.out.println("Got " + events.size() + " Events from Strong-Filter");
+			if (events.size() < 5) {
+				System.out.println("Fetching Events from Medium-Filter...");
+				events = DatabaseAdapter.getRecommendationFilterMedium(userID, 4);
+				System.out.println("Got " + events.size() + " Events from Medium-Filter");
+				if (events.size() < 5) {
+					System.out.println("Fetching Events from Light-Filter...");
+					events = DatabaseAdapter.getRecommendationFilterLight(userID, 4);
+					System.out.println("Got " + events.size() + " Events from Light-Filters");
+				}
+			}
+
+			events.sort((e1, e2) -> e1.getGenre().compareTo(e2.getGenre()));
 
 			String currentGenre = "";
 
@@ -63,7 +80,7 @@ public class RecommenderServlet extends HttpServlet {
 						"<br><span style=\"float: right;\">" + "<button type=\"submit\">Auswählen</button></span>");
 
 				// Beschreibung einfuegen
-				builder.append(event.getDescription());
+				builder.append("Weitere Termine für diese Veranstalung finden Sie nach der Auswahl");
 				builder.append("<input type=\"hidden\" name=\"eventTitle\" value=\"" + event.getTitle() + "\"/>");
 				builder.append("</form><br><hr><br>");
 			}
