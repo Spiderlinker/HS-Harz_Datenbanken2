@@ -241,13 +241,12 @@ public class DatabaseAdapter {
 			List<Event> events = new ArrayList<>();
 
 			PreparedStatement statement = conn.prepareStatement(
-					"select title, description, typename from events group by title, description, typename order by typename asc");
+					"select title, description, typename from events group by title, typename order by typename asc");
 
 			ResultSet result = statement.executeQuery();
 			while (result.next()) {
 				Event event = new Event();
 				event.setTitle(result.getString("TITLE"));
-				event.setDescription(result.getString("DESCRIPTION"));
 				event.setGenre(result.getString("TYPENAME"));
 
 				events.add(event);
@@ -388,6 +387,138 @@ public class DatabaseAdapter {
 			}
 
 			return names;
+		});
+	}
+
+	public static List<Event> getRecommendationFilterStrong(int userid, int minRating) throws SQLException {
+		return runWithConnection(conn -> {
+
+			List<Event> events = new ArrayList<>();
+			PreparedStatement statement = conn
+					.prepareStatement("select distinct title, typename from events where title in" //
+							+ "	(SELECT distinct e.title" //
+							+ "	from RATINGS r, EVENTS e," //
+							+ "		(select c.userid userlist" //
+							+ "		from customer c, " //
+							+ "			(SELECT GENDER_SHORT gender, EXTRACT(YEAR from BIRTHDAY_DATE) birthday" //
+							+ "			FROM CUSTOMER" //
+							+ "			WHERE userid = ?) info" //
+							+ "		where c.userid not like ?" //
+							+ "		AND c.GENDER_SHORT like info.gender" //
+							+ "		AND EXTRACT(YEAR from c.BIRTHDAY_DATE) < (info.birthday + 5)" //
+							+ "		AND EXTRACT(YEAR from c.BIRTHDAY_DATE) > (info.birthday - 5)" //
+							+ "		) ageGender" //
+							+ "	where r.userid in ageGender.userlist" //
+							+ "	AND r.eventid = e.eventid" //
+							+ "	AND r.RATING >= ?" //
+							+ "	and e.genre in " //
+							+ "		(select distinct genre" //
+							+ "		from CUSTOMER, EVENTS " //
+							+ "		where userid = ?" //
+							+ "		AND(" //
+							+ "			preference1 = genre" //
+							+ "			OR preference2 = genre" //
+							+ "			OR preference3 = genre" //
+							+ ")))" //
+			);
+			statement.setInt(1, userid);
+			statement.setInt(2, userid);
+			statement.setInt(3, minRating);
+			statement.setInt(4, userid);
+
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				Event event = new Event();
+				event.setTitle(result.getString("TITLE"));
+				event.setGenre(result.getString("TYPENAME"));
+
+				events.add(event);
+			}
+
+			return events;
+		});
+	}
+
+	public static List<Event> getRecommendationFilterMedium(int userid, int minRating) throws SQLException {
+		return runWithConnection(conn -> {
+
+			List<Event> events = new ArrayList<>();
+			PreparedStatement statement = conn.prepareStatement("select distinct e.title, e.typename" //
+					+ " from RATINGS r, EVENTS e," //
+					+ "	(select c.userid userlist" //
+					+ "	from customer c," //
+					+ "	(select EXTRACT(YEAR from BIRTHDAY_DATE) birthday" //
+					+ "	from CUSTOMER" //
+					+ "	where userid = ?) info" //
+					+ "	where c.userid not like ?" //
+					+ "	AND EXTRACT(YEAR from c.BIRTHDAY_DATE) < (info.birthday + 5)" //
+					+ "	AND EXTRACT(YEAR from c.BIRTHDAY_DATE) > (info.birthday - 5)" //
+					+ "	) age" //
+					+ " where r.userid in age.userlist" //
+					+ " AND r.eventid = e.eventid" //
+					+ " AND r.RATING >= ?" //
+					+ " and e.genre in " //
+					+ "		(select distinct genre" //
+					+ "		from CUSTOMER, EVENTS " //
+					+ "		where userid = ?" //
+					+ "		AND(" //
+					+ "			preference1 = genre" //
+					+ "			OR preference2 = genre" //
+					+ "			OR preference3 = genre" //
+					+ "			)" //
+					+ "		)" //
+			);
+			statement.setInt(1, userid);
+			statement.setInt(2, userid);
+			statement.setInt(3, minRating);
+			statement.setInt(4, userid);
+
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				Event event = new Event();
+				event.setTitle(result.getString("TITLE"));
+				event.setGenre(result.getString("TYPENAME"));
+
+				events.add(event);
+			}
+
+			return events;
+		});
+	}
+
+	public static List<Event> getRecommendationFilterLight(int userid, int minRating) throws SQLException {
+		return runWithConnection(conn -> {
+
+			List<Event> events = new ArrayList<>();
+			PreparedStatement statement = conn.prepareStatement("select distinct e.title, e.typename" //
+					+ " from RATINGS r, EVENTS e," //
+					+ "	(select c.userid userlist" //
+					+ "	from customer c," //
+					+ "	(select EXTRACT(YEAR from BIRTHDAY_DATE) birthday" //
+					+ "	from CUSTOMER" //
+					+ "	where userid = ?) info" //
+					+ "	where c.userid not like ?" //
+					+ "	AND EXTRACT(YEAR from c.BIRTHDAY_DATE) < (info.birthday + 5)" //
+					+ "	AND EXTRACT(YEAR from c.BIRTHDAY_DATE) > (info.birthday - 5)" //
+					+ "	) age" //
+					+ " where r.userid in age.userlist" //
+					+ " AND r.eventid = e.eventid" //
+					+ " AND r.RATING >= ?" //
+			);
+			statement.setInt(1, userid);
+			statement.setInt(2, userid);
+			statement.setInt(3, minRating);
+
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				Event event = new Event();
+				event.setTitle(result.getString("TITLE"));
+				event.setGenre(result.getString("TYPENAME"));
+
+				events.add(event);
+			}
+
+			return events;
 		});
 	}
 
