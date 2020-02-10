@@ -80,7 +80,7 @@ public class RecommenderServlet extends HttpServlet {
 						"<br><span style=\"float: right;\">" + "<button type=\"submit\">Auswählen</button></span>");
 
 				// Beschreibung einfuegen
-				builder.append("Weitere Termine für diese Veranstalung finden Sie nach der Auswahl");
+				builder.append("Weitere Termine für diese Veranstaltung finden Sie nach der Auswahl");
 				builder.append("<input type=\"hidden\" name=\"eventTitle\" value=\"" + event.getTitle() + "\"/>");
 				builder.append("</form><br><hr><br>");
 			}
