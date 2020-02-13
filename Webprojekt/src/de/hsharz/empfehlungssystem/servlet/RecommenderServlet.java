@@ -5,7 +5,11 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -25,6 +29,10 @@ public class RecommenderServlet extends HttpServlet {
 	/** */
 	private static final long serialVersionUID = 1L;
 
+	private static final int MIN_AMOUNT_RECOMMENDATION = 5;
+	private static final double MIN_SIMILARITY = 0.2;
+	private static final int MIN_RATING = 4;
+
 	public String getEmpfehlungen() {
 		System.out.println("Hole Empfehlungen");
 
@@ -38,56 +46,122 @@ public class RecommenderServlet extends HttpServlet {
 	}
 
 	private String showAllEvents() {
-		StringBuilder builder = new StringBuilder();
-		
+		int userID = Session.getLoggedInUser().getId();
+
+		List<Event> eventsToRecommend = new ArrayList<>();
+		addEventsViaCollaborativeFiltering(eventsToRecommend, userID);
+
+		if (eventsToRecommend.size() < MIN_AMOUNT_RECOMMENDATION) {
+			addEventsViaKnowledgeBasedAndDemographicFiltering(eventsToRecommend, userID);
+		}
+
+		if (eventsToRecommend.size() < MIN_AMOUNT_RECOMMENDATION) {
+			addAllEvents(eventsToRecommend);
+		}
+
+		eventsToRecommend.sort((e1, e2) -> e1.getGenre().compareTo(e2.getGenre()));
+		return createWebsiteFromEvents(eventsToRecommend);
+	}
+
+	private void addEventsViaCollaborativeFiltering(List<Event> events, int userID) {
+		Set<Event> unsortedEvents = new HashSet<>();
 		try {
-
-//			List<Event> events = DatabaseAdapter.getAllEventTitleGrouped();
-			int userID = Session.getLoggedInUser().getId();
-			List<Event> events = DatabaseAdapter.getRecommendationFilterStrong(userID, 4);
-
-			System.out.println("Got " + events.size() + " Events from Strong-Filter");
-			if (events.size() < 5) {
-				System.out.println("Fetching Events from Medium-Filter...");
-				events = DatabaseAdapter.getRecommendationFilterMedium(userID, 4);
-				System.out.println("Got " + events.size() + " Events from Medium-Filter");
-				if (events.size() < 5) {
-					System.out.println("Fetching Events from Light-Filter...");
-					events = DatabaseAdapter.getRecommendationFilterLight(userID, 4);
-					System.out.println("Got " + events.size() + " Events from Light-Filters");
+			List<Integer> aehnlicheUser = DatabaseAdapter.getAehnlicheUser(userID, MIN_SIMILARITY);
+			int index = 0;
+			System.out.println("Aehnliche User: " + aehnlicheUser);
+			while (aehnlicheUser.size() < MIN_AMOUNT_RECOMMENDATION && index < aehnlicheUser.size()) {
+				System.out.println("Suche erneut nach aehnlichen Usern...");
+				List<Integer> tempAehnliche = DatabaseAdapter.getAehnlicheUser(aehnlicheUser.get(index),
+						MIN_SIMILARITY);
+				tempAehnliche.removeAll(aehnlicheUser);
+				if (tempAehnliche.isEmpty()) {
+					System.out.println("Keine weiteren ähnlichen User gefunden");
+					break;
 				}
+				aehnlicheUser.addAll(tempAehnliche);
+				System.out.println("Aehnliche User: " + aehnlicheUser);
 			}
 
-			events.sort((e1, e2) -> e1.getGenre().compareTo(e2.getGenre()));
+			aehnlicheUser.remove(Integer.valueOf(userID));
+			System.out.println("Final: Aehnliche User: " + aehnlicheUser);
 
-			String currentGenre = "";
+			if(aehnlicheUser.isEmpty()) {
+				System.err.println("User is grey sheep: " + userID);
+				return;
+			}
+			
+			String userList = "";
+			System.out.print("Erstelle Userlist: ");
+			userList = aehnlicheUser.stream().map(String::valueOf).collect(Collectors.joining(", "));
+			System.out.println(userList);
 
-			for (Event event : events) {
+			unsortedEvents
+					.addAll(DatabaseAdapter.getRecommendationCollaborativeFiltering(userID, userList, MIN_RATING));
+			System.out.println(unsortedEvents.size() + " Events to recommend: " + unsortedEvents);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
-				// Genre-Trennung
-				if (!event.getGenre().equals(currentGenre)) {
-					currentGenre = event.getGenre();
-					builder.append("<h2>" + event.getGenre() + "</h2>");
-					builder.append("<hr><br>");
-				}
+		events.addAll(unsortedEvents);
 
-				// Titel einfuegen
-				builder.append("<form method=\"POST\" action=\"/Empfehlungssystem/Empfehlungen\"><b>" + event.getTitle()
-						+ "</b>");
+	}
 
-				// Kaufen-Button einfuegen
-				builder.append(
-						"<br><span style=\"float: right;\">" + "<button type=\"submit\">Auswählen</button></span>");
+	private void addEventsViaKnowledgeBasedAndDemographicFiltering(List<Event> events, int userID) {
+		try {
+			events.addAll(DatabaseAdapter.getRecommendationFilterStrong(userID, MIN_RATING));
+			System.out.println("Got " + events.size() + " Events from Strong-Filter");
 
-				// Beschreibung einfuegen
-				builder.append("Weitere Termine für diese Veranstaltung finden Sie nach der Auswahl");
-				builder.append("<input type=\"hidden\" name=\"eventTitle\" value=\"" + event.getTitle() + "\"/>");
-				builder.append("</form><br><hr><br>");
+			if (events.size() < MIN_AMOUNT_RECOMMENDATION) {
+				System.out.println("Fetching Events from Medium-Filter...");
+				events.addAll(DatabaseAdapter.getRecommendationFilterMedium(userID, MIN_RATING));
+				System.out.println("Got " + events.size() + " Events from Medium-Filter");
+
+			}
+
+			if (events.size() < MIN_AMOUNT_RECOMMENDATION) {
+				System.out.println("Fetching Events from Light-Filter...");
+				events.addAll(DatabaseAdapter.getRecommendationFilterLight(userID, MIN_RATING));
+				System.out.println("Got " + events.size() + " Events from Light-Filters");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
+	}
+
+	private void addAllEvents(List<Event> events) {
+		try {
+			events.addAll(DatabaseAdapter.getAllEventTitleGrouped());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private String createWebsiteFromEvents(List<Event> events) {
+		StringBuilder builder = new StringBuilder();
+		String currentGenre = "";
+
+		for (Event event : events) {
+
+			// Genre-Trennung
+			if (!event.getGenre().equals(currentGenre)) {
+				currentGenre = event.getGenre();
+				builder.append("<h2>" + event.getGenre() + "</h2>");
+				builder.append("<hr><br>");
+			}
+
+			// Titel einfuegen
+			builder.append(
+					"<form method=\"POST\" action=\"/Empfehlungssystem/Empfehlungen\"><b>" + event.getTitle() + "</b>");
+
+			// Kaufen-Button einfuegen
+			builder.append("<br><span style=\"float: right;\">" + "<button type=\"submit\">Auswählen</button></span>");
+
+			// Beschreibung einfuegen
+			builder.append("Weitere Termine für diese Veranstaltung finden Sie nach der Auswahl");
+			builder.append("<input type=\"hidden\" name=\"eventTitle\" value=\"" + event.getTitle() + "\"/>");
+			builder.append("</form><br><hr><br>");
+		}
 		return builder.toString();
 	}
 
