@@ -166,5 +166,9 @@ public class User {
 		this.preference1 = preference1;
 	}
 
+	@Override
+	public String toString() {
+		return "User: " + getFirstname() + " " + getLastname() + ", " + getUsername();
+	}
 
 }

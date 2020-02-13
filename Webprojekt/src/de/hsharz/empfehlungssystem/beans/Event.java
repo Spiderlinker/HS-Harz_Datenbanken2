@@ -132,4 +132,18 @@ public class Event {
 		this.street = street;
 	}
 
+	@Override
+	public String toString() {
+		return "Event: " + getTitle();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Event) {
+			Event e = (Event) obj;
+			return getTitle().equals(e.getTitle());
+		}
+		return super.equals(obj);
+	}
+
 }
