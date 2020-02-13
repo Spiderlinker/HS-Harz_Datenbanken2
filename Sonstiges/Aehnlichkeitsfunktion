@@ -1,0 +1,289 @@
+-- Durchschnittsbewertung:
+select userid, eventid, rating, avg(rating) over (partition by userid) avgRating
+from RATINGS;
+
+
+-- Nutzer Rating Pearson-Spearman
+(select userid, eventid, (rating - avgRating) ratingPS
+from (
+    select userid, eventid, rating, avg(rating) over (partition by userid) avgRating
+    from RATINGS
+    ) 
+where userid = ?
+) nutzer
+
+;
+
+-- Andere Rating Pearson-Spearman
+(select userid, eventid, (rating - avgRating) ratingPS
+from (
+    select userid, eventid, rating, avg(rating) over (partition by userid) avgRating
+    from RATINGS
+    ) 
+where userid <> ?
+) andere
+
+;
+
+-- Nuter * Andere
+select andere.userid, nutzer.eventid, (nutzer.ratingPS * andere.ratingPS) prodRating
+from 
+    (
+    select userid, eventid, (rating - avgRating) ratingPS
+    from (
+        select userid, eventid, rating, avg(rating) over (partition by userid) avgRating
+        from RATINGS
+        ) 
+    where userid = 70
+    ) nutzer
+    ,
+    (
+    select userid, eventid, (rating - avgRating) ratingPS
+    from (
+        select userid, eventid, rating, avg(rating) over (partition by userid) avgRating
+        from RATINGS
+        ) 
+    where userid <> 70
+    ) andere
+where nutzer.eventid = andere.eventid;
+
+-- Aufsummieren --> Zähler bzw. Skalarprodukt
+(select userid, sum(prodRating) skalarProdukt
+from (
+    select andere.userid, nutzer.eventid, (nutzer.ratingPS * andere.ratingPS) prodRating
+    from 
+        (
+        select userid, eventid, (rating - avgRating) ratingPS
+        from (
+            select userid, eventid, rating, avg(rating) over (partition by userid) avgRating
+            from RATINGS
+            ) 
+        where userid = 70
+        ) nutzer
+    ,
+        (
+        select userid, eventid, (rating - avgRating) ratingPS
+        from (
+            select userid, eventid, rating, avg(rating) over (partition by userid) avgRating
+            from RATINGS
+            ) 
+        where userid <> 70
+        ) andere
+    where nutzer.eventid = andere.eventid
+    )
+group by userid
+) zaehler
+
+-- ##################################################
+
+-- Nenner
+
+-- Nutzer: Quadrieren der einzelnen Vektorbestandteile 
+select userid, eventid, power(rating - avgRating, 2) ratingPS
+from (
+    select userid, eventid, rating, avg(rating) over (partition by userid) avgRating
+    from RATINGS
+    )
+where userid = ?
+
+;
+
+-- Andere: Quadrieren der einzelnen Vektorbestandteile 
+select userid, eventid, power(rating - avgRating, 2) ratingPS
+from (
+    select userid, eventid, rating, avg(rating) over (partition by userid) avgRating
+    from RATINGS
+    )
+where userid <> ?
+
+-- Nutzer: Wurzel der Summe der Quadrate
+(select userid, sqrt(sum(ratingPS)) ratingPS
+from (
+    select userid, eventid, power(rating - avgRating, 2) ratingPS
+    from (
+        select userid, eventid, rating, avg(rating) over (partition by userid) avgRating
+        from RATINGS
+        )
+    where userid = ?
+    )
+) nutzer
+
+;
+
+-- Abdere: Wurzel der Summe der Quadrate
+(select userid, sqrt(sum(ratingPS)) ratingPS
+from (
+    select userid, eventid, power(rating - avgRating, 2) ratingPS
+    from (
+        select userid, eventid, rating, avg(rating) over (partition by userid) avgRating
+        from RATINGS
+        )
+    where userid <> ?
+    ) 
+) andere
+
+;
+
+-- Zusammenfügen des Nenners, Multiplizieren von Nutzer * Andere
+(select andere.userid, nutzer.ratingPS * andere.ratingPS prodRating
+from 
+    (
+    select userid, sqrt(sum(ratingPS)) ratingPS
+    from (
+        select userid, eventid, power(rating - avgRating, 2) ratingPS
+        from (
+            select userid, eventid, rating, avg(rating) over (partition by userid) avgRating
+            from RATINGS
+            )
+        where userid = 70
+        )
+    group by userid
+    ) nutzer
+,
+    (
+    select userid, sqrt(sum(ratingPS)) ratingPS
+    from (
+        select userid, eventid, power(rating - avgRating, 2) ratingPS
+        from (
+            select userid, eventid, rating, avg(rating) over (partition by userid) avgRating
+            from RATINGS
+            )
+        where userid <> 70
+        ) 
+    group by userid
+    ) andere
+) nenner
+
+;
+
+
+-- ################################
+-- Zusammenfügen Zähler und Nenner
+
+select zaehler.userid, (zaehler.skalarProdukt / nenner.prodRating) Aehnlichkeit
+from 
+    (
+    select userid, sum(prodRating) skalarProdukt
+    from (
+        select andere.userid, nutzer.eventid, (nutzer.ratingPS * andere.ratingPS) prodRating
+        from 
+            (
+            select userid, eventid, (rating - avgRating) ratingPS
+            from (
+                select userid, eventid, rating, avg(rating) over (partition by userid) avgRating
+                from RATINGS
+                ) 
+            where userid = 70
+            ) nutzer
+        ,
+            (
+            select userid, eventid, (rating - avgRating) ratingPS
+            from (
+                select userid, eventid, rating, avg(rating) over (partition by userid) avgRating
+                from RATINGS
+                ) 
+            where userid <> 70
+            ) andere
+        where nutzer.eventid = andere.eventid
+        )
+    group by userid
+    ) zaehler
+,
+    (
+    select andere.userid, nutzer.ratingPS * andere.ratingPS prodRating
+    from 
+        (
+        select userid, sqrt(sum(ratingPS)) ratingPS
+        from (
+            select userid, eventid, power(rating - avgRating, 2) ratingPS
+            from (
+                select userid, eventid, rating, avg(rating) over (partition by userid) avgRating
+                from RATINGS
+                )
+            where userid = 70
+            )
+        group by userid
+        ) nutzer
+    ,
+        (
+        select userid, sqrt(sum(ratingPS)) ratingPS
+        from (
+            select userid, eventid, power(rating - avgRating, 2) ratingPS
+            from (
+                select userid, eventid, rating, avg(rating) over (partition by userid) avgRating
+                from RATINGS
+                )
+            where userid <> 70
+            ) 
+        group by userid
+        ) andere
+    ) nenner
+where zaehler.userid = nenner.userid
+
+;
+
+-- Mit Ähnlichkeitsabfrage > 0.2
+
+select userid, Aehnlichkeit
+from (
+    select zaehler.userid, (zaehler.skalarProdukt / nenner.prodRating) Aehnlichkeit
+    from 
+        (
+        select userid, sum(prodRating) skalarProdukt
+        from (
+            select andere.userid, nutzer.eventid, (nutzer.ratingPS * andere.ratingPS) prodRating
+            from 
+                (
+                select userid, eventid, (rating - avgRating) ratingPS
+                from (
+                    select userid, eventid, rating, avg(rating) over (partition by userid) avgRating
+                    from RATINGS
+                    ) 
+                where userid = 14
+                ) nutzer
+            ,
+                (
+                select userid, eventid, (rating - avgRating) ratingPS
+                from (
+                    select userid, eventid, rating, avg(rating) over (partition by userid) avgRating
+                    from RATINGS
+                    ) 
+                where userid <> 14
+                ) andere
+            where nutzer.eventid = andere.eventid
+            )
+        group by userid
+        ) zaehler
+    ,
+        (
+        select andere.userid, nutzer.ratingPS * andere.ratingPS prodRating
+        from 
+            (
+            select userid, sqrt(sum(ratingPS)) ratingPS
+            from (
+                select userid, eventid, power(rating - avgRating, 2) ratingPS
+                from (
+                    select userid, eventid, rating, avg(rating) over (partition by userid) avgRating
+                    from RATINGS
+                    )
+                where userid = 14
+                )
+            group by userid
+            ) nutzer
+        ,
+            (
+            select userid, sqrt(sum(ratingPS)) ratingPS
+            from (
+                select userid, eventid, power(rating - avgRating, 2) ratingPS
+                from (
+                    select userid, eventid, rating, avg(rating) over (partition by userid) avgRating
+                    from RATINGS
+                    )
+                where userid <> 14
+                ) 
+            group by userid
+            ) andere
+        ) nenner
+    where zaehler.userid = nenner.userid
+) 
+where aehnlichkeit > 0.2;
