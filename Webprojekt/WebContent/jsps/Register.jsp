@@ -42,7 +42,7 @@
 				
 				<label for="email"><b>Welche Anmeldedaten möchtest du verwenden?</b></label> 
 				<input type="text" placeholder="Wie lautet deine E-Mail-Adresse" name="email" value="${user.email}" 
-					   pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,10}" class="fullText" required>
+					   pattern="[a-zA-Z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-zA-Z]{2,10}" class="fullText" required>
 					   
 				<!-- \s matched Whitespace, \S matched alles was nicht Whitespace ist -->
 				<input type="password" placeholder="Welches Passwort möchtest du wählen? (mind. 4 Zeichen)" name="password" value="${user.password}" 
