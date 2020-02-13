@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import de.hsharz.empfehlungssystem.beans.Event;
 import de.hsharz.empfehlungssystem.beans.TicketType;
@@ -245,11 +246,7 @@ public class DatabaseAdapter {
 
 			ResultSet result = statement.executeQuery();
 			while (result.next()) {
-				Event event = new Event();
-				event.setTitle(result.getString("TITLE"));
-				event.setGenre(result.getString("TYPENAME"));
-
-				events.add(event);
+				events.add(createLightEventFromResult(result));
 			}
 
 			return events;
@@ -342,6 +339,13 @@ public class DatabaseAdapter {
 		return event;
 	}
 
+	private static Event createLightEventFromResult(ResultSet result) throws SQLException {
+		Event event = new Event();
+		event.setTitle(result.getString("TITLE"));
+		event.setGenre(result.getString("TYPENAME"));
+		return event;
+	}
+
 	public static List<String> getPaymethods() throws SQLException {
 		return runWithConnection(conn -> {
 
@@ -390,6 +394,113 @@ public class DatabaseAdapter {
 		});
 	}
 
+	public static List<Event> getRecommendationCollaborativeFiltering(int userID, String users, double minRating)
+			throws SQLException {
+		return runWithConnection(conn -> {
+
+			List<Event> events = new ArrayList<>();
+			String empfohleneProdukte = String.format(Locale.US, "SELECT DISTINCT title, typename FROM " //
+					+ "    (SELECT e.eventid, e.title, e.typename, round(avg(r.rating), 2) schnitt from " //
+					+ "        RATINGS r, EVENTS e " //
+					+ "        WHERE " //
+					+ "            r.eventid = e.eventid " //
+					+ "            and userid in (%s) " //
+					+ "            and rating > %.2f " //
+					+ "        group by e.eventid, e.title, e.typename " //
+					+ "        order by schnitt desc) " //
+					+ "     where eventid not in (select eventid from RATINGS where userid = %s) " //
+					+ " FETCH NEXT %d ROWS ONLY", users, minRating, userID, 10);
+			ResultSet result = conn.createStatement().executeQuery(empfohleneProdukte);
+			while (result.next()) {
+				events.add(createLightEventFromResult(result));
+			}
+
+			return events;
+		});
+	}
+
+	public static List<Integer> getAehnlicheUser(int userID, double mindestAehnlichkeit) throws SQLException {
+		return runWithConnection(conn -> {
+
+			List<Integer> user = new ArrayList<>();
+			PreparedStatement aehnlicheUser = conn.prepareStatement("select userid, Aehnlichkeit " //
+					+ "from ( " //
+					+ "    select zaehler.userid, (zaehler.skalarProdukt / nenner.prodRating) Aehnlichkeit " //
+					+ "    from  " //
+					+ "        ( " //
+					+ "        select userid, sum(prodRating) skalarProdukt " //
+					+ "        from ( " //
+					+ "            select andere.userid, nutzer.eventid, (nutzer.ratingPS * andere.ratingPS) prodRating " //
+					+ "            from  " //
+					+ "                ( " //
+					+ "                select userid, eventid, (rating - avgRating) ratingPS " //
+					+ "                from ( " //
+					+ "                    select userid, eventid, rating, avg(rating) over (partition by userid) avgRating " //
+					+ "                    from RATINGS " //
+					+ "                    )  " //
+					+ "                where userid = ? " //
+					+ "                ) nutzer " //
+					+ "            , " //
+					+ "                ( " //
+					+ "                select userid, eventid, (rating - avgRating) ratingPS " //
+					+ "                from ( " //
+					+ "                    select userid, eventid, rating, avg(rating) over (partition by userid) avgRating " //
+					+ "                    from RATINGS " //
+					+ "                    )  " //
+					+ "                where userid <> ? " //
+					+ "                ) andere " //
+					+ "            where nutzer.eventid = andere.eventid " //
+					+ "            ) " //
+					+ "        group by userid " //
+					+ "        ) zaehler " //
+					+ "    , " //
+					+ "        ( " //
+					+ "        select andere.userid, nutzer.ratingPS * andere.ratingPS prodRating " //
+					+ "        from  " //
+					+ "            ( " //
+					+ "            select userid, sqrt(sum(ratingPS)) ratingPS " //
+					+ "            from ( " //
+					+ "                select userid, eventid, power(rating - avgRating, 2) ratingPS " //
+					+ "                from ( " //
+					+ "                    select userid, eventid, rating, avg(rating) over (partition by userid) avgRating " //
+					+ "                    from RATINGS " //
+					+ "                    ) " //
+					+ "                where userid = ? " //
+					+ "                ) " //
+					+ "            group by userid " //
+					+ "            ) nutzer " //
+					+ "        , " //
+					+ "            ( " //
+					+ "            select userid, sqrt(sum(ratingPS)) ratingPS " //
+					+ "            from ( " //
+					+ "                select userid, eventid, power(rating - avgRating, 2) ratingPS " //
+					+ "                from ( " //
+					+ "                    select userid, eventid, rating, avg(rating) over (partition by userid) avgRating " //
+					+ "                    from RATINGS " //
+					+ "                    ) " //
+					+ "                where userid <> ? " //
+					+ "                )  " //
+					+ "            group by userid " //
+					+ "            ) andere " //
+					+ "        ) nenner " //
+					+ "    where zaehler.userid = nenner.userid AND nenner.prodRating <> 0 " //
+					+ ")  " //
+					+ "where aehnlichkeit > ?");
+			aehnlicheUser.setInt(1, userID);
+			aehnlicheUser.setInt(2, userID);
+			aehnlicheUser.setInt(3, userID);
+			aehnlicheUser.setInt(4, userID);
+			aehnlicheUser.setDouble(5, mindestAehnlichkeit);
+
+			ResultSet result = aehnlicheUser.executeQuery();
+			while (result.next()) {
+				user.add(result.getInt(1));
+			}
+
+			return user;
+		});
+	}
+
 	public static List<Event> getRecommendationFilterStrong(int userid, int minRating) throws SQLException {
 		return runWithConnection(conn -> {
 
@@ -428,11 +539,7 @@ public class DatabaseAdapter {
 
 			ResultSet result = statement.executeQuery();
 			while (result.next()) {
-				Event event = new Event();
-				event.setTitle(result.getString("TITLE"));
-				event.setGenre(result.getString("TYPENAME"));
-
-				events.add(event);
+				events.add(createLightEventFromResult(result));
 			}
 
 			return events;
@@ -475,11 +582,7 @@ public class DatabaseAdapter {
 
 			ResultSet result = statement.executeQuery();
 			while (result.next()) {
-				Event event = new Event();
-				event.setTitle(result.getString("TITLE"));
-				event.setGenre(result.getString("TYPENAME"));
-
-				events.add(event);
+				events.add(createLightEventFromResult(result));
 			}
 
 			return events;
@@ -511,11 +614,7 @@ public class DatabaseAdapter {
 
 			ResultSet result = statement.executeQuery();
 			while (result.next()) {
-				Event event = new Event();
-				event.setTitle(result.getString("TITLE"));
-				event.setGenre(result.getString("TYPENAME"));
-
-				events.add(event);
+				events.add(createLightEventFromResult(result));
 			}
 
 			return events;
