@@ -2,9 +2,6 @@ package de.hsharz.empfehlungssystem.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -80,7 +77,7 @@ public class StatistikenServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("doGet Statistiken");
-//		
+
 //		if(SessionUtils.redirectToLoginPageIfNotLoggedIn(request, response)) {
 //			// Nutzer war nicht eingeloggt und wurde auf die Login-Page weitergeleitet
 //			return;
