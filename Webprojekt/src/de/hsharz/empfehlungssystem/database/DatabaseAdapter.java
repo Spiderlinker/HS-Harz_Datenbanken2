@@ -400,15 +400,15 @@ public class DatabaseAdapter {
 
 			List<Event> events = new ArrayList<>();
 			String empfohleneProdukte = String.format(Locale.US, "SELECT DISTINCT title, typename FROM " //
-					+ "    (SELECT e.eventid, e.title, e.typename, round(avg(r.rating), 2) schnitt from " //
+					+ "    (SELECT e.title, e.description, e.typename, round(avg(r.rating), 2) schnitt from " //
 					+ "        RATINGS r, EVENTS e " //
 					+ "        WHERE " //
 					+ "            r.eventid = e.eventid " //
 					+ "            and userid in (%s) " //
 					+ "            and rating > %.2f " //
-					+ "        group by e.eventid, e.title, e.typename " //
+					+ "        group by e.title, e.description, e.typename " //
 					+ "        order by schnitt desc) " //
-					+ "     where eventid not in (select eventid from RATINGS where userid = %s) " //
+					+ "     where description not in (select e.description from EVENTS e, RATINGS r where r.userid = %s AND e.eventid = r.eventid) " //
 					+ " FETCH NEXT %d ROWS ONLY", users, minRating, userID, 10);
 			ResultSet result = conn.createStatement().executeQuery(empfohleneProdukte);
 			while (result.next()) {
@@ -611,6 +611,25 @@ public class DatabaseAdapter {
 			statement.setInt(1, userid);
 			statement.setInt(2, userid);
 			statement.setInt(3, minRating);
+
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				events.add(createLightEventFromResult(result));
+			}
+
+			return events;
+		});
+	}
+
+	public static List<Event> getNewEvents() throws SQLException {
+		return runWithConnection(conn -> {
+
+			List<Event> events = new ArrayList<>();
+			PreparedStatement statement = conn.prepareStatement("select title, typename, MAX(eventid) " //
+					+ "from events " //
+					+ "group by title, typename " //
+					+ "order by MAX(eventid) desc fetch next 5 rows only" //
+			);
 
 			ResultSet result = statement.executeQuery();
 			while (result.next()) {
