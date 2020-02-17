@@ -20,6 +20,10 @@ public class DatabaseAdapter {
 		// Utils Klasse
 	}
 
+	// #####################################################################################
+	// ----- User -----
+	// #####################################################################################
+
 	public static User getUser(String username, String password) throws SQLException {
 		return runWithConnection(conn -> {
 
@@ -53,20 +57,6 @@ public class DatabaseAdapter {
 			}
 
 			return user;
-		});
-	}
-
-	public static List<String> getAllGenreNames() throws SQLException {
-		return runWithConnection(conn -> {
-			List<String> genreNames = new ArrayList<>();
-
-			PreparedStatement statement = conn.prepareStatement("SELECT distinct genre FROM events");
-			ResultSet result = statement.executeQuery();
-			while (result.next()) {
-				genreNames.add(result.getString(1));
-			}
-
-			return genreNames;
 		});
 	}
 
@@ -119,6 +109,10 @@ public class DatabaseAdapter {
 		});
 	}
 
+	// #####################################################################################
+	// ----- Purchases -----
+	// #####################################################################################
+
 	public static boolean putPurchase(Event event, int amountOfTickets, String paymethod, String ticketTypeName,
 			User user) throws SQLException {
 		return runWithConnection(conn -> {
@@ -167,6 +161,61 @@ public class DatabaseAdapter {
 		});
 	}
 
+	public static List<Event> getPurchasesOfUser(User user) throws SQLException {
+		return runWithConnection(conn -> {
+			List<Event> events = new ArrayList<>();
+
+			PreparedStatement statement = conn.prepareStatement(
+					"SELECT * FROM events WHERE eventID IN (select eventID from purchases where userID = ?) ");
+			statement.setInt(1, user.getId());
+
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				events.add(createEventFromResult(result));
+			}
+
+			return events;
+		});
+	}
+
+	public static List<Event> getUnratedPurchasesOfUser(User user) throws SQLException {
+		return runWithConnection(conn -> {
+			List<Event> events = new ArrayList<>();
+			
+	//		...
+			
+			PreparedStatement statement = conn.prepareStatement(
+					  "SELECT * " //
+					+ "FROM events " //
+					+ "WHERE eventID IN "
+					+ "    (" //
+					+ "    SELECT eventID " //
+					+ "    FROM purchases " //
+					+ "    WHERE userID = ? "
+					+ "    ) " //
+					+ "AND eventID NOT IN "
+					+ "    (" //
+					+ "    SELECT eventID " //
+					+ "    FROM ratings " //
+					+ "    WHERE userID = ? " //
+					+ "      AND rating > 0" //
+					+ "    )");
+			statement.setInt(1, user.getId());
+			statement.setInt(2, user.getId());
+
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				events.add(createEventFromResult(result));
+			}
+
+			return events;
+		});
+	}
+
+	// #####################################################################################
+	// ----- Ratings -----
+	// #####################################################################################
+
 	public static boolean insertRating(User user, String event, Integer rating) throws SQLException {
 		return runWithConnection(conn -> {
 
@@ -204,21 +253,21 @@ public class DatabaseAdapter {
 		});
 	}
 
-	public static String getAnalysis(String name) throws SQLException {
+	// #####################################################################################
+	// ----- Events -----
+	// #####################################################################################
+
+	public static List<String> getAllGenreNames() throws SQLException {
 		return runWithConnection(conn -> {
+			List<String> genreNames = new ArrayList<>();
 
-			PreparedStatement statement = conn
-					.prepareStatement("SELECT sqlanfrage FROM ANALYTICS_ANFRAGE where name = ?");
-			statement.setString(1, name);
+			PreparedStatement statement = conn.prepareStatement("SELECT distinct genre FROM events");
 			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				genreNames.add(result.getString(1));
+			}
 
-			result.next();
-
-			PreparedStatement stmtStatistik = conn.prepareStatement(result.getString(1));
-			ResultSet restulStatistik = stmtStatistik.executeQuery();
-
-			restulStatistik.next();
-			return restulStatistik.getString(1);
+			return genreNames;
 		});
 	}
 
@@ -284,36 +333,19 @@ public class DatabaseAdapter {
 		});
 	}
 
-	public static List<Event> getPurchasesOfUser(User user) throws SQLException {
+	public static List<Event> getNewEvents() throws SQLException {
 		return runWithConnection(conn -> {
-			List<Event> events = new ArrayList<>();
 
-			PreparedStatement statement = conn.prepareStatement(
-					"SELECT * FROM events WHERE eventID IN (select eventID from purchases where userID = ?) ");
-			statement.setInt(1, user.getId());
+			List<Event> events = new ArrayList<>();
+			PreparedStatement statement = conn.prepareStatement("select title, typename, MAX(eventid) " //
+					+ "from events " //
+					+ "group by title, typename " //
+					+ "order by MAX(eventid) desc fetch next 5 rows only" //
+			);
 
 			ResultSet result = statement.executeQuery();
 			while (result.next()) {
-				events.add(createEventFromResult(result));
-			}
-
-			return events;
-		});
-	}
-
-	public static List<Event> getUnratedPurchasesOfUser(User user) throws SQLException {
-		return runWithConnection(conn -> {
-			List<Event> events = new ArrayList<>();
-
-			PreparedStatement statement = conn.prepareStatement(
-					"SELECT * FROM events WHERE eventID IN (select eventID from purchases where userID = ?) "
-							+ "AND eventID not in (select eventID from ratings where userID = ? AND rating > 0)");
-			statement.setInt(1, user.getId());
-			statement.setInt(2, user.getId());
-
-			ResultSet result = statement.executeQuery();
-			while (result.next()) {
-				events.add(createEventFromResult(result));
+				events.add(createLightEventFromResult(result));
 			}
 
 			return events;
@@ -346,53 +378,9 @@ public class DatabaseAdapter {
 		return event;
 	}
 
-	public static List<String> getPaymethods() throws SQLException {
-		return runWithConnection(conn -> {
-
-			List<String> paymethods = new ArrayList<>();
-			PreparedStatement statement = conn.prepareStatement("SELECT * FROM paymethod");
-
-			ResultSet result = statement.executeQuery();
-			while (result.next()) {
-				paymethods.add(result.getString(1));
-			}
-
-			return paymethods;
-		});
-	}
-
-	public static List<TicketType> getTicketTypes() throws SQLException {
-		return runWithConnection(conn -> {
-
-			List<TicketType> ticketTypes = new ArrayList<>();
-			PreparedStatement statement = conn.prepareStatement("SELECT * FROM tickettypes");
-
-			ResultSet result = statement.executeQuery();
-			while (result.next()) {
-				TicketType type = new TicketType();
-				type.setName(result.getString(1));
-				type.setPercentage(result.getInt(2));
-				ticketTypes.add(type);
-			}
-
-			return ticketTypes;
-		});
-	}
-
-	public static List<String> getAnalyticNames() throws SQLException {
-		return runWithConnection(conn -> {
-
-			List<String> names = new ArrayList<>();
-			PreparedStatement statement = conn.prepareStatement("SELECT Name FROM ANALYTICS_ANFRAGE");
-
-			ResultSet result = statement.executeQuery();
-			while (result.next()) {
-				names.add(result.getString(1));
-			}
-
-			return names;
-		});
-	}
+	// #####################################################################################
+	// ----- Recommendations -----
+	// #####################################################################################
 
 	public static List<Event> getRecommendationCollaborativeFiltering(int userID, String users, double minRating)
 			throws SQLException {
@@ -514,8 +502,8 @@ public class DatabaseAdapter {
 							+ "			(SELECT GENDER_SHORT gender, EXTRACT(YEAR from BIRTHDAY_DATE) birthday" //
 							+ "			FROM CUSTOMER" //
 							+ "			WHERE userid = ?) info" //
-							+ "		where c.userid not like ?" //
-							+ "		AND c.GENDER_SHORT like info.gender" //
+							+ "		where c.userid <> ?" //
+							+ "		AND c.GENDER_SHORT = info.gender" //
 							+ "		AND EXTRACT(YEAR from c.BIRTHDAY_DATE) < (info.birthday + 5)" //
 							+ "		AND EXTRACT(YEAR from c.BIRTHDAY_DATE) > (info.birthday - 5)" //
 							+ "		) ageGender" //
@@ -557,7 +545,7 @@ public class DatabaseAdapter {
 					+ "	(select EXTRACT(YEAR from BIRTHDAY_DATE) birthday" //
 					+ "	from CUSTOMER" //
 					+ "	where userid = ?) info" //
-					+ "	where c.userid not like ?" //
+					+ "	where c.userid <> ?" //
 					+ "	AND EXTRACT(YEAR from c.BIRTHDAY_DATE) < (info.birthday + 5)" //
 					+ "	AND EXTRACT(YEAR from c.BIRTHDAY_DATE) > (info.birthday - 5)" //
 					+ "	) age" //
@@ -600,7 +588,7 @@ public class DatabaseAdapter {
 					+ "	(select EXTRACT(YEAR from BIRTHDAY_DATE) birthday" //
 					+ "	from CUSTOMER" //
 					+ "	where userid = ?) info" //
-					+ "	where c.userid not like ?" //
+					+ "	where c.userid <> ?" //
 					+ "	AND EXTRACT(YEAR from c.BIRTHDAY_DATE) < (info.birthday + 5)" //
 					+ "	AND EXTRACT(YEAR from c.BIRTHDAY_DATE) > (info.birthday - 5)" //
 					+ "	) age" //
@@ -621,22 +609,73 @@ public class DatabaseAdapter {
 		});
 	}
 
-	public static List<Event> getNewEvents() throws SQLException {
+	// #####################################################################################
+	// ----- Statistiken -----
+	// #####################################################################################
+
+	public static String getAnalysis(String name) throws SQLException {
 		return runWithConnection(conn -> {
 
-			List<Event> events = new ArrayList<>();
-			PreparedStatement statement = conn.prepareStatement("select title, typename, MAX(eventid) " //
-					+ "from events " //
-					+ "group by title, typename " //
-					+ "order by MAX(eventid) desc fetch next 5 rows only" //
-			);
+			PreparedStatement statement = conn
+					.prepareStatement("SELECT sqlanfrage FROM ANALYTICS_ANFRAGE where name = ?");
+			statement.setString(1, name);
+			ResultSet result = statement.executeQuery();
+
+			result.next();
+
+			PreparedStatement stmtStatistik = conn.prepareStatement(result.getString(1));
+			ResultSet restulStatistik = stmtStatistik.executeQuery();
+
+			restulStatistik.next();
+			return restulStatistik.getString(1);
+		});
+	}
+
+	public static List<String> getPaymethods() throws SQLException {
+		return runWithConnection(conn -> {
+
+			List<String> paymethods = new ArrayList<>();
+			PreparedStatement statement = conn.prepareStatement("SELECT * FROM paymethod");
 
 			ResultSet result = statement.executeQuery();
 			while (result.next()) {
-				events.add(createLightEventFromResult(result));
+				paymethods.add(result.getString(1));
 			}
 
-			return events;
+			return paymethods;
+		});
+	}
+
+	public static List<TicketType> getTicketTypes() throws SQLException {
+		return runWithConnection(conn -> {
+
+			List<TicketType> ticketTypes = new ArrayList<>();
+			PreparedStatement statement = conn.prepareStatement("SELECT * FROM tickettypes");
+
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				TicketType type = new TicketType();
+				type.setName(result.getString(1));
+				type.setPercentage(result.getInt(2));
+				ticketTypes.add(type);
+			}
+
+			return ticketTypes;
+		});
+	}
+
+	public static List<String> getAnalyticNames() throws SQLException {
+		return runWithConnection(conn -> {
+
+			List<String> names = new ArrayList<>();
+			PreparedStatement statement = conn.prepareStatement("SELECT Name FROM ANALYTICS_ANFRAGE");
+
+			ResultSet result = statement.executeQuery();
+			while (result.next()) {
+				names.add(result.getString(1));
+			}
+
+			return names;
 		});
 	}
 
@@ -644,13 +683,13 @@ public class DatabaseAdapter {
 	 * Führt die gegebene Funktion aus und übergibt dieser eine Verbindung zur
 	 * Datenbank
 	 * 
-	 * @param <T>      Rückgabedatentyp der gegebenen Funktion
 	 * @param function Funktion, die mit einer Datenbankverbindung ausgeführt werden
 	 *                 soll
+	 * @param <R>      Rückgabedatentyp der gegebenen Funktion
 	 * @return Rückgabewert der gegebenen Function
 	 * @throws SQLException Fehler bei der Ausführung
 	 */
-	private static <T> T runWithConnection(SqlFunction<T, Connection> function) throws SQLException {
+	private static <R> R runWithConnection(SqlFunction<Connection, R> function) throws SQLException {
 		try (Connection conn = getConnection()) {
 			return function.apply(conn);
 		}
@@ -664,15 +703,15 @@ public class DatabaseAdapter {
 	 * wird die Connection geschlossen und der von der Funktion zurückgegebene Wert
 	 * zurückgegeben.
 	 * 
-	 * @param <T>   Rückgabedatentyp der gegebenen Funktion
 	 * @param query Funktion, die mit einer Connection (mit ggf. Rollback bei
 	 *              Fehlern) ausgeführt werden soll
+	 * @param <R>   Rückgabedatentyp der gegebenen Funktion
 	 * @return Rückgabewert der gegebenen Funktion
 	 * @throws SQLException Fehler beim Verbinden zu der Datenbank
 	 */
-	private static <T> T runWithConnectionRollback(SqlFunction<T, Connection> query) throws SQLException {
+	private static <R> R runWithConnectionRollback(SqlFunction<Connection, R> query) throws SQLException {
 		Connection conn = getConnection();
-		T functionReturn = null;
+		R functionReturn = null;
 		try {
 			conn.setAutoCommit(false);
 			functionReturn = query.apply(conn);
