@@ -32,6 +32,8 @@ public class LoginServlet extends HttpServlet {
 
 		User loggedInUser = Session.getLoggedInUser();
 		System.out.println("User: " + loggedInUser);
+		// Nutzer auf die Login.jsp weiterleiten, falls dieser nicht eingeloggt ist (==
+		// null)
 		if (loggedInUser == null) {
 			// Keine GET-Operationen ausführen, nur über POST anmelden
 			RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/jsps/Login.jsp");
@@ -39,6 +41,7 @@ public class LoginServlet extends HttpServlet {
 			return;
 		}
 
+		// Benutzer ist eingeloggt. Weiterleiten auf Empfehlungen
 		request.setAttribute("user", loggedInUser);
 		response.sendRedirect(request.getContextPath() + "/Empfehlungen");
 	}
@@ -73,6 +76,7 @@ public class LoginServlet extends HttpServlet {
 
 		}
 
+		// Traten Fehler beim Einloggen auf?
 		if (hasError) {
 			System.out.println("Has Error...");
 			user = new User();
@@ -81,15 +85,14 @@ public class LoginServlet extends HttpServlet {
 			request.setAttribute("errorString", errorString);
 			request.setAttribute("user", user);
 
+			// Benutzer mit Fehlermeldung erneut die Login-Seite darstellen mit
+			// Fehlermeldung
 			RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/jsps/Login.jsp");
 			dispatcher.forward(request, response);
-
 		} else {
-
+			// User in Session abspeichern und zu Empfehlungen weiterleiten
 			Session.storeLoggedInUser(user);
-
 			response.sendRedirect(request.getContextPath() + "/Empfehlungen");
-
 		}
 
 	}
