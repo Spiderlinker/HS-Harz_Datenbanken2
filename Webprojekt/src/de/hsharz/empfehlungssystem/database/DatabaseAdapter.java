@@ -616,7 +616,7 @@ public class DatabaseAdapter {
 		return runWithConnection(conn -> {
 
 			PreparedStatement statement = conn
-					.prepareStatement("SELECT sqlanfrage FROM ANALYSIS_QUERIES where name = ?");
+					.prepareStatement("SELECT sqlquery FROM ANALYSIS_QUERIES where name = ?");
 			statement.setString(1, name);
 			ResultSet result = statement.executeQuery();
 
