@@ -81,7 +81,8 @@ public class DatabaseAdapter {
 					+ "to_char(to_date(?, 'DD.MM.YYYY'), 'J')," // 15 Birthday_Julian
 					+ "?," // 16 Preference1
 					+ "?," // 17 Preference2
-					+ "?" // 18 Preference3
+					+ "?," // 18 Preference3
+					+ "?" // 18 Birthday_Year
 					+ ")");
 
 			statement.setString(1, user.getFirstname());
@@ -102,6 +103,8 @@ public class DatabaseAdapter {
 			statement.setString(16, user.getPreference1());
 			statement.setString(17, user.getPreference2());
 			statement.setString(18, user.getPreference3());
+			statement.setInt(19,
+					Integer.parseInt(user.getBirthday().substring(user.getBirthday().lastIndexOf('.') + 1)));
 
 			int result = statement.executeUpdate();
 
@@ -181,20 +184,16 @@ public class DatabaseAdapter {
 	public static List<Event> getUnratedPurchasesOfUser(User user) throws SQLException {
 		return runWithConnection(conn -> {
 			List<Event> events = new ArrayList<>();
-			
-	//		...
-			
-			PreparedStatement statement = conn.prepareStatement(
-					  "SELECT * " //
+
+			// ...
+
+			PreparedStatement statement = conn.prepareStatement("SELECT * " //
 					+ "FROM events " //
-					+ "WHERE eventID IN "
-					+ "    (" //
+					+ "WHERE eventID IN " + "    (" //
 					+ "    SELECT eventID " //
 					+ "    FROM purchases " //
-					+ "    WHERE userID = ? "
-					+ "    ) " //
-					+ "AND eventID NOT IN "
-					+ "    (" //
+					+ "    WHERE userID = ? " + "    ) " //
+					+ "AND eventID NOT IN " + "    (" //
 					+ "    SELECT eventID " //
 					+ "    FROM ratings " //
 					+ "    WHERE userID = ? " //
@@ -499,13 +498,13 @@ public class DatabaseAdapter {
 							+ "	from RATINGS r, EVENTS e," //
 							+ "		(select c.userid userlist" //
 							+ "		from customer c, " //
-							+ "			(SELECT GENDER_SHORT gender, EXTRACT(YEAR from BIRTHDAY_DATE) birthday" //
+							+ "			(SELECT GENDER_SHORT gender, birthday_year birthday" //
 							+ "			FROM CUSTOMER" //
 							+ "			WHERE userid = ?) info" //
 							+ "		where c.userid <> ?" //
 							+ "		AND c.GENDER_SHORT = info.gender" //
-							+ "		AND EXTRACT(YEAR from c.BIRTHDAY_DATE) < (info.birthday + 5)" //
-							+ "		AND EXTRACT(YEAR from c.BIRTHDAY_DATE) > (info.birthday - 5)" //
+							+ "		AND c.birthday_year < (info.birthday + 5)" //
+							+ "		AND c.birthday_year > (info.birthday - 5)" //
 							+ "		) ageGender" //
 							+ "	where r.userid in ageGender.userlist" //
 							+ "	AND r.eventid = e.eventid" //
@@ -542,12 +541,12 @@ public class DatabaseAdapter {
 					+ " from RATINGS r, EVENTS e," //
 					+ "	(select c.userid userlist" //
 					+ "	from customer c," //
-					+ "	(select EXTRACT(YEAR from BIRTHDAY_DATE) birthday" //
+					+ "	(select birthday_year birthday" //
 					+ "	from CUSTOMER" //
 					+ "	where userid = ?) info" //
 					+ "	where c.userid <> ?" //
-					+ "	AND EXTRACT(YEAR from c.BIRTHDAY_DATE) < (info.birthday + 5)" //
-					+ "	AND EXTRACT(YEAR from c.BIRTHDAY_DATE) > (info.birthday - 5)" //
+					+ "	AND c.birthday_year < (info.birthday + 5)" //
+					+ "	AND c.birthday_year > (info.birthday - 5)" //
 					+ "	) age" //
 					+ " where r.userid in age.userlist" //
 					+ " AND r.eventid = e.eventid" //
@@ -585,12 +584,12 @@ public class DatabaseAdapter {
 					+ " from RATINGS r, EVENTS e," //
 					+ "	(select c.userid userlist" //
 					+ "	from customer c," //
-					+ "	(select EXTRACT(YEAR from BIRTHDAY_DATE) birthday" //
+					+ "	(select birthday_year birthday" //
 					+ "	from CUSTOMER" //
 					+ "	where userid = ?) info" //
 					+ "	where c.userid <> ?" //
-					+ "	AND EXTRACT(YEAR from c.BIRTHDAY_DATE) < (info.birthday + 5)" //
-					+ "	AND EXTRACT(YEAR from c.BIRTHDAY_DATE) > (info.birthday - 5)" //
+					+ "	AND c.birthday_year < (info.birthday + 5)" //
+					+ "	AND c.birthday_year > (info.birthday - 5)" //
 					+ "	) age" //
 					+ " where r.userid in age.userlist" //
 					+ " AND r.eventid = e.eventid" //
@@ -617,7 +616,7 @@ public class DatabaseAdapter {
 		return runWithConnection(conn -> {
 
 			PreparedStatement statement = conn
-					.prepareStatement("SELECT sqlanfrage FROM ANALYTICS_ANFRAGE where name = ?");
+					.prepareStatement("SELECT sqlanfrage FROM ANALYSIS_QUERIES where name = ?");
 			statement.setString(1, name);
 			ResultSet result = statement.executeQuery();
 
@@ -664,11 +663,11 @@ public class DatabaseAdapter {
 		});
 	}
 
-	public static List<String> getAnalyticNames() throws SQLException {
+	public static List<String> getAnalysisNames() throws SQLException {
 		return runWithConnection(conn -> {
 
 			List<String> names = new ArrayList<>();
-			PreparedStatement statement = conn.prepareStatement("SELECT Name FROM ANALYTICS_ANFRAGE");
+			PreparedStatement statement = conn.prepareStatement("SELECT Name FROM ANALYSIS_QUERIES");
 
 			ResultSet result = statement.executeQuery();
 			while (result.next()) {

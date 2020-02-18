@@ -24,7 +24,7 @@ public class StatistikenServlet extends HttpServlet {
 		StringBuilder builder = new StringBuilder();
 
 		try {
-			List<String> analyticNames = DatabaseAdapter.getAnalyticNames();
+			List<String> analyticNames = DatabaseAdapter.getAnalysisNames();
 
 			builder.append("<ul>");
 			for (String name : analyticNames) {
