@@ -13,15 +13,6 @@
 	<body>
 		<jsp:include page="_header.jsp"></jsp:include>
 		
-		<div class="sidebar">
-			<p>Navigation</p>
-			<a href="Empfehlungen">Empfehlungen</a>
-			<a href="Bewertungen">Bewertungen</a>
-			<a href="History">Kaufhistorie</a>
-			<a href="Statistiken">Statistiken</a>
-			<a href="Logout">Logout</a>
-		</div>
-				
 		<div class="container">
 			<jsp:getProperty name="historyID" property="history" />
 		</div>
