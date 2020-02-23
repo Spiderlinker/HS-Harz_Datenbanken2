@@ -615,8 +615,7 @@ public class DatabaseAdapter {
 	public static String getAnalysis(String name) throws SQLException {
 		return runWithConnection(conn -> {
 
-			PreparedStatement statement = conn
-					.prepareStatement("SELECT sqlquery FROM ANALYSIS_QUERIES where name = ?");
+			PreparedStatement statement = conn.prepareStatement("SELECT sqlquery FROM ANALYSIS_QUERIES where name = ?");
 			statement.setString(1, name);
 			ResultSet result = statement.executeQuery();
 
@@ -733,10 +732,6 @@ public class DatabaseAdapter {
 	 */
 	private static Connection getConnection() throws SQLException {
 		return DatabaseConnection.getConnection();
-	}
-
-	public static List<String> getAllEmpfehlungen(User loggedInUser) {
-		return new ArrayList<>();
 	}
 
 }
