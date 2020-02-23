@@ -222,15 +222,13 @@ public class DatabaseAdapter {
 					+ "?," // 1 UserID
 					+ "?," // 2 EventID
 					+ "?," // 3 Rating
-					+ "?," // 4 Timestamp
-					+ "(SELECT DURATION_IN_MINUTES FROM EVENTS WHERE EVENTID = ?)" // 5 Event_Duration
+					+ "?" // 4 Timestamp
 					+ ")");
 
 			statement.setInt(1, user.getId());
 			statement.setString(2, event);
 			statement.setInt(3, rating);
 			statement.setDate(4, new Date(System.currentTimeMillis()));
-			statement.setString(5, event);
 
 			int result = statement.executeUpdate();
 
