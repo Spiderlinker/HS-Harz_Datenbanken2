@@ -52,10 +52,12 @@ public class RecommenderServlet extends HttpServlet {
 		addEventsViaCollaborativeFiltering(eventsToRecommend, userID);
 
 		if (eventsToRecommend.size() < MIN_AMOUNT_RECOMMENDATION) {
+			eventsToRecommend.clear();
 			addEventsViaKnowledgeBasedAndDemographicFiltering(eventsToRecommend, userID);
 		}
 
 		if (eventsToRecommend.size() < MIN_AMOUNT_RECOMMENDATION) {
+			eventsToRecommend.clear();
 			addAllEvents(eventsToRecommend);
 		}
 
@@ -113,6 +115,7 @@ public class RecommenderServlet extends HttpServlet {
 
 			if (events.size() < MIN_AMOUNT_RECOMMENDATION) {
 				System.out.println("Fetching Events from Medium-Filter...");
+				events.clear();
 				events.addAll(DatabaseAdapter.getRecommendationFilterMedium(userID, MIN_RATING));
 				System.out.println("Got " + events.size() + " Events from Medium-Filter");
 
@@ -120,6 +123,7 @@ public class RecommenderServlet extends HttpServlet {
 
 			if (events.size() < MIN_AMOUNT_RECOMMENDATION) {
 				System.out.println("Fetching Events from Light-Filter...");
+				events.clear();
 				events.addAll(DatabaseAdapter.getRecommendationFilterLight(userID, MIN_RATING));
 				System.out.println("Got " + events.size() + " Events from Light-Filters");
 			}
